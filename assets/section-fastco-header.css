@@ -1,0 +1,323 @@
+/* ─────────────────────────────────────────────────────
+   FASTCO · HEADER STYLES
+   Sprint 2026-05-06
+   Depende de: assets/fastco-tokens.css (vars --fastco-*)
+   ─────────────────────────────────────────────────── */
+
+/* ─── Container ─── */
+.fastco-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--fastco-crema);
+  border-bottom: 1px solid var(--fastco-linea);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fastco-header-inner {
+  max-width: var(--fastco-max);
+  margin: 0 auto;
+  padding: 0 var(--fastco-gutter);
+  height: var(--fastco-nav-h);
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+/* ─── LOGO wordmark ─── */
+.fastco-logo {
+  display: inline-flex;
+  align-items: baseline;
+  text-decoration: none;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.fastco-logo-mark {
+  font-weight: 800;
+  font-size: 26px;
+  color: var(--fastco-grafito);
+  letter-spacing: -0.025em;
+}
+.fastco-logo-dot {
+  font-weight: 800;
+  font-size: 26px;
+  color: var(--fastco-naranja);
+  letter-spacing: -0.025em;
+  margin-left: 1px;
+}
+
+/* ─── NAV principal ─── */
+.fastco-nav {
+  flex: 1;
+}
+.fastco-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 4px;
+}
+.fastco-nav-item {
+  position: relative;
+}
+.fastco-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: var(--fastco-r-md);
+  color: var(--fastco-texto);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.18s var(--fastco-ease-out);
+  cursor: pointer;
+}
+.fastco-nav-link:hover {
+  background: var(--fastco-crema-deep);
+  color: var(--fastco-grafito);
+}
+.fastco-nav-caret {
+  transition: transform 0.2s var(--fastco-ease-out);
+}
+.fastco-nav-item.has-mega:hover .fastco-nav-caret {
+  transform: rotate(180deg);
+}
+
+/* ─── MEGA-DROPDOWN ─── */
+.fastco-mega {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 720px;
+  background: var(--fastco-blanco);
+  border: 1px solid var(--fastco-linea);
+  border-radius: var(--fastco-r-xl);
+  box-shadow: var(--fastco-sh-3);
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.22s var(--fastco-ease-out);
+  pointer-events: none;
+}
+.fastco-nav-item.has-mega:hover > .fastco-mega,
+.fastco-nav-item.has-mega:focus-within > .fastco-mega {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.fastco-mega-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+  margin-bottom: 16px;
+}
+.fastco-mega-cat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 14px;
+  border-radius: var(--fastco-r-md);
+  text-decoration: none;
+  transition: background 0.15s var(--fastco-ease-out);
+}
+.fastco-mega-cat:hover {
+  background: var(--fastco-naranja-tint);
+}
+.fastco-mega-cat-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fastco-grafito);
+}
+.fastco-mega-cat-desc {
+  font-size: 12px;
+  color: var(--fastco-texto-sec);
+  line-height: 1.4;
+}
+.fastco-mega-cat--featured {
+  position: relative;
+}
+.fastco-mega-cat--featured::after {
+  content: 'Más vendido';
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--fastco-naranja);
+  background: var(--fastco-naranja-tint);
+  padding: 3px 8px;
+  border-radius: var(--fastco-r-pill);
+}
+.fastco-mega-foot {
+  border-top: 1px solid var(--fastco-linea);
+  padding-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+.fastco-mega-foot-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fastco-naranja);
+  text-decoration: none;
+  transition: gap 0.2s var(--fastco-ease-out);
+}
+.fastco-mega-foot-link:hover {
+  gap: 10px;
+}
+
+/* ─── HEADER ACTIONS (search · account · cart) ─── */
+.fastco-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.fastco-icon-btn {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--fastco-r-md);
+  color: var(--fastco-texto);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.18s var(--fastco-ease-out);
+}
+.fastco-icon-btn:hover {
+  background: var(--fastco-crema-deep);
+  color: var(--fastco-naranja);
+}
+.fastco-cart-btn {
+  position: relative;
+}
+.fastco-cart-count {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  background: var(--fastco-naranja);
+  color: var(--fastco-blanco);
+  border-radius: var(--fastco-r-pill);
+  font-size: 10px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+}
+
+/* ─── BURGER mobile ─── */
+.fastco-burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 0;
+  border-radius: var(--fastco-r-md);
+  cursor: pointer;
+  padding: 10px;
+  transition: background 0.18s var(--fastco-ease-out);
+}
+.fastco-burger:hover {
+  background: var(--fastco-crema-deep);
+}
+.fastco-burger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--fastco-grafito);
+  border-radius: 2px;
+}
+
+/* ─── MOBILE DRAWER ─── */
+.fastco-mobile-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+.fastco-mobile-drawer.open {
+  pointer-events: auto;
+}
+.fastco-mobile-drawer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26,31,46,0.5);
+  opacity: 0;
+  transition: opacity 0.3s var(--fastco-ease-out);
+}
+.fastco-mobile-drawer.open .fastco-mobile-drawer-overlay {
+  opacity: 1;
+}
+.fastco-mobile-drawer-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 88%;
+  max-width: 360px;
+  background: var(--fastco-crema);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.3s var(--fastco-ease-out);
+  box-shadow: 8px 0 24px rgba(26,31,46,0.12);
+}
+.fastco-mobile-drawer.open .fastco-mobile-drawer-panel {
+  transform: translateX(0);
+}
+.fastco-mobile-drawer-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--fastco-linea);
+}
+.fastco-mobile-close {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  border-radius: var(--fastco-r-md);
+  color: var(--fastco-texto-sec);
+  cursor: pointer;
+  transition: all 0.18s var(--fastco-ease-out);
+}
+.fastco-mobile-close:hover {
+  background: var(--fastco-crema-deep);
+  color: var(--fastco-texto);
+}
+.fastco-mobile-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 2px;
+  overflow-y: auto;
+}
+.fastco-mobile-nav a {
+  display: block;
+  padding: 12px 14px;
+  border-radius: var(--fastco-r-md);
+  color: var(--fastco-texto);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.15s var(--fastco-ease-out);
