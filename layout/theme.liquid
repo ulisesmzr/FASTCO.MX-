@@ -41,6 +41,10 @@
 
     {{ content_for_header }}
 
+{%- comment -%} fastco brand layer · Sprint 2026-05-06 {%- endcomment -%}
+       {% render 'fastco-fonts' %}
+       {{ 'fastco-tokens.css' | asset_url | stylesheet_tag }}
+
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
       assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
