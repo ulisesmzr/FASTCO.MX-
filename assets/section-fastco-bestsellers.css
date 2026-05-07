@@ -1,0 +1,271 @@
+/* ─────────────────────────────────────────────────────
+   FASTCO · BESTSELLERS STYLES
+   + product card reusable
+   Sprint 2026-05-06
+   Depende de: assets/fastco-tokens.css
+   Reutiliza: .fastco-section-eyebrow / .fastco-section-title
+              / .fastco-section-lead (definidos en mundos.css)
+   ─────────────────────────────────────────────────── */
+
+.fastco-bestsellers {
+  background: var(--fastco-blanco);
+  padding: 96px 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fastco-bestsellers-inner {
+  max-width: var(--fastco-max);
+  margin: 0 auto;
+  padding: 0 var(--fastco-gutter);
+}
+
+/* ─── HEAD ─── */
+.fastco-bestsellers-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+.fastco-bestsellers-head-text {
+  max-width: 720px;
+}
+.fastco-bestsellers-viewall {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border: 1px solid var(--fastco-linea);
+  border-radius: var(--fastco-r-md);
+  background: var(--fastco-crema);
+  color: var(--fastco-grafito);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s var(--fastco-ease-out);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.fastco-bestsellers-viewall:hover {
+  border-color: var(--fastco-naranja);
+  color: var(--fastco-naranja);
+  background: var(--fastco-naranja-tint);
+}
+.fastco-bestsellers-viewall svg {
+  transition: transform 0.2s var(--fastco-ease-out);
+}
+.fastco-bestsellers-viewall:hover svg {
+  transform: translateX(3px);
+}
+
+/* ─── GRID ─── */
+.fastco-bestsellers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ─────────────────────────────────────────────────────
+   PRODUCT CARD (reusable)
+   ─────────────────────────────────────────────────── */
+.fastco-product-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--fastco-blanco);
+  border: 1px solid var(--fastco-linea);
+  border-radius: var(--fastco-r-lg);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: all 0.25s var(--fastco-ease-out);
+  position: relative;
+}
+.fastco-product-card:hover {
+  border-color: var(--fastco-naranja);
+  transform: translateY(-3px);
+  box-shadow: var(--fastco-sh-2);
+}
+
+.fastco-product-card-media {
+  position: relative;
+  background: var(--fastco-crema);
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.fastco-product-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s var(--fastco-ease-out);
+}
+.fastco-product-card:hover .fastco-product-card-img {
+  transform: scale(1.04);
+}
+
+.fastco-product-card-img--empty {
+  display: grid;
+  place-items: center;
+  color: var(--fastco-linea);
+  background: var(--fastco-crema-deep);
+}
+
+/* ─── TAG (oferta / eco / agotado) ─── */
+.fastco-product-card-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: var(--fastco-r-pill);
+  z-index: 2;
+}
+.fastco-product-card-tag--sale {
+  background: var(--fastco-naranja);
+  color: var(--fastco-blanco);
+}
+.fastco-product-card-tag--eco {
+  background: var(--fastco-menta);
+  color: var(--fastco-grafito);
+}
+.fastco-product-card-tag--out {
+  background: var(--fastco-grafito);
+  color: var(--fastco-blanco);
+}
+
+/* ─── BODY ─── */
+.fastco-product-card-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.fastco-product-card-vendor {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fastco-texto-mute);
+  margin-bottom: 2px;
+}
+
+.fastco-product-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--fastco-grafito);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.fastco-product-card-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+.fastco-product-card-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--fastco-grafito);
+  font-variant-numeric: tabular-nums;
+}
+.fastco-product-card-compare {
+  font-size: 13px;
+  color: var(--fastco-texto-mute);
+  text-decoration: line-through;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─────────────────────────────────────────────────────
+   ESTADO VACÍO (cuando la colección está vacía o sin set)
+   ─────────────────────────────────────────────────── */
+.fastco-bestsellers-empty {
+  text-align: center;
+  padding: 64px 32px;
+  background: var(--fastco-crema);
+  border: 1px dashed var(--fastco-linea);
+  border-radius: var(--fastco-r-xl);
+}
+.fastco-bestsellers-empty-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--fastco-blanco);
+  color: var(--fastco-texto-mute);
+  margin-bottom: 20px;
+  border: 1px solid var(--fastco-linea);
+}
+.fastco-bestsellers-empty-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--fastco-grafito);
+  margin: 0 0 8px;
+  letter-spacing: -0.015em;
+}
+.fastco-bestsellers-empty-desc {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--fastco-texto-sec);
+  margin: 0 auto;
+  max-width: 480px;
+}
+
+/* ─────────────────────────────────────────────────────
+   RESPONSIVE
+   ─────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .fastco-bestsellers {
+    padding: 72px 0;
+  }
+  .fastco-bestsellers-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .fastco-bestsellers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .fastco-bestsellers-head {
+    margin-bottom: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fastco-bestsellers {
+    padding: 56px 0;
+  }
+  .fastco-product-card-body {
+    padding: 14px;
+  }
+  .fastco-product-card-title {
+    font-size: 14px;
+  }
+  .fastco-product-card-price {
+    font-size: 15px;
+  }
+  .fastco-bestsellers-empty {
+    padding: 48px 20px;
+  }
+  .fastco-product-card-img--empty svg {
+    width: 32px;
+    height: 32px;
+  }
+}
