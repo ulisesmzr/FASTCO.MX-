@@ -1,0 +1,218 @@
+{%- comment -%}
+  ─────────────────────────────────────────
+  fastco-hero.liquid
+  Hero institucional stat-board.
+  Eyebrow + headline + lead + CTAs + panel de stats con glass.
+  Editable desde el editor de Shopify (settings).
+  Sprint 2026-05-06.
+  ─────────────────────────────────────────
+{%- endcomment -%}
+
+{{ 'section-fastco-hero.css' | asset_url | stylesheet_tag }}
+
+<section class="fastco-hero" data-section-id="{{ section.id }}">
+  <div class="fastco-hero-grid-bg" aria-hidden="true"></div>
+  <div class="fastco-hero-blur fastco-hero-blur--orange" aria-hidden="true"></div>
+  <div class="fastco-hero-blur fastco-hero-blur--orange-2" aria-hidden="true"></div>
+
+  <div class="fastco-hero-inner">
+
+    <div class="fastco-hero-text">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="fastco-hero-eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.headline != blank -%}
+        <h1 class="fastco-hero-headline">{{ section.settings.headline }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.lead != blank -%}
+        <p class="fastco-hero-lead">{{ section.settings.lead }}</p>
+      {%- endif -%}
+
+      <div class="fastco-hero-ctas">
+        {%- if section.settings.cta_primary_text != blank and section.settings.cta_primary_url != blank -%}
+          <a href="{{ section.settings.cta_primary_url }}" class="fastco-btn fastco-btn--primary fastco-btn--lg">
+            {{ section.settings.cta_primary_text }}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.cta_secondary_text != blank and section.settings.cta_secondary_url != blank -%}
+          <a href="{{ section.settings.cta_secondary_url }}" class="fastco-btn fastco-btn--ghost-light fastco-btn--lg">
+            {{ section.settings.cta_secondary_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.show_strip -%}
+        <div class="fastco-hero-strip">
+          <span><strong>48h</strong> CDMX y AM</span>
+          <span class="fastco-hero-strip-sep"></span>
+          <span><strong>Logística propia</strong> fastco</span>
+          <span class="fastco-hero-strip-sep"></span>
+          <span><strong>Catálogo institucional</strong> con marcas líderes</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} STAT BOARD derecho {%- endcomment -%}
+    <aside class="fastco-stat-board" aria-label="Cifras clave">
+      <div class="fastco-stat-board-eyebrow">{{ section.settings.board_eyebrow | default: 'Operación fastco' }}</div>
+
+      <div class="fastco-stat-board-main">
+        <div class="fastco-stat-board-num">
+          {{ section.settings.stat_main_num | default: '300' }}<span class="fastco-stat-board-unit">+</span>
+        </div>
+        <div class="fastco-stat-board-sub">{{ section.settings.stat_main_label | default: 'SKUs en catálogo objetivo' }}</div>
+      </div>
+
+      <div class="fastco-stat-board-divider"></div>
+
+      <div class="fastco-stat-board-rows">
+        <div class="fastco-stat-board-row">
+          <span class="fastco-stat-board-row-label">Marcas líderes</span>
+          <span class="fastco-stat-board-row-value">{{ section.settings.stat_brands | default: '50+' }}</span>
+        </div>
+        <div class="fastco-stat-board-row">
+          <span class="fastco-stat-board-row-label">Cobertura CDMX/AM</span>
+          <span class="fastco-stat-board-row-value">{{ section.settings.stat_zones | default: '8 zonas' }}</span>
+        </div>
+        <div class="fastco-stat-board-row">
+          <span class="fastco-stat-board-row-label">Entrega</span>
+          <span class="fastco-stat-board-row-value">{{ section.settings.stat_delivery | default: '48h' }}</span>
+        </div>
+        <div class="fastco-stat-board-row">
+          <span class="fastco-stat-board-row-label">Mínimo gratis</span>
+          <span class="fastco-stat-board-row-value">{{ section.settings.stat_min | default: '$3,500' }}</span>
+        </div>
+      </div>
+
+      <div class="fastco-stat-board-foot">
+        <div class="fastco-stat-board-pulse" aria-hidden="true"></div>
+        <span>{{ section.settings.board_foot | default: 'Operación activa' }}</span>
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "fastco · Hero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Texto principal"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Distribuidor B2B HORECA institucional"
+    },
+    {
+      "type": "textarea",
+      "id": "headline",
+      "label": "Headline (H1)",
+      "default": "Suministros institucionales con respaldo de marcas líderes."
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Subtítulo",
+      "default": "Higiénico, dispensadores, limpieza profesional, EPP y refacciones para hoteles, restaurantes, cafeterías y oficinas. Entrega en 48 horas en CDMX y zona metropolitana con logística propia fastco."
+    },
+    {
+      "type": "header",
+      "content": "Botones"
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_text",
+      "label": "CTA principal — texto",
+      "default": "Ver catálogo"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_url",
+      "label": "CTA principal — link"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_text",
+      "label": "CTA secundario — texto",
+      "default": "Cobertura y logística"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_url",
+      "label": "CTA secundario — link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_strip",
+      "label": "Mostrar strip de promesas debajo de los CTAs",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Stat board (panel derecho)"
+    },
+    {
+      "type": "text",
+      "id": "board_eyebrow",
+      "label": "Board eyebrow",
+      "default": "Operación fastco"
+    },
+    {
+      "type": "text",
+      "id": "stat_main_num",
+      "label": "Cifra principal",
+      "default": "300"
+    },
+    {
+      "type": "text",
+      "id": "stat_main_label",
+      "label": "Etiqueta cifra principal",
+      "default": "SKUs en catálogo objetivo"
+    },
+    {
+      "type": "text",
+      "id": "stat_brands",
+      "label": "Marcas líderes (valor)",
+      "default": "50+"
+    },
+    {
+      "type": "text",
+      "id": "stat_zones",
+      "label": "Cobertura CDMX/AM (valor)",
+      "default": "8 zonas"
+    },
+    {
+      "type": "text",
+      "id": "stat_delivery",
+      "label": "Entrega (valor)",
+      "default": "48h"
+    },
+    {
+      "type": "text",
+      "id": "stat_min",
+      "label": "Mínimo envío gratis (valor)",
+      "default": "$3,500"
+    },
+    {
+      "type": "text",
+      "id": "board_foot",
+      "label": "Texto footer del board",
+      "default": "Operación activa"
+    }
+  ],
+  "presets": [
+    {
+      "name": "fastco · Hero"
+    }
+  ]
+}
+{% endschema %}
