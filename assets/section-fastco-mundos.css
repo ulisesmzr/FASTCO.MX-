@@ -1,0 +1,282 @@
+/* ─────────────────────────────────────────────────────
+   FASTCO · 7 MUNDOS STYLES
+   + utilidades compartidas de cabecera de sección
+   Sprint 2026-05-06
+   Depende de: assets/fastco-tokens.css
+   ─────────────────────────────────────────────────── */
+
+/* ─────────────────────────────────────────────────────
+   SHARED — section header utilities (uso en TODAS las
+   secciones del home: mundos, bestsellers, dispensadores,
+   logística, eco, brand-marquee, cta-final)
+   ─────────────────────────────────────────────────── */
+.fastco-section-eyebrow {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fastco-naranja);
+  padding: 6px 12px;
+  background: var(--fastco-naranja-tint);
+  border-radius: var(--fastco-r-pill);
+  margin-bottom: 20px;
+}
+
+.fastco-section-title {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--fastco-grafito);
+  margin: 0 0 18px;
+}
+
+.fastco-section-lead {
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--fastco-texto-sec);
+  margin: 0;
+  max-width: 640px;
+}
+
+/* ─────────────────────────────────────────────────────
+   MUNDOS — section
+   ─────────────────────────────────────────────────── */
+.fastco-mundos {
+  background: var(--fastco-crema);
+  padding: 96px 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fastco-mundos-inner {
+  max-width: var(--fastco-max);
+  margin: 0 auto;
+  padding: 0 var(--fastco-gutter);
+}
+
+.fastco-mundos-head {
+  margin-bottom: 56px;
+  max-width: 720px;
+}
+
+/* ─── GRID ─── */
+.fastco-mundos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+/* ─── CARD del mundo ─── */
+.fastco-mundo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+  background: var(--fastco-blanco);
+  border: 1px solid var(--fastco-linea);
+  border-radius: var(--fastco-r-lg);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s var(--fastco-ease-out);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.fastco-mundo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--fastco-naranja-tint) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.25s var(--fastco-ease-out);
+  z-index: -1;
+}
+
+.fastco-mundo:hover {
+  border-color: var(--fastco-naranja);
+  transform: translateY(-3px);
+  box-shadow: var(--fastco-sh-2);
+}
+
+.fastco-mundo:hover::before {
+  opacity: 1;
+}
+
+.fastco-mundo-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--fastco-r-md);
+  background: var(--fastco-crema-deep);
+  color: var(--fastco-grafito);
+  transition: all 0.25s var(--fastco-ease-out);
+  margin-bottom: 4px;
+}
+
+.fastco-mundo:hover .fastco-mundo-icon {
+  background: var(--fastco-naranja);
+  color: var(--fastco-blanco);
+  transform: scale(1.05);
+}
+
+.fastco-mundo-name {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--fastco-grafito);
+  margin: 0;
+}
+
+.fastco-mundo-desc {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--fastco-texto-sec);
+  margin: 0;
+}
+
+/* ─── FEATURED variant (Dispensadores) ─── */
+.fastco-mundo--featured {
+  grid-column: span 2;
+  background: var(--fastco-grafito);
+  color: var(--fastco-blanco);
+  border-color: var(--fastco-grafito);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 240px;
+  position: relative;
+  overflow: hidden;
+}
+
+.fastco-mundo--featured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 100% 100%, rgba(246,87,31,0.18), transparent 60%),
+    radial-gradient(ellipse 40% 60% at 0% 0%, rgba(246,87,31,0.08), transparent 50%);
+  z-index: -1;
+  opacity: 1;
+}
+
+.fastco-mundo--featured:hover {
+  border-color: var(--fastco-naranja);
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+}
+
+.fastco-mundo--featured:hover::before {
+  opacity: 1;
+}
+
+.fastco-mundo--featured .fastco-mundo-icon {
+  background: rgba(255,255,255,0.08);
+  color: var(--fastco-naranja);
+  width: 64px;
+  height: 64px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.fastco-mundo--featured:hover .fastco-mundo-icon {
+  background: var(--fastco-naranja);
+  color: var(--fastco-blanco);
+  border-color: var(--fastco-naranja);
+}
+
+.fastco-mundo--featured .fastco-mundo-name {
+  font-size: 28px;
+  color: var(--fastco-blanco);
+  letter-spacing: -0.025em;
+  margin-top: auto;
+}
+
+.fastco-mundo--featured .fastco-mundo-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+/* ─── BADGE "Más vendido" en featured ─── */
+.fastco-mundo-badge {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fastco-naranja);
+  background: var(--fastco-naranja-tint);
+  border: 1px solid rgba(246,87,31,0.3);
+  padding: 5px 10px;
+  border-radius: var(--fastco-r-pill);
+  z-index: 1;
+}
+
+/* ─── CTA inline en featured ─── */
+.fastco-mundo-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fastco-naranja);
+  margin-top: 16px;
+  transition: gap 0.2s var(--fastco-ease-out);
+}
+
+.fastco-mundo--featured:hover .fastco-mundo-cta {
+  gap: 12px;
+}
+
+/* ─────────────────────────────────────────────────────
+   RESPONSIVE
+   ─────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .fastco-mundos {
+    padding: 72px 0;
+  }
+  .fastco-mundos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .fastco-mundo--featured {
+    grid-column: span 2;
+    min-height: 200px;
+  }
+  .fastco-mundo--featured .fastco-mundo-name {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .fastco-mundos {
+    padding: 56px 0;
+  }
+  .fastco-mundos-head {
+    margin-bottom: 40px;
+  }
+  .fastco-mundos-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .fastco-mundo--featured {
+    grid-column: span 1;
+    padding: 28px;
+  }
+  .fastco-mundo--featured .fastco-mundo-name {
+    font-size: 22px;
+  }
+  .fastco-mundo {
+    padding: 22px;
+  }
+}
