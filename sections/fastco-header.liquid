@@ -1,0 +1,170 @@
+{%- comment -%}
+  ─────────────────────────────────────────
+  fastco-header.liquid
+  Header principal del sitio fastco.
+  Wordmark CSS + nav 3 items + mega-dropdown catálogo + cart drawer.
+  Sprint 2026-05-06.
+  ─────────────────────────────────────────
+{%- endcomment -%}
+
+{{ 'section-fastco-header.css' | asset_url | stylesheet_tag }}
+
+<header class="fastco-header" data-section-id="{{ section.id }}">
+  <div class="fastco-header-inner">
+
+    {%- comment -%} LOGO wordmark {%- endcomment -%}
+    <a href="{{ routes.root_url }}" class="fastco-logo" aria-label="fastco · Inicio">
+      <span class="fastco-logo-mark">fastco</span><span class="fastco-logo-dot">.</span>
+    </a>
+
+    {%- comment -%} NAV principal — 3 items {%- endcomment -%}
+    <nav class="fastco-nav" aria-label="Principal">
+      <ul class="fastco-nav-list">
+        <li class="fastco-nav-item has-mega">
+          <a href="{{ routes.collections_url }}" class="fastco-nav-link">
+            Catálogo
+            <svg class="fastco-nav-caret" width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M1 1l4 4 4-4"/></svg>
+          </a>
+
+          <div class="fastco-mega" role="menu" aria-label="Catálogo">
+            <div class="fastco-mega-grid">
+              <a href="/collections/higienico-institucional" class="fastco-mega-cat" role="menuitem">
+                <span class="fastco-mega-cat-name">Higiénico institucional</span>
+                <span class="fastco-mega-cat-desc">Marli, Pétalo, Kleenex, Scott, Tork</span>
+              </a>
+              <a href="/collections/toalla-de-manos" class="fastco-mega-cat" role="menuitem">
+                <span class="fastco-mega-cat-name">Toalla de manos</span>
+                <span class="fastco-mega-cat-desc">KCP y Tork H1, H2, H5</span>
+              </a>
+              <a href="/collections/servilletas-y-manteleria" class="fastco-mega-cat" role="menuitem">
+                <span class="fastco-mega-cat-name">Servilletas y mantelería</span>
+                <span class="fastco-mega-cat-desc">Tork Xpressnap, LinStyle, Marli</span>
+              </a>
+              <a href="/collections/dispensadores" class="fastco-mega-cat fastco-mega-cat--featured" role="menuitem">
+                <span class="fastco-mega-cat-name">Dispensadores</span>
+                <span class="fastco-mega-cat-desc">Tork Elevation, Image Design, KCP</span>
+              </a>
+              <a href="/collections/limpieza-y-quimicos" class="fastco-mega-cat" role="menuitem">
+                <span class="fastco-mega-cat-name">Limpieza y químicos</span>
+                <span class="fastco-mega-cat-desc">PYCSA, 3M, paños Tork, jabones</span>
+              </a>
+              <a href="/collections/epp-y-desechables" class="fastco-mega-cat" role="menuitem">
+                <span class="fastco-mega-cat-name">EPP y desechables</span>
+                <span class="fastco-mega-cat-desc">Cubrebocas, guantes, vasos, contenedores</span>
+              </a>
+              <a href="/collections/refacciones-rapidas" class="fastco-mega-cat" role="menuitem">
+                <span class="fastco-mega-cat-name">Refacciones rápidas</span>
+                <span class="fastco-mega-cat-desc">Cloralex, fibras, repuestos, pastillas WC</span>
+              </a>
+            </div>
+            <div class="fastco-mega-foot">
+              <a href="{{ routes.collections_url }}" class="fastco-mega-foot-link">
+                Ver catálogo completo
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="fastco-nav-item">
+          <a href="/collections/dispensadores" class="fastco-nav-link">Dispensadores</a>
+        </li>
+
+        <li class="fastco-nav-item">
+          <a href="/pages/logistica" class="fastco-nav-link">Logística</a>
+        </li>
+      </ul>
+    </nav>
+
+    {%- comment -%} ACTIONS — search · account · cart {%- endcomment -%}
+    <div class="fastco-header-actions">
+
+      {%- comment -%} Search trigger (usa el predictive search nativo de Dawn) {%- endcomment -%}
+      <a href="{{ routes.search_url }}" class="fastco-icon-btn" aria-label="Buscar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </a>
+
+      {%- comment -%} Account icon (login default Dawn) {%- endcomment -%}
+      {%- if shop.customer_accounts_enabled -%}
+        <a href="{{ routes.account_url }}" class="fastco-icon-btn" aria-label="Mi cuenta">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg>
+        </a>
+      {%- endif -%}
+
+      {%- comment -%} Cart icon — Dawn maneja el cart drawer via cart-drawer.liquid {%- endcomment -%}
+      <a href="{{ routes.cart_url }}" class="fastco-icon-btn fastco-cart-btn" id="cart-icon-bubble" aria-label="Carrito ({{ cart.item_count }} artículos)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2l-2 5h16l-2-5"/><path d="M3 7h18l-2 13H5L3 7z"/></svg>
+        {%- if cart.item_count > 0 -%}
+          <span class="fastco-cart-count">{{ cart.item_count }}</span>
+        {%- endif -%}
+      </a>
+
+      {%- comment -%} Mobile burger {%- endcomment -%}
+      <button class="fastco-burger" id="fastcoBurger" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  {%- comment -%} Mobile drawer (oculto por default, se abre con el burger) {%- endcomment -%}
+  <div class="fastco-mobile-drawer" id="fastcoMobileDrawer" aria-hidden="true">
+    <div class="fastco-mobile-drawer-overlay" data-close-drawer></div>
+    <aside class="fastco-mobile-drawer-panel">
+      <div class="fastco-mobile-drawer-head">
+        <span class="fastco-logo-mark">fastco</span><span class="fastco-logo-dot">.</span>
+        <button class="fastco-mobile-close" data-close-drawer aria-label="Cerrar menú">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <nav class="fastco-mobile-nav">
+        <a href="{{ routes.collections_url }}">Catálogo completo</a>
+        <a href="/collections/higienico-institucional">Higiénico institucional</a>
+        <a href="/collections/toalla-de-manos">Toalla de manos</a>
+        <a href="/collections/servilletas-y-manteleria">Servilletas y mantelería</a>
+        <a href="/collections/dispensadores" class="featured">Dispensadores</a>
+        <a href="/collections/limpieza-y-quimicos">Limpieza y químicos</a>
+        <a href="/collections/epp-y-desechables">EPP y desechables</a>
+        <a href="/collections/refacciones-rapidas">Refacciones rápidas</a>
+        <hr class="fastco-mobile-divider">
+        <a href="/pages/logistica">Logística</a>
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{{ routes.account_url }}">Mi cuenta</a>
+        {%- endif -%}
+      </nav>
+    </aside>
+  </div>
+</header>
+
+<script>
+  (function(){
+    const burger = document.getElementById('fastcoBurger');
+    const drawer = document.getElementById('fastcoMobileDrawer');
+    if(!burger || !drawer) return;
+    const open = () => { drawer.classList.add('open'); drawer.setAttribute('aria-hidden','false'); burger.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; };
+    const close = () => { drawer.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); burger.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
+    burger.addEventListener('click', open);
+    drawer.querySelectorAll('[data-close-drawer]').forEach(el => el.addEventListener('click', close));
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "fastco · Header",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Configuración del header fastco"
+    },
+    {
+      "type": "paragraph",
+      "content": "Header con logo wordmark, navegación de 3 items y mega-dropdown del catálogo. Editable en código (sections/fastco-header.liquid)."
+    }
+  ],
+  "presets": [
+    {
+      "name": "fastco · Header"
+    }
+  ]
+}
+{% endschema %}
