@@ -1,0 +1,177 @@
+/* ─────────────────────────────────────────────────────
+   FASTCO · FOOTER STYLES
+   Sprint 2026-05-06
+   Depende de: assets/fastco-tokens.css
+   ─────────────────────────────────────────────────── */
+
+.fastco-footer {
+  background: var(--fastco-grafito);
+  color: var(--fastco-blanco);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  margin-top: 96px;
+}
+
+/* ─── MAIN AREA ─── */
+.fastco-footer-main {
+  padding: 72px 0 56px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.fastco-footer-inner {
+  max-width: var(--fastco-max);
+  margin: 0 auto;
+  padding: 0 var(--fastco-gutter);
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
+  gap: 56px;
+}
+
+/* ─── BRAND COLUMN ─── */
+.fastco-footer-brand {
+  max-width: 380px;
+}
+.fastco-footer-logo {
+  display: inline-flex;
+  align-items: baseline;
+  text-decoration: none;
+  line-height: 1;
+  margin-bottom: 18px;
+}
+.fastco-footer-logo-mark {
+  font-weight: 800;
+  font-size: 30px;
+  color: var(--fastco-blanco);
+  letter-spacing: -0.025em;
+}
+.fastco-footer-logo-dot {
+  font-weight: 800;
+  font-size: 30px;
+  color: var(--fastco-naranja);
+  letter-spacing: -0.025em;
+  margin-left: 1px;
+}
+.fastco-footer-tagline {
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.65);
+  margin: 0 0 24px;
+}
+
+/* Social icons */
+.fastco-footer-social {
+  display: flex;
+  gap: 8px;
+}
+.fastco-social-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--fastco-r-md);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  transition: all 0.2s var(--fastco-ease-out);
+}
+.fastco-social-icon:hover {
+  background: var(--fastco-naranja);
+  color: var(--fastco-blanco);
+  transform: translateY(-2px);
+}
+
+/* ─── COLUMNAS ─── */
+.fastco-footer-col {
+  min-width: 0;
+}
+.fastco-footer-col-title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fastco-naranja);
+  margin: 0 0 18px;
+}
+.fastco-footer-col-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.fastco-footer-col-list li {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.75);
+}
+.fastco-footer-col-list a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  transition: color 0.18s var(--fastco-ease-out);
+}
+.fastco-footer-col-list a:hover {
+  color: var(--fastco-naranja);
+}
+
+/* Contact column variant */
+.fastco-footer-col-list--contact li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+.fastco-footer-contact-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.4);
+  font-weight: 500;
+}
+
+/* ─── SLOGAN STRIP ─── */
+.fastco-footer-slogan {
+  background: var(--fastco-grafito-deep);
+  padding: 28px 0;
+  overflow: hidden;
+  position: relative;
+}
+.fastco-footer-slogan::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at top left, rgba(246,87,31,0.08), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(246,87,31,0.05), transparent 60%);
+  pointer-events: none;
+}
+.fastco-footer-slogan-inner {
+  max-width: var(--fastco-max);
+  margin: 0 auto;
+  padding: 0 var(--fastco-gutter);
+  text-align: center;
+  position: relative;
+}
+.fastco-footer-slogan-text {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--fastco-blanco);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.fastco-footer-slogan-dot {
+  color: var(--fastco-naranja);
+}
+
+/* ─── BOTTOM BAR ─── */
+.fastco-footer-bottom {
+  padding: 20px 0;
+  background: var(--fastco-grafito);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.fastco-footer-bottom-inner {
+  max-width: var(--fastco-max);
+  margin: 0 auto;
+  padding: 0 var(--fastco-gutter);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
