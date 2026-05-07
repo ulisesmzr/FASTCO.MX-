@@ -147,4 +147,209 @@
     0 20px 40px rgba(0,0,0,0.3),
     inset 0 1px 0 rgba(255,255,255,0.08);
 }
-.fastco
+.fastco-stat-board::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--fastco-r-xl);
+  background: linear-gradient(135deg, rgba(246,87,31,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.fastco-stat-board-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+.fastco-stat-board-main {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.fastco-stat-board-num {
+  font-size: 64px;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: var(--fastco-blanco);
+  display: flex;
+  align-items: baseline;
+}
+.fastco-stat-board-unit {
+  color: var(--fastco-naranja);
+  font-size: 36px;
+  margin-left: 4px;
+}
+.fastco-stat-board-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  font-weight: 500;
+}
+
+.fastco-stat-board-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+}
+
+.fastco-stat-board-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fastco-stat-board-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+.fastco-stat-board-row-label {
+  color: rgba(255,255,255,0.6);
+}
+.fastco-stat-board-row-value {
+  color: var(--fastco-blanco);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.fastco-stat-board-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 500;
+}
+.fastco-stat-board-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--fastco-menta);
+  position: relative;
+  animation: fastco-pulse 2s var(--fastco-ease-out) infinite;
+}
+.fastco-stat-board-pulse::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: var(--fastco-menta);
+  opacity: 0.4;
+  animation: fastco-pulse-ring 2s var(--fastco-ease-out) infinite;
+}
+@keyframes fastco-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+@keyframes fastco-pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.5; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+/* ─────────────────────────────────────────────────────
+   BUTTONS (compartido con resto del theme fastco)
+   ─────────────────────────────────────────────────── */
+.fastco-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  border-radius: var(--fastco-r-md);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s var(--fastco-ease-out);
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+}
+.fastco-btn--lg {
+  padding: 16px 28px;
+  font-size: 15px;
+}
+.fastco-btn--primary {
+  background: var(--fastco-naranja);
+  color: var(--fastco-blanco);
+  border-color: var(--fastco-naranja);
+  box-shadow: var(--fastco-sh-orange);
+}
+.fastco-btn--primary:hover {
+  background: var(--fastco-naranja-hover);
+  border-color: var(--fastco-naranja-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(246,87,31,0.28);
+}
+.fastco-btn--primary svg {
+  transition: transform 0.2s var(--fastco-ease-out);
+}
+.fastco-btn--primary:hover svg {
+  transform: translateX(3px);
+}
+.fastco-btn--ghost-light {
+  background: rgba(255,255,255,0.06);
+  color: var(--fastco-blanco);
+  border-color: rgba(255,255,255,0.18);
+}
+.fastco-btn--ghost-light:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1024px) {
+  .fastco-hero {
+    padding: 72px 0 88px;
+  }
+  .fastco-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .fastco-stat-board {
+    max-width: 480px;
+  }
+  .fastco-hero-blur--orange {
+    width: 380px;
+    height: 380px;
+    top: -120px;
+    right: -80px;
+  }
+}
+
+@media (max-width: 640px) {
+  .fastco-hero {
+    padding: 56px 0 72px;
+  }
+  .fastco-hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+  }
+  .fastco-hero-lead {
+    font-size: 16px;
+  }
+  .fastco-hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .fastco-btn {
+    justify-content: center;
+  }
+  .fastco-stat-board {
+    padding: 24px;
+  }
+  .fastco-stat-board-num {
+    font-size: 48px;
+  }
+  .fastco-stat-board-unit {
+    font-size: 28px;
+  }
+  .fastco-hero-strip {
+    font-size: 12px;
+  }
+}
