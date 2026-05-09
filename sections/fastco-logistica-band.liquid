@@ -1,19 +1,19 @@
 {%- comment -%}
   ─────────────────────────────────────────
   fastco-logistica-band.liquid
-  Banda con mapa visual de las 8 zonas formalizadas
-  CDMX/AM + promesa logística (48h, $3,500 gratis,
-  $299 menor, nacional Estafeta y DHL).
-  Sprint 2026-05-08.
+  Mapa SVG abstracto de 8 zonas CDMX/AM
+  + tabla de promesa de envío.
+  Background crema. Sprint 2026-05-08.
   ─────────────────────────────────────────
 {%- endcomment -%}
 
 {{ 'section-fastco-logistica-band.css' | asset_url | stylesheet_tag }}
 
-<section class="fastco-logistica-band" data-section-id="{{ section.id }}">
+<section class="fastco-log" data-section-id="{{ section.id }}">
   <div class="fastco-log-inner">
 
-    <header class="fastco-log-head">
+    {%- comment -%} HEADER {%- endcomment -%}
+    <div class="fastco-log-head">
       {%- if section.settings.eyebrow != blank -%}
         <div class="fastco-section-eyebrow">{{ section.settings.eyebrow }}</div>
       {%- endif -%}
@@ -23,46 +23,47 @@
       {%- if section.settings.lead != blank -%}
         <p class="fastco-section-lead">{{ section.settings.lead }}</p>
       {%- endif -%}
-    </header>
+    </div>
 
     <div class="fastco-log-grid">
 
-      {%- comment -%} LEFT — Mapa abstracto de 8 zonas {%- endcomment -%}
+      {%- comment -%} LEFT — Mapa SVG abstracto {%- endcomment -%}
       <div class="fastco-log-map">
         <div class="fastco-log-map-frame">
-          <div class="fastco-log-map-label">CDMX y zona metropolitana · Logística propia fastco</div>
-
-          <svg class="fastco-log-map-svg" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            {%- comment -%} Líneas de cuadrícula sutil {%- endcomment -%}
+          <div class="fastco-log-map-label">Cobertura logística propia · CDMX y zona metropolitana</div>
+          <svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" class="fastco-log-svg" aria-hidden="true">
             <defs>
-              <pattern id="grid-log" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(26,31,46,0.06)" stroke-width="1"/>
-              </pattern>
+              <radialGradient id="fastco-log-cedis-grad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#F6571F" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#F6571F" stop-opacity="0"/>
+              </radialGradient>
             </defs>
-            <rect width="400" height="320" fill="url(#grid-log)"/>
 
-            {%- comment -%} Líneas conectoras desde el cedis {%- endcomment -%}
-            <g stroke="rgba(246,87,31,0.18)" stroke-width="1" fill="none" stroke-dasharray="3 3">
+            {%- comment -%} Halo del cedis {%- endcomment -%}
+            <circle cx="200" cy="160" r="80" fill="url(#fastco-log-cedis-grad)"/>
+
+            {%- comment -%} Líneas de conexión cedis → zonas {%- endcomment -%}
+            <g class="fastco-log-lines" stroke-width="1" stroke-dasharray="3,3">
               <line x1="200" y1="160" x2="120" y2="80"/>
-              <line x1="200" y1="160" x2="280" y2="70"/>
-              <line x1="200" y1="160" x2="100" y2="140"/>
+              <line x1="200" y1="160" x2="280" y2="100"/>
+              <line x1="200" y1="160" x2="340" y2="120"/>
               <line x1="200" y1="160" x2="320" y2="180"/>
               <line x1="200" y1="160" x2="140" y2="240"/>
               <line x1="200" y1="160" x2="280" y2="260"/>
               <line x1="200" y1="160" x2="80" y2="220"/>
-              <line x1="200" y1="160" x2="340" y2="120"/>
+              <line x1="200" y1="160" x2="360" y2="240"/>
             </g>
 
-            {%- comment -%} 8 zonas con punto + nombre {%- endcomment -%}
+            {%- comment -%} Zonas (8 puntos con label) {%- endcomment -%}
             <g class="fastco-log-zones">
               <g class="fastco-log-zone"><circle cx="120" cy="80" r="6"/><text x="120" y="65">Polanco</text></g>
-              <g class="fastco-log-zone"><circle cx="280" cy="70" r="6"/><text x="280" y="55">Aeropuerto AICM</text></g>
-              <g class="fastco-log-zone"><circle cx="100" cy="140" r="6"/><text x="100" y="125">Santa Fe</text></g>
+              <g class="fastco-log-zone"><circle cx="280" cy="100" r="6"/><text x="280" y="85">Santa Fe</text></g>
               <g class="fastco-log-zone"><circle cx="340" cy="120" r="6"/><text x="340" y="105">Interlomas</text></g>
               <g class="fastco-log-zone"><circle cx="320" cy="180" r="6"/><text x="320" y="200">Roma · Condesa</text></g>
               <g class="fastco-log-zone"><circle cx="140" cy="240" r="6"/><text x="140" y="260">Narvarte · Del Valle</text></g>
               <g class="fastco-log-zone"><circle cx="280" cy="260" r="6"/><text x="280" y="280">Pedregal · Coyoacán</text></g>
               <g class="fastco-log-zone"><circle cx="80" cy="220" r="6"/><text x="80" y="240">Izcalli (Cedis)</text></g>
+              <g class="fastco-log-zone"><circle cx="360" cy="240" r="6"/><text x="360" y="260">Aeropuerto AICM</text></g>
             </g>
 
             {%- comment -%} Pulse central — origen del cedis {%- endcomment -%}
@@ -88,3 +89,68 @@
               <span class="fastco-log-tier-cond">Pedido ≥ $3,500</span>
               <span class="fastco-log-tier-cost fastco-log-tier-cost--free">Gratis</span>
             </div>
+            <div class="fastco-log-tier">
+              <span class="fastco-log-tier-cond">Pedido &lt; $3,500</span>
+              <span class="fastco-log-tier-cost">$299</span>
+            </div>
+          </div>
+          <div class="fastco-log-row-note">Logística propia fastco. 8 zonas con cobertura activa.</div>
+        </div>
+
+        <div class="fastco-log-row">
+          <div class="fastco-log-row-head">
+            <span class="fastco-log-row-zone">Nacional · Estafeta</span>
+            <span class="fastco-log-row-time">2-4 días</span>
+          </div>
+          <div class="fastco-log-row-note">Tarifa Estafeta + 10%. Gratis en órdenes ≥ $5,000.</div>
+        </div>
+
+        <div class="fastco-log-row">
+          <div class="fastco-log-row-head">
+            <span class="fastco-log-row-zone">Nacional · DHL Premium</span>
+            <span class="fastco-log-row-time">24-48h</span>
+          </div>
+          <div class="fastco-log-row-note">Tarifa DHL + 15%. Para pedidos urgentes fuera de CDMX.</div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "fastco · Logística",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Texto principal"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Logística que sí cumple"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "8 zonas, 1 promesa: 48 horas."
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Subtítulo",
+      "default": "Operamos con flota propia en CDMX y zona metropolitana. Para el resto del país, convenios con Estafeta y DHL. Sin sorpresas, sin promesas vacías."
+    }
+  ],
+  "presets": [
+    {
+      "name": "fastco · Logística"
+    }
+  ]
+}
+{% endschema %}
