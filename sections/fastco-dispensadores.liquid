@@ -1,0 +1,183 @@
+{%- comment -%}
+  ─────────────────────────────────────────
+  fastco-dispensadores.liquid
+  Push al catálogo de dispensadores — la jugada
+  estratégica del modelo HORECA. Layout split con
+  3 sistemas destacados (T8 hoteles, T9 restaurantes,
+  N4 mostrador). Sin CTAs hacia AM/cuentas corporativas.
+  Sprint 2026-05-08.
+  ─────────────────────────────────────────
+{%- endcomment -%}
+
+{{ 'section-fastco-dispensadores.css' | asset_url | stylesheet_tag }}
+
+<section class="fastco-dispensadores" data-section-id="{{ section.id }}">
+  <div class="fastco-disp-grid-bg" aria-hidden="true"></div>
+  <div class="fastco-disp-blur" aria-hidden="true"></div>
+
+  <div class="fastco-disp-inner">
+
+    {%- comment -%} LEFT: text + CTA + stats {%- endcomment -%}
+    <div class="fastco-disp-text">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="fastco-section-eyebrow fastco-section-eyebrow--light">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="fastco-section-title fastco-section-title--light">{{ section.settings.title }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.lead != blank -%}
+        <p class="fastco-section-lead fastco-section-lead--light">{{ section.settings.lead }}</p>
+      {%- endif -%}
+
+      <div class="fastco-disp-cta-wrap">
+        <a href="{{ section.settings.cta_url | default: '/collections/dispensadores' }}" class="fastco-btn fastco-btn--primary fastco-btn--lg">
+          {{ section.settings.cta_text | default: 'Ver dispensadores' }}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="fastco-disp-promise">
+        <div class="fastco-disp-promise-item">
+          <div class="fastco-disp-promise-num">5<span class="fastco-disp-promise-unit">+</span></div>
+          <div class="fastco-disp-promise-label">años de vida útil del dispensador</div>
+        </div>
+        <div class="fastco-disp-promise-item">
+          <div class="fastco-disp-promise-num">100<span class="fastco-disp-promise-unit">%</span></div>
+          <div class="fastco-disp-promise-label">refills compatibles siempre en stock</div>
+        </div>
+        <div class="fastco-disp-promise-item">
+          <div class="fastco-disp-promise-num">48<span class="fastco-disp-promise-unit">h</span></div>
+          <div class="fastco-disp-promise-label">entrega del primer refill en CDMX/AM</div>
+        </div>
+      </div>
+    </div>
+
+    {%- comment -%} RIGHT: stack de 3 cards de sistemas {%- endcomment -%}
+    <div class="fastco-disp-cards">
+
+      {%- comment -%} T8 — Hoteles {%- endcomment -%}
+      <a href="/collections/dispensadores" class="fastco-disp-card">
+        <div class="fastco-disp-card-head">
+          <span class="fastco-disp-card-code">T8</span>
+          <span class="fastco-disp-card-tag">Hoteles</span>
+        </div>
+        <div class="fastco-disp-card-body">
+          <div class="fastco-disp-card-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="3" width="14" height="22" rx="2"/>
+              <path d="M13 25v3M19 25v3"/>
+              <circle cx="16" cy="14" r="4"/>
+              <path d="M12 9h8"/>
+            </svg>
+          </div>
+          <div class="fastco-disp-card-content">
+            <h3 class="fastco-disp-card-name">Tork SmartOne Maxi</h3>
+            <p class="fastco-disp-card-desc">Capacidad extendida para baños de tráfico medio-alto. Sistema cerrado que reduce consumo y robo.</p>
+          </div>
+        </div>
+        <span class="fastco-disp-card-cta">Ver sistema <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+      </a>
+
+      {%- comment -%} T9 — Restaurantes {%- endcomment -%}
+      <a href="/collections/dispensadores" class="fastco-disp-card">
+        <div class="fastco-disp-card-head">
+          <span class="fastco-disp-card-code">T9</span>
+          <span class="fastco-disp-card-tag">Restaurantes</span>
+        </div>
+        <div class="fastco-disp-card-body">
+          <div class="fastco-disp-card-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="10" y="5" width="12" height="20" rx="2"/>
+              <path d="M14 25v3M18 25v3"/>
+              <circle cx="16" cy="14" r="3"/>
+              <path d="M13 10h6"/>
+            </svg>
+          </div>
+          <div class="fastco-disp-card-content">
+            <h3 class="fastco-disp-card-name">Tork SmartOne Mini</h3>
+            <p class="fastco-disp-card-desc">Tamaño compacto para baños de servicio en restaurantes. Mismo sistema SmartOne, footprint menor.</p>
+          </div>
+        </div>
+        <span class="fastco-disp-card-cta">Ver sistema <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+      </a>
+
+      {%- comment -%} N4 — Mostrador {%- endcomment -%}
+      <a href="/collections/dispensadores" class="fastco-disp-card">
+        <div class="fastco-disp-card-head">
+          <span class="fastco-disp-card-code">N4</span>
+          <span class="fastco-disp-card-tag">Mostrador</span>
+        </div>
+        <div class="fastco-disp-card-body">
+          <div class="fastco-disp-card-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="10" width="20" height="14" rx="2"/>
+              <path d="M10 14h12M10 18h8"/>
+              <path d="M16 6v4"/>
+              <circle cx="16" cy="5" r="1"/>
+            </svg>
+          </div>
+          <div class="fastco-disp-card-content">
+            <h3 class="fastco-disp-card-name">Tork Xpressnap</h3>
+            <p class="fastco-disp-card-desc">Servilletero de mostrador que entrega una a la vez. Reduce hasta 25% el consumo vs servilletero abierto.</p>
+          </div>
+        </div>
+        <span class="fastco-disp-card-cta">Ver sistema <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+      </a>
+
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "fastco · Dispensadores",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Texto principal"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "El sistema que captura el ciclo"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Título",
+      "default": "Dispensadores que aseguran tu refill por años."
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Subtítulo",
+      "default": "Un dispensador instalado significa rotación recurrente del refill compatible. Es la jugada estratégica del catálogo HORECA: invierte una vez, abastece sin pensar durante años."
+    },
+    {
+      "type": "header",
+      "content": "Botón principal"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto del botón",
+      "default": "Ver dispensadores"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Link del botón"
+    }
+  ],
+  "presets": [
+    {
+      "name": "fastco · Dispensadores"
+    }
+  ]
+}
+{% endschema %}
