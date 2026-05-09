@@ -37,18 +37,6 @@
         "board_foot": "Operación activa"
       }
     },
-    "fastco_bestsellers_jBnNQp": {
-      "type": "fastco-bestsellers",
-      "name": "fastco · Bestsellers",
-      "settings": {
-        "eyebrow": "Lo más pedido",
-        "title": "Bestsellers HORECA.",
-        "lead": "Los productos que más rotan en restaurantes, cafeterías y hoteles. Marcas líderes con respaldo, presentación institucional, entrega 48h.",
-        "collection": "frontpage",
-        "product_count": 8,
-        "show_view_all": true
-      }
-    },
     "fastco_mundos_w3aacq": {
       "type": "fastco-mundos",
       "name": "fastco · 7 Mundos",
@@ -77,6 +65,40 @@
         "title": "8 zonas, 1 promesa: 48 horas.",
         "lead": "Operamos con flota propia en CDMX y zona metropolitana. Para el resto del país, convenios con Estafeta y DHL. Sin sorpresas, sin promesas vacías."
       }
+    },
+    "fastco_bestsellers_jBnNQp": {
+      "type": "fastco-bestsellers",
+      "name": "fastco · Bestsellers",
+      "settings": {
+        "eyebrow": "Lo más pedido",
+        "title": "Bestsellers HORECA.",
+        "lead": "Los productos que más rotan en restaurantes, cafeterías y hoteles. Marcas líderes con respaldo, presentación institucional, entrega 48h.",
+        "collection": "frontpage",
+        "product_count": 8,
+        "show_view_all": true
+      }
+    },
+    "fastco_brand_marquee_JT9wJU": {
+      "type": "fastco-brand-marquee",
+      "name": "fastco · Marcas",
+      "settings": {
+        "eyebrow": "Catálogo institucional con respaldo",
+        "claim": "300+ SKUs · 50+ marcas líderes en México.",
+        "subclaim": "Distribuimos las marcas que tu operación HORECA ya conoce, con la consistencia y el respaldo institucional que necesita.",
+        "brands_list": "KCP, Tork, 3M, Pétalo, Marli, Cloralex, Kleenex, Scott, Kimlark, LinStyle, PYCSA, Pacific Blue, Kimberly-Clark Professional, Tena Professional, Sigma Plastic"
+      }
+    },
+    "fastco_cta_final_D4DWKd": {
+      "type": "fastco-cta-final",
+      "name": "fastco · CTA final",
+      "settings": {
+        "eyebrow": "Empieza ahora",
+        "slogan": "Tu operación nunca se detiene.",
+        "subtitle": "Catálogo institucional con respaldo de marcas líderes. Entrega 48h en CDMX y zona metropolitana, nacional vía Estafeta y DHL.",
+        "button_label": "Ver catálogo completo",
+        "button_link": "shopify://collections/all",
+        "foot_note": "Pedido mínimo $3,500 para envío gratis CDMX/AM · Pago seguro · Facturación electrónica"
+      }
     }
   },
   "order": [
@@ -85,6 +107,8 @@
     "fastco_mundos_w3aacq",
     "fastco_dispensadores_dm9Ygj",
     "fastco_logistica_band_G9AEJy",
-    "fastco_bestsellers_jBnNQp"
+    "fastco_bestsellers_jBnNQp",
+    "fastco_brand_marquee_JT9wJU",
+    "fastco_cta_final_D4DWKd"
   ]
 }
