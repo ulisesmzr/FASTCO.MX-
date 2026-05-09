@@ -1,0 +1,315 @@
+/* ─────────────────────────────────────────────────────
+   FASTCO · DISPENSADORES STYLES
+   + modifiers --light para utilidades compartidas
+   Sprint 2026-05-08
+   Depende de: assets/fastco-tokens.css
+   ─────────────────────────────────────────────────── */
+
+/* ─────────────────────────────────────────────────────
+   SHARED — modifiers --light para fondos oscuros
+   (uso en cualquier sección con fondo grafito)
+   ─────────────────────────────────────────────────── */
+.fastco-section-eyebrow--light {
+  background: rgba(246,87,31,0.12);
+  border: 1px solid rgba(246,87,31,0.3);
+}
+.fastco-section-title--light {
+  color: var(--fastco-blanco);
+}
+.fastco-section-lead--light {
+  color: rgba(255,255,255,0.72);
+}
+
+/* ─────────────────────────────────────────────────────
+   DISPENSADORES — section
+   ─────────────────────────────────────────────────── */
+.fastco-dispensadores {
+  position: relative;
+  background: var(--fastco-grafito);
+  color: var(--fastco-blanco);
+  padding: 96px 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.fastco-disp-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 56px 56px;
+  background-position: -1px -1px;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse 70% 50% at 30% 50%, black 30%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 50% at 30% 50%, black 30%, transparent 80%);
+  pointer-events: none;
+}
+
+.fastco-disp-blur {
+  position: absolute;
+  width: 480px;
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(246,87,31,0.22), transparent 70%);
+  filter: blur(70px);
+  top: 50%;
+  right: -160px;
+  transform: translateY(-50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.fastco-disp-inner {
+  position: relative;
+  z-index: 2;
+  max-width: var(--fastco-max);
+  margin: 0 auto;
+  padding: 0 var(--fastco-gutter);
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+/* ─── LEFT: text + CTA + promise ─── */
+.fastco-disp-text {
+  min-width: 0;
+}
+
+.fastco-disp-cta-wrap {
+  margin: 32px 0 48px;
+}
+
+.fastco-disp-promise {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.fastco-disp-promise-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.fastco-disp-promise-num {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--fastco-blanco);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  display: flex;
+  align-items: baseline;
+}
+.fastco-disp-promise-unit {
+  color: var(--fastco-naranja);
+  font-size: 22px;
+  margin-left: 2px;
+}
+.fastco-disp-promise-label {
+  font-size: 12px;
+  line-height: 1.4;
+  color: rgba(255,255,255,0.55);
+  font-weight: 500;
+}
+
+/* ─── RIGHT: stack de cards de sistemas ─── */
+.fastco-disp-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fastco-disp-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 22px 24px;
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--fastco-r-lg);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.25s var(--fastco-ease-out);
+  overflow: hidden;
+}
+
+.fastco-disp-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(246,87,31,0.06), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.25s var(--fastco-ease-out);
+  pointer-events: none;
+}
+
+.fastco-disp-card:hover {
+  border-color: rgba(246,87,31,0.4);
+  background: rgba(255,255,255,0.05);
+  transform: translateX(4px);
+}
+
+.fastco-disp-card:hover::before {
+  opacity: 1;
+}
+
+.fastco-disp-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.fastco-disp-card-code {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--fastco-naranja);
+  background: rgba(246,87,31,0.14);
+  border: 1px solid rgba(246,87,31,0.28);
+  padding: 4px 10px;
+  border-radius: var(--fastco-r-pill);
+}
+
+.fastco-disp-card-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.fastco-disp-card-body {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.fastco-disp-card-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--fastco-r-md);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--fastco-naranja);
+  transition: all 0.25s var(--fastco-ease-out);
+}
+
+.fastco-disp-card:hover .fastco-disp-card-icon {
+  background: var(--fastco-naranja);
+  color: var(--fastco-blanco);
+  border-color: var(--fastco-naranja);
+}
+
+.fastco-disp-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.fastco-disp-card-name {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--fastco-blanco);
+  margin: 0 0 4px;
+}
+
+.fastco-disp-card-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.6);
+  margin: 0;
+}
+
+.fastco-disp-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fastco-naranja);
+  align-self: flex-end;
+  transition: gap 0.2s var(--fastco-ease-out);
+}
+
+.fastco-disp-card:hover .fastco-disp-card-cta {
+  gap: 10px;
+}
+
+/* ─────────────────────────────────────────────────────
+   RESPONSIVE
+   ─────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .fastco-dispensadores {
+    padding: 72px 0;
+  }
+  .fastco-disp-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .fastco-disp-blur {
+    width: 360px;
+    height: 360px;
+    right: -120px;
+  }
+  .fastco-disp-cta-wrap {
+    margin: 28px 0 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .fastco-dispensadores {
+    padding: 56px 0;
+  }
+  .fastco-disp-promise {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding-top: 24px;
+  }
+  .fastco-disp-promise-item {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .fastco-disp-promise-num {
+    font-size: 30px;
+    flex-shrink: 0;
+    min-width: 72px;
+  }
+  .fastco-disp-promise-label {
+    font-size: 13px;
+  }
+  .fastco-disp-card {
+    padding: 18px 20px;
+    gap: 14px;
+  }
+  .fastco-disp-card-body {
+    gap: 14px;
+  }
+  .fastco-disp-card-icon {
+    width: 48px;
+    height: 48px;
+  }
+  .fastco-disp-card-name {
+    font-size: 15px;
+  }
+  .fastco-disp-card-desc {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fastco-disp-promise-num {
+    font-size: 26px;
+  }
+}
