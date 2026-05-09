@@ -1,0 +1,317 @@
+/* ─────────────────────────────────────────────────────
+   FASTCO · LOGÍSTICA BAND STYLES
+   Mapa SVG abstracto + tabla de promesa por tier
+   Sprint 2026-05-08
+   Depende de: assets/fastco-tokens.css
+   ─────────────────────────────────────────────────── */
+
+.fastco-logistica-band {
+  background: var(--fastco-crema);
+  padding: 96px 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.fastco-log-inner {
+  max-width: var(--fastco-max);
+  margin: 0 auto;
+  padding: 0 var(--fastco-gutter);
+}
+
+.fastco-log-head {
+  margin-bottom: 56px;
+  max-width: 720px;
+}
+
+.fastco-log-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 56px;
+  align-items: stretch;
+}
+
+/* ─────────────────────────────────────────────────────
+   LEFT — Mapa abstracto
+   ─────────────────────────────────────────────────── */
+.fastco-log-map {
+  display: flex;
+}
+
+.fastco-log-map-frame {
+  position: relative;
+  width: 100%;
+  background: var(--fastco-blanco);
+  border: 1px solid var(--fastco-linea);
+  border-radius: var(--fastco-r-xl);
+  padding: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.fastco-log-map-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fastco-texto-mute);
+  margin-bottom: 12px;
+}
+
+.fastco-log-map-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  flex: 1;
+  overflow: visible;
+}
+
+/* ─── Zonas ─── */
+.fastco-log-zones circle {
+  fill: var(--fastco-naranja);
+  transition: all 0.3s var(--fastco-ease-out);
+}
+
+.fastco-log-zones text {
+  fill: var(--fastco-grafito);
+  font-size: 10px;
+  font-weight: 600;
+  text-anchor: middle;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+.fastco-log-zone {
+  cursor: default;
+}
+
+.fastco-log-zone circle {
+  animation: fastco-zone-pulse 3s var(--fastco-ease-out) infinite;
+}
+
+.fastco-log-zone:nth-child(1) circle { animation-delay: 0s; }
+.fastco-log-zone:nth-child(2) circle { animation-delay: 0.4s; }
+.fastco-log-zone:nth-child(3) circle { animation-delay: 0.8s; }
+.fastco-log-zone:nth-child(4) circle { animation-delay: 1.2s; }
+.fastco-log-zone:nth-child(5) circle { animation-delay: 1.6s; }
+.fastco-log-zone:nth-child(6) circle { animation-delay: 2.0s; }
+.fastco-log-zone:nth-child(7) circle { animation-delay: 2.4s; }
+.fastco-log-zone:nth-child(8) circle { animation-delay: 2.8s; }
+
+@keyframes fastco-zone-pulse {
+  0%, 100% { opacity: 0.55; r: 5; }
+  50% { opacity: 1; r: 7; }
+}
+
+/* ─── Cedis central ─── */
+.fastco-log-cedis-ring {
+  fill: none;
+  stroke: var(--fastco-naranja);
+  stroke-width: 1.5;
+  opacity: 0.6;
+  animation: fastco-cedis-ring 2.4s var(--fastco-ease-out) infinite;
+  transform-origin: 200px 160px;
+}
+
+.fastco-log-cedis-core {
+  fill: var(--fastco-naranja);
+  stroke: var(--fastco-blanco);
+  stroke-width: 2;
+}
+
+.fastco-log-cedis text {
+  fill: var(--fastco-grafito);
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+@keyframes fastco-cedis-ring {
+  0% { transform: scale(0.7); opacity: 0.8; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* ─────────────────────────────────────────────────────
+   RIGHT — Tabla de promesa
+   ─────────────────────────────────────────────────── */
+.fastco-log-promise {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fastco-log-row {
+  background: var(--fastco-blanco);
+  border: 1px solid var(--fastco-linea);
+  border-radius: var(--fastco-r-lg);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: all 0.2s var(--fastco-ease-out);
+}
+
+.fastco-log-row:hover {
+  border-color: var(--fastco-linea);
+  transform: translateY(-1px);
+  box-shadow: var(--fastco-sh-1);
+}
+
+/* Featured row (CDMX/AM) */
+.fastco-log-row--featured {
+  background: var(--fastco-grafito);
+  border-color: var(--fastco-grafito);
+  color: var(--fastco-blanco);
+  position: relative;
+  overflow: hidden;
+}
+
+.fastco-log-row--featured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 100% at 100% 0%, rgba(246,87,31,0.18), transparent 60%),
+    radial-gradient(ellipse 40% 60% at 0% 100%, rgba(246,87,31,0.08), transparent 60%);
+  pointer-events: none;
+}
+
+.fastco-log-row--featured > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Row head: zone + time */
+.fastco-log-row-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.fastco-log-row-zone {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fastco-grafito);
+  letter-spacing: -0.01em;
+}
+
+.fastco-log-row--featured .fastco-log-row-zone {
+  color: var(--fastco-blanco);
+  font-size: 16px;
+}
+
+.fastco-log-row-time {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--fastco-naranja);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.fastco-log-row--featured .fastco-log-row-time {
+  font-size: 24px;
+}
+
+/* Tiers (solo en featured) */
+.fastco-log-row-tiers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--fastco-r-md);
+}
+
+.fastco-log-tier {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.fastco-log-tier-cond {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+}
+
+.fastco-log-tier-cost {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--fastco-blanco);
+  font-variant-numeric: tabular-nums;
+}
+
+.fastco-log-tier-cost--free {
+  color: var(--fastco-menta);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 13px;
+}
+
+/* Row foot — descripción */
+.fastco-log-row-foot {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--fastco-texto-sec);
+}
+
+.fastco-log-row--featured .fastco-log-row-foot {
+  color: rgba(255,255,255,0.55);
+  padding-top: 4px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ─────────────────────────────────────────────────────
+   RESPONSIVE
+   ─────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .fastco-logistica-band {
+    padding: 72px 0;
+  }
+  .fastco-log-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .fastco-log-head {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .fastco-logistica-band {
+    padding: 56px 0;
+  }
+  .fastco-log-map-frame {
+    padding: 18px;
+  }
+  .fastco-log-zones text {
+    font-size: 9px;
+  }
+  .fastco-log-row {
+    padding: 18px 20px;
+  }
+  .fastco-log-row--featured .fastco-log-row-zone {
+    font-size: 15px;
+  }
+  .fastco-log-row--featured .fastco-log-row-time {
+    font-size: 20px;
+  }
+  .fastco-log-tier-cond {
+    font-size: 12px;
+  }
+  .fastco-log-tier-cost {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fastco-log-row-head {
+    flex-wrap: wrap;
+  }
+  .fastco-log-row-time {
+    font-size: 14px;
+  }
+}
