@@ -68,13 +68,23 @@
         "cta_text": "Ver dispensadores",
         "cta_url": ""
       }
+    },
+    "fastco_logistica_band_G9AEJy": {
+      "type": "fastco-logistica-band",
+      "name": "fastco · Logística",
+      "settings": {
+        "eyebrow": "Logística que sí cumple",
+        "title": "8 zonas, 1 promesa: 48 horas.",
+        "lead": "Operamos con flota propia en CDMX y zona metropolitana. Para el resto del país, convenios con Estafeta y DHL. Sin sorpresas, sin promesas vacías."
+      }
     }
   },
   "order": [
     "fastco-header",
     "fastco_hero_GAYkCF",
-    "fastco_bestsellers_jBnNQp",
     "fastco_mundos_w3aacq",
-    "fastco_dispensadores_dm9Ygj"
+    "fastco_dispensadores_dm9Ygj",
+    "fastco_logistica_band_G9AEJy",
+    "fastco_bestsellers_jBnNQp"
   ]
 }
