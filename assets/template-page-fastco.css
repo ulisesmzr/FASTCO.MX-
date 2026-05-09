@@ -1,0 +1,412 @@
+/* ============================================
+   FASTCO PAGE TEMPLATE STYLES
+   File: assets/template-page-fastco.css
+   Used by: pages with templateSuffix "fastco"
+   Pages: quienes-somos, logistica, marcas, contacto
+   ============================================ */
+
+/* --------- Base wrapper --------- */
+.fastco-page {
+  background: var(--fastco-color-bg, #faf7f2);
+  color: var(--fastco-color-text, #1a1a1a);
+  font-family: var(--fastco-font-body, system-ui, -apple-system, BlinkMacSystemFont, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fastco-page-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --------- Hero eyebrow band --------- */
+.fastco-page-hero-eyebrow {
+  background: var(--fastco-color-surface, #ffffff);
+  padding: 32px 0 18px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.fastco-page-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fastco-color-accent, #c8332a);
+  font-weight: 600;
+}
+
+/* --------- Body wrapper --------- */
+.fastco-page-body {
+  padding: 64px 0 96px;
+}
+
+.fastco-page-content {
+  /* RTE class also applied for theme inheritance */
+}
+
+/* --------- First H1 of body content = hero title --------- */
+.fastco-page-content > h1:first-child,
+.fastco-page-content h1 {
+  font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, 'Times New Roman', serif);
+  font-size: clamp(40px, 6vw, 64px);
+  line-height: 1.05;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--fastco-color-text, #1a1a1a);
+  margin: 0 0 48px 0;
+  max-width: 20ch;
+}
+
+/* --------- H2 with red accent line above --------- */
+.fastco-page-content h2 {
+  font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, 'Times New Roman', serif);
+  font-size: clamp(28px, 3.5vw, 36px);
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--fastco-color-text, #1a1a1a);
+  margin: 64px 0 24px 0;
+  position: relative;
+}
+
+.fastco-page-content h2::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--fastco-color-accent, #c8332a);
+  margin-bottom: 18px;
+}
+
+/* --------- H3 --------- */
+.fastco-page-content h3 {
+  font-family: var(--fastco-font-body, system-ui, sans-serif);
+  font-size: 19px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--fastco-color-text, #1a1a1a);
+  margin: 36px 0 12px 0;
+  letter-spacing: -0.005em;
+}
+
+/* --------- Paragraphs --------- */
+.fastco-page-content p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--fastco-color-text-secondary, #2c2c2c);
+  margin: 0 0 20px 0;
+}
+
+.fastco-page-content p strong {
+  color: var(--fastco-color-text, #1a1a1a);
+  font-weight: 600;
+}
+
+.fastco-page-content p em {
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  font-style: italic;
+}
+
+/* --------- Lists --------- */
+.fastco-page-content ul,
+.fastco-page-content ol {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--fastco-color-text-secondary, #2c2c2c);
+  margin: 0 0 24px 0;
+  padding-left: 24px;
+}
+
+.fastco-page-content ul li,
+.fastco-page-content ol li {
+  margin-bottom: 10px;
+  padding-left: 4px;
+}
+
+.fastco-page-content ul li::marker {
+  color: var(--fastco-color-accent, #c8332a);
+}
+
+.fastco-page-content ol li::marker {
+  color: var(--fastco-color-accent, #c8332a);
+  font-weight: 600;
+}
+
+.fastco-page-content li strong {
+  color: var(--fastco-color-text, #1a1a1a);
+}
+
+/* --------- Inline links --------- */
+.fastco-page-content a {
+  color: var(--fastco-color-accent, #c8332a);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s ease;
+}
+
+.fastco-page-content a:hover {
+  opacity: 0.7;
+}
+
+/* --------- Link with strong inside = button-style CTA --------- */
+.fastco-page-content p a:has(strong) {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.fastco-page-content p a:has(strong) strong {
+  display: inline-block;
+  padding: 14px 28px;
+  background: var(--fastco-color-accent, #c8332a);
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+  margin-top: 8px;
+}
+
+.fastco-page-content p a:has(strong):hover strong {
+  background: var(--fastco-color-accent-hover, #a52822);
+  opacity: 1;
+}
+
+/* --------- Tables (logística costos) --------- */
+.fastco-page-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 32px 0;
+  font-size: 15px;
+  background: var(--fastco-color-surface, #ffffff);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.fastco-page-content table thead {
+  background: var(--fastco-color-accent, #c8332a);
+  color: #ffffff;
+}
+
+.fastco-page-content table thead th {
+  padding: 14px 18px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.fastco-page-content table tbody td {
+  padding: 16px 18px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  color: var(--fastco-color-text-secondary, #2c2c2c);
+}
+
+.fastco-page-content table tbody td strong {
+  color: var(--fastco-color-text, #1a1a1a);
+}
+
+.fastco-page-content table tbody tr:nth-child(odd) {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+/* --------- CONTACT FORM (only renders on /pages/contacto) --------- */
+.fastco-page-form {
+  margin-top: 56px;
+  padding: 40px;
+  background: var(--fastco-color-surface, #ffffff);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+}
+
+.fastco-form-row {
+  margin-bottom: 20px;
+}
+
+.fastco-form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fastco-color-text, #1a1a1a);
+  margin-bottom: 8px;
+}
+
+.fastco-form-input,
+.fastco-form-textarea {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--fastco-color-text, #1a1a1a);
+  background: var(--fastco-color-bg, #faf7f2);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.fastco-form-input:focus,
+.fastco-form-textarea:focus {
+  outline: none;
+  border-color: var(--fastco-color-accent, #c8332a);
+  background: var(--fastco-color-surface, #ffffff);
+}
+
+.fastco-form-textarea {
+  resize: vertical;
+  min-height: 140px;
+  line-height: 1.6;
+}
+
+.fastco-form-submit {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--fastco-color-accent, #c8332a);
+  color: #ffffff;
+  border: none;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  margin-top: 8px;
+}
+
+.fastco-form-submit:hover {
+  background: var(--fastco-color-accent-hover, #a52822);
+}
+
+.fastco-form-success {
+  padding: 16px 20px;
+  background: rgba(34, 139, 34, 0.08);
+  border-left: 3px solid #228b22;
+  color: #1a1a1a;
+  font-weight: 500;
+  margin-bottom: 24px;
+  border-radius: 4px;
+}
+
+.fastco-form-errors {
+  padding: 16px 20px;
+  background: rgba(200, 51, 42, 0.08);
+  border-left: 3px solid var(--fastco-color-accent, #c8332a);
+  color: var(--fastco-color-text, #1a1a1a);
+  margin-bottom: 24px;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+.fastco-form-errors p {
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+.fastco-form-errors ul {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+/* --------- FINAL CTA BAND --------- */
+.fastco-page-final-cta {
+  background: var(--fastco-color-text, #1a1a1a);
+  color: #ffffff;
+  padding: 72px 0;
+  text-align: center;
+}
+
+.fastco-page-final-cta-question {
+  font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.2;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  margin: 0 0 32px 0;
+}
+
+.fastco-page-final-cta-button {
+  display: inline-block;
+  padding: 16px 36px;
+  background: var(--fastco-color-accent, #c8332a);
+  color: #ffffff !important;
+  text-decoration: none !important;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.fastco-page-final-cta-button:hover {
+  background: var(--fastco-color-accent-hover, #a52822);
+  opacity: 1 !important;
+}
+
+/* --------- MOBILE RESPONSIVE --------- */
+@media (max-width: 640px) {
+  .fastco-page-container {
+    padding: 0 20px;
+  }
+
+  .fastco-page-hero-eyebrow {
+    padding: 24px 0 14px;
+  }
+
+  .fastco-page-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+  }
+
+  .fastco-page-body {
+    padding: 40px 0 64px;
+  }
+
+  .fastco-page-content > h1:first-child,
+  .fastco-page-content h1 {
+    font-size: clamp(36px, 9vw, 44px);
+    margin-bottom: 32px;
+  }
+
+  .fastco-page-content h2 {
+    font-size: 26px;
+    margin: 48px 0 20px 0;
+  }
+
+  .fastco-page-content h3 {
+    font-size: 17px;
+  }
+
+  .fastco-page-content p,
+  .fastco-page-content ul,
+  .fastco-page-content ol {
+    font-size: 16px;
+  }
+
+  .fastco-page-content table {
+    font-size: 13px;
+  }
+
+  .fastco-page-content table thead th,
+  .fastco-page-content table tbody td {
+    padding: 12px 14px;
+  }
+
+  .fastco-page-form {
+    padding: 28px 22px;
+  }
+
+  .fastco-page-final-cta {
+    padding: 52px 0;
+  }
+}
