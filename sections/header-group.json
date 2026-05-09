@@ -57,12 +57,24 @@
         "title": "Los 7 mundos fastco.",
         "lead": "Catálogo curado por categoría de uso institucional. Marcas líderes, presentación profesional, compatibilidad cruzada entre dispensadores y refills."
       }
+    },
+    "fastco_dispensadores_dm9Ygj": {
+      "type": "fastco-dispensadores",
+      "name": "fastco · Dispensadores",
+      "settings": {
+        "eyebrow": "El sistema que captura el ciclo",
+        "title": "Dispensadores que aseguran tu refill por años.",
+        "lead": "Un dispensador instalado significa rotación recurrente del refill compatible. Es la jugada estratégica del catálogo HORECA: invierte una vez, abastece sin pensar durante años.",
+        "cta_text": "Ver dispensadores",
+        "cta_url": ""
+      }
     }
   },
   "order": [
     "fastco-header",
     "fastco_hero_GAYkCF",
     "fastco_bestsellers_jBnNQp",
-    "fastco_mundos_w3aacq"
+    "fastco_mundos_w3aacq",
+    "fastco_dispensadores_dm9Ygj"
   ]
 }
