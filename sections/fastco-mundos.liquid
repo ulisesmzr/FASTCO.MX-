@@ -1,0 +1,155 @@
+{%- comment -%}
+  ─────────────────────────────────────────
+  fastco-mundos.liquid
+  Grid de los 7 mundos del catálogo fastco.
+  Cada mundo es una entrada al catálogo via colección.
+  Dispensadores tiene tratamiento featured (jugada de captura).
+  Sprint 2026-05-06.
+  ─────────────────────────────────────────
+{%- endcomment -%}
+
+{{ 'section-fastco-mundos.css' | asset_url | stylesheet_tag }}
+
+<section class="fastco-mundos" data-section-id="{{ section.id }}">
+  <div class="fastco-mundos-inner">
+
+    <header class="fastco-mundos-head">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="fastco-section-eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="fastco-section-title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.lead != blank -%}
+        <p class="fastco-section-lead">{{ section.settings.lead }}</p>
+      {%- endif -%}
+    </header>
+
+    <div class="fastco-mundos-grid">
+
+      {%- comment -%} 1 — Dispensadores (FEATURED, ocupa 2 columnas) {%- endcomment -%}
+      <a href="/collections/dispensadores" class="fastco-mundo fastco-mundo--featured">
+        <div class="fastco-mundo-badge">Más vendido</div>
+        <div class="fastco-mundo-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="8" y="4" width="16" height="20" rx="2"/>
+            <path d="M12 24v3M20 24v3"/>
+            <path d="M11 14h10M11 10h10"/>
+            <path d="M14 18h4"/>
+          </svg>
+        </div>
+        <h3 class="fastco-mundo-name">Dispensadores</h3>
+        <p class="fastco-mundo-desc">Tork Elevation, Image Design, KCP. La base del modelo refill: un dispensador instalado fideliza el consumo del refill por años.</p>
+        <span class="fastco-mundo-cta">Ver dispensadores <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+      </a>
+
+      {%- comment -%} 2 — Higiénico institucional {%- endcomment -%}
+      <a href="/collections/higienico-institucional" class="fastco-mundo">
+        <div class="fastco-mundo-icon">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="6" y="8" width="20" height="16" rx="2"/>
+            <circle cx="16" cy="16" r="4"/>
+            <circle cx="16" cy="16" r="1.5"/>
+          </svg>
+        </div>
+        <h3 class="fastco-mundo-name">Higiénico institucional</h3>
+        <p class="fastco-mundo-desc">Marli, Pétalo, Kleenex, Scott, Tork. Junior y senior, jumbo y mini.</p>
+      </a>
+
+      {%- comment -%} 3 — Toalla de manos {%- endcomment -%}
+      <a href="/collections/toalla-de-manos" class="fastco-mundo">
+        <div class="fastco-mundo-icon">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 6h20v20H6z"/>
+            <path d="M10 12h12M10 16h12M10 20h8"/>
+          </svg>
+        </div>
+        <h3 class="fastco-mundo-name">Toalla de manos</h3>
+        <p class="fastco-mundo-desc">KCP y Tork sistemas H1, H2, H5. Compatibilidad garantizada.</p>
+      </a>
+
+      {%- comment -%} 4 — Servilletas y mantelería {%- endcomment -%}
+      <a href="/collections/servilletas-y-manteleria" class="fastco-mundo">
+        <div class="fastco-mundo-icon">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 9l11-4 11 4-11 4z"/>
+            <path d="M5 16l11 4 11-4"/>
+            <path d="M5 23l11 4 11-4"/>
+          </svg>
+        </div>
+        <h3 class="fastco-mundo-name">Servilletas y mantelería</h3>
+        <p class="fastco-mundo-desc">Tork Xpressnap, LinStyle airlaid, Marli punta-punta.</p>
+      </a>
+
+      {%- comment -%} 5 — Limpieza y químicos {%- endcomment -%}
+      <a href="/collections/limpieza-y-quimicos" class="fastco-mundo">
+        <div class="fastco-mundo-icon">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 4h4v6h-4z"/>
+            <path d="M11 10h10l1 4v12a2 2 0 0 1-2 2h-8a2 2 0 0 1-2-2V14z"/>
+            <path d="M14 18h4"/>
+          </svg>
+        </div>
+        <h3 class="fastco-mundo-name">Limpieza y químicos</h3>
+        <p class="fastco-mundo-desc">PYCSA, 3M, paños Tork, jabones líquidos institucionales.</p>
+      </a>
+
+      {%- comment -%} 6 — EPP y desechables {%- endcomment -%}
+      <a href="/collections/epp-y-desechables" class="fastco-mundo">
+        <div class="fastco-mundo-icon">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 13c0-2 2-4 5-4h10c3 0 5 2 5 4v3l-2 2v-1H8v1l-2-2z"/>
+            <path d="M11 9V6h10v3"/>
+          </svg>
+        </div>
+        <h3 class="fastco-mundo-name">EPP y desechables</h3>
+        <p class="fastco-mundo-desc">Cubrebocas, guantes, vasos, contenedores, charolas.</p>
+      </a>
+
+      {%- comment -%} 7 — Refacciones rápidas {%- endcomment -%}
+      <a href="/collections/refacciones-rapidas" class="fastco-mundo">
+        <div class="fastco-mundo-icon">
+          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="16" cy="16" r="3"/>
+            <path d="M16 4v3M16 25v3M4 16h3M25 16h3M7.5 7.5l2 2M22.5 22.5l2 2M7.5 24.5l2-2M22.5 9.5l2-2"/>
+          </svg>
+        </div>
+        <h3 class="fastco-mundo-name">Refacciones rápidas</h3>
+        <p class="fastco-mundo-desc">Cloralex, fibras, repuestos, pastillas WC, bolsas.</p>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "fastco · 7 Mundos",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Catálogo institucional"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Los 7 mundos fastco."
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Subtítulo",
+      "default": "Catálogo curado por categoría de uso institucional. Marcas líderes, presentación profesional, compatibilidad cruzada entre dispensadores y refills."
+    }
+  ],
+  "presets": [
+    {
+      "name": "fastco · 7 Mundos"
+    }
+  ]
+}
+{% endschema %}
