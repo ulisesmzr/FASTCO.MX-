@@ -1,0 +1,512 @@
+/* ============================================
+   FASTCO CART DRAWER STYLES
+   File: assets/section-fastco-cart-drawer.css
+   Used by: sections/fastco-cart-drawer.liquid
+   ============================================ */
+
+/* --------- Drawer container (fullscreen wrapper) --------- */
+.fastco-cart-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.fastco-cart-drawer[aria-hidden="false"] {
+  pointer-events: auto;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s ease, visibility 0s linear 0s;
+}
+
+/* --------- Overlay (backdrop) --------- */
+.fastco-cart-drawer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  cursor: pointer;
+}
+
+/* --------- Panel (the drawer itself) --------- */
+.fastco-cart-drawer-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 420px;
+  max-width: 100vw;
+  background: var(--fastco-color-bg, #faf7f2);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-out;
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.12);
+  font-family: var(--fastco-font-body, system-ui, -apple-system, sans-serif);
+  outline: none;
+}
+
+.fastco-cart-drawer[aria-hidden="false"] .fastco-cart-drawer-panel {
+  transform: translateX(0);
+}
+
+/* --------- Header --------- */
+.fastco-cart-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 24px 18px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: var(--fastco-color-surface, #ffffff);
+}
+
+.fastco-cart-drawer-title {
+  margin: 0;
+  font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--fastco-color-text, #1a1a1a);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.fastco-cart-drawer-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 7px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--fastco-font-body, system-ui, sans-serif);
+  background: var(--fastco-color-accent, #c8332a);
+  color: #ffffff;
+  border-radius: 12px;
+  letter-spacing: 0;
+}
+
+.fastco-cart-drawer-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--fastco-color-text, #1a1a1a);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.15s ease;
+}
+
+.fastco-cart-drawer-close:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* --------- Free shipping bar --------- */
+.fastco-cart-drawer-shipping {
+  padding: 16px 24px;
+  background: var(--fastco-color-surface, #ffffff);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.fastco-cart-drawer-shipping-message {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--fastco-color-text-secondary, #2c2c2c);
+  margin-bottom: 10px;
+}
+
+.fastco-cart-drawer-shipping-message strong {
+  color: var(--fastco-color-text, #1a1a1a);
+  font-weight: 600;
+}
+
+.fastco-cart-drawer-shipping-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.fastco-cart-drawer-shipping-bar-fill {
+  height: 100%;
+  background: var(--fastco-color-accent, #c8332a);
+  border-radius: 2px;
+  transition: width 0.4s ease-out;
+}
+
+/* --------- Items list (scrollable area) --------- */
+.fastco-cart-drawer-items {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 0;
+}
+
+/* --------- Single item --------- */
+.fastco-cart-drawer-item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: 14px;
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  position: relative;
+  transition: opacity 0.2s ease;
+}
+
+.fastco-cart-drawer-item.is-loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.fastco-cart-drawer-item:last-child {
+  border-bottom: none;
+}
+
+/* item image */
+.fastco-cart-drawer-item-image {
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+}
+
+.fastco-cart-drawer-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fastco-cart-drawer-item-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0,0,0,0.03), rgba(0,0,0,0.08));
+}
+
+/* item info */
+.fastco-cart-drawer-item-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.fastco-cart-drawer-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--fastco-color-text, #1a1a1a);
+  text-decoration: none;
+  margin: 0 0 2px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  letter-spacing: -0.005em;
+}
+
+.fastco-cart-drawer-item-title:hover {
+  color: var(--fastco-color-accent, #c8332a);
+}
+
+.fastco-cart-drawer-item-variant {
+  font-size: 12px;
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  margin: 0 0 8px;
+  line-height: 1.3;
+}
+
+.fastco-cart-drawer-item-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.fastco-cart-drawer-item-price {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fastco-color-text, #1a1a1a);
+  margin: 0;
+  white-space: nowrap;
+}
+
+/* qty controls */
+.fastco-cart-drawer-qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  background: var(--fastco-color-surface, #ffffff);
+  overflow: hidden;
+}
+
+.fastco-cart-drawer-qty-btn {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--fastco-color-text, #1a1a1a);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+  padding: 0;
+  line-height: 1;
+}
+
+.fastco-cart-drawer-qty-btn:hover {
+  background: var(--fastco-color-accent, #c8332a);
+  color: #ffffff;
+}
+
+.fastco-cart-drawer-qty-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.fastco-cart-drawer-qty-input {
+  width: 36px;
+  height: 28px;
+  text-align: center;
+  border: none;
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--fastco-color-text, #1a1a1a);
+  background: transparent;
+  font-family: inherit;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  padding: 0;
+}
+
+.fastco-cart-drawer-qty-input::-webkit-outer-spin-button,
+.fastco-cart-drawer-qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.fastco-cart-drawer-qty-input:focus {
+  outline: 2px solid var(--fastco-color-accent, #c8332a);
+  outline-offset: -2px;
+}
+
+/* item remove (X icon top right) */
+.fastco-cart-drawer-item-remove {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: none;
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.fastco-cart-drawer-item-remove:hover {
+  background: rgba(200, 51, 42, 0.08);
+  color: var(--fastco-color-accent, #c8332a);
+}
+
+/* --------- Empty state --------- */
+.fastco-cart-drawer-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  text-align: center;
+}
+
+.fastco-cart-drawer-empty-title {
+  font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--fastco-color-text, #1a1a1a);
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.fastco-cart-drawer-empty-text {
+  font-size: 14px;
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  margin: 0 0 28px;
+}
+
+.fastco-cart-drawer-empty-cta {
+  display: inline-block;
+  padding: 12px 28px;
+  background: var(--fastco-color-accent, #c8332a);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.fastco-cart-drawer-empty-cta:hover {
+  background: var(--fastco-color-accent-hover, #a52822);
+}
+
+/* --------- Footer (subtotal + CTAs) --------- */
+.fastco-cart-drawer-footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 18px 24px 24px;
+  background: var(--fastco-color-surface, #ffffff);
+}
+
+.fastco-cart-drawer-subtotal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.fastco-cart-drawer-subtotal-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fastco-color-text-secondary, #2c2c2c);
+  letter-spacing: 0.01em;
+}
+
+.fastco-cart-drawer-subtotal-value {
+  font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--fastco-color-text, #1a1a1a);
+  letter-spacing: -0.01em;
+}
+
+.fastco-cart-drawer-footer-note {
+  font-size: 11px;
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  margin: 0 0 16px;
+  letter-spacing: 0.01em;
+}
+
+.fastco-cart-drawer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.fastco-cart-drawer-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.fastco-cart-drawer-btn-primary {
+  background: var(--fastco-color-accent, #c8332a);
+  color: #ffffff;
+}
+
+.fastco-cart-drawer-btn-primary:hover {
+  background: var(--fastco-color-accent-hover, #a52822);
+}
+
+.fastco-cart-drawer-btn-secondary {
+  background: transparent;
+  color: var(--fastco-color-text, #1a1a1a);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.fastco-cart-drawer-btn-secondary:hover {
+  border-color: var(--fastco-color-text, #1a1a1a);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* --------- Body scroll lock when drawer open --------- */
+body.fastco-cart-drawer-open {
+  overflow: hidden;
+}
+
+/* --------- Hide Shopify default cart notification when drawer is in use --------- */
+cart-notification,
+.cart-notification-wrapper {
+  display: none !important;
+}
+
+/* --------- Mobile responsive --------- */
+@media (max-width: 480px) {
+  .fastco-cart-drawer-panel {
+    width: 100vw;
+  }
+
+  .fastco-cart-drawer-header {
+    padding: 18px 18px 14px;
+  }
+
+  .fastco-cart-drawer-title {
+    font-size: 22px;
+  }
+
+  .fastco-cart-drawer-shipping {
+    padding: 14px 18px;
+  }
+
+  .fastco-cart-drawer-item {
+    padding: 14px 18px;
+    grid-template-columns: 64px 1fr auto;
+    gap: 12px;
+  }
+
+  .fastco-cart-drawer-item-image,
+  .fastco-cart-drawer-item-image img {
+    width: 64px;
+    height: 64px;
+  }
+
+  .fastco-cart-drawer-item-remove {
+    top: 10px;
+    right: 12px;
+  }
+
+  .fastco-cart-drawer-footer {
+    padding: 16px 18px 20px;
+  }
+
+  .fastco-cart-drawer-subtotal-value {
+    font-size: 22px;
+  }
+}
