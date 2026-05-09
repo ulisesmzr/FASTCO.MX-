@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "fastco · Header group",
   "type": "header",
@@ -5,9 +14,45 @@
     "fastco-header": {
       "type": "fastco-header",
       "settings": {}
+    },
+    "fastco_hero_GAYkCF": {
+      "type": "fastco-hero",
+      "name": "fastco · Hero",
+      "settings": {
+        "eyebrow": "Distribuidor B2B HORECA institucional",
+        "headline": "Suministros institucionales con respaldo de marcas líderes.",
+        "lead": "Higiénico, dispensadores, limpieza profesional, EPP y refacciones para hoteles, restaurantes, cafeterías y oficinas. Entrega en 48 horas en CDMX y zona metropolitana con logística propia fastco.",
+        "cta_primary_text": "Ver catálogo",
+        "cta_primary_url": "",
+        "cta_secondary_text": "Cobertura y logística",
+        "cta_secondary_url": "",
+        "show_strip": true,
+        "board_eyebrow": "Operación fastco",
+        "stat_main_num": "300",
+        "stat_main_label": "SKUs en catálogo objetivo",
+        "stat_brands": "50+",
+        "stat_zones": "8 zonas",
+        "stat_delivery": "48h",
+        "stat_min": "$3,500",
+        "board_foot": "Operación activa"
+      }
+    },
+    "fastco_bestsellers_jBnNQp": {
+      "type": "fastco-bestsellers",
+      "name": "fastco · Bestsellers",
+      "settings": {
+        "eyebrow": "Lo más pedido",
+        "title": "Bestsellers HORECA.",
+        "lead": "Los productos que más rotan en restaurantes, cafeterías y hoteles. Marcas líderes con respaldo, presentación institucional, entrega 48h.",
+        "collection": "",
+        "product_count": 8,
+        "show_view_all": true
+      }
     }
   },
   "order": [
-    "fastco-header"
+    "fastco-header",
+    "fastco_hero_GAYkCF",
+    "fastco_bestsellers_jBnNQp"
   ]
 }
