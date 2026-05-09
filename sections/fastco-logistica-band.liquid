@@ -1,0 +1,90 @@
+{%- comment -%}
+  ─────────────────────────────────────────
+  fastco-logistica-band.liquid
+  Banda con mapa visual de las 8 zonas formalizadas
+  CDMX/AM + promesa logística (48h, $3,500 gratis,
+  $299 menor, nacional Estafeta y DHL).
+  Sprint 2026-05-08.
+  ─────────────────────────────────────────
+{%- endcomment -%}
+
+{{ 'section-fastco-logistica-band.css' | asset_url | stylesheet_tag }}
+
+<section class="fastco-logistica-band" data-section-id="{{ section.id }}">
+  <div class="fastco-log-inner">
+
+    <header class="fastco-log-head">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="fastco-section-eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="fastco-section-title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.lead != blank -%}
+        <p class="fastco-section-lead">{{ section.settings.lead }}</p>
+      {%- endif -%}
+    </header>
+
+    <div class="fastco-log-grid">
+
+      {%- comment -%} LEFT — Mapa abstracto de 8 zonas {%- endcomment -%}
+      <div class="fastco-log-map">
+        <div class="fastco-log-map-frame">
+          <div class="fastco-log-map-label">CDMX y zona metropolitana · Logística propia fastco</div>
+
+          <svg class="fastco-log-map-svg" viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            {%- comment -%} Líneas de cuadrícula sutil {%- endcomment -%}
+            <defs>
+              <pattern id="grid-log" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(26,31,46,0.06)" stroke-width="1"/>
+              </pattern>
+            </defs>
+            <rect width="400" height="320" fill="url(#grid-log)"/>
+
+            {%- comment -%} Líneas conectoras desde el cedis {%- endcomment -%}
+            <g stroke="rgba(246,87,31,0.18)" stroke-width="1" fill="none" stroke-dasharray="3 3">
+              <line x1="200" y1="160" x2="120" y2="80"/>
+              <line x1="200" y1="160" x2="280" y2="70"/>
+              <line x1="200" y1="160" x2="100" y2="140"/>
+              <line x1="200" y1="160" x2="320" y2="180"/>
+              <line x1="200" y1="160" x2="140" y2="240"/>
+              <line x1="200" y1="160" x2="280" y2="260"/>
+              <line x1="200" y1="160" x2="80" y2="220"/>
+              <line x1="200" y1="160" x2="340" y2="120"/>
+            </g>
+
+            {%- comment -%} 8 zonas con punto + nombre {%- endcomment -%}
+            <g class="fastco-log-zones">
+              <g class="fastco-log-zone"><circle cx="120" cy="80" r="6"/><text x="120" y="65">Polanco</text></g>
+              <g class="fastco-log-zone"><circle cx="280" cy="70" r="6"/><text x="280" y="55">Aeropuerto AICM</text></g>
+              <g class="fastco-log-zone"><circle cx="100" cy="140" r="6"/><text x="100" y="125">Santa Fe</text></g>
+              <g class="fastco-log-zone"><circle cx="340" cy="120" r="6"/><text x="340" y="105">Interlomas</text></g>
+              <g class="fastco-log-zone"><circle cx="320" cy="180" r="6"/><text x="320" y="200">Roma · Condesa</text></g>
+              <g class="fastco-log-zone"><circle cx="140" cy="240" r="6"/><text x="140" y="260">Narvarte · Del Valle</text></g>
+              <g class="fastco-log-zone"><circle cx="280" cy="260" r="6"/><text x="280" y="280">Pedregal · Coyoacán</text></g>
+              <g class="fastco-log-zone"><circle cx="80" cy="220" r="6"/><text x="80" y="240">Izcalli (Cedis)</text></g>
+            </g>
+
+            {%- comment -%} Pulse central — origen del cedis {%- endcomment -%}
+            <g class="fastco-log-cedis">
+              <circle cx="200" cy="160" r="14" class="fastco-log-cedis-ring"/>
+              <circle cx="200" cy="160" r="9" class="fastco-log-cedis-core"/>
+              <text x="200" y="190" text-anchor="middle">CEDIS fastco</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      {%- comment -%} RIGHT — Tabla de promesa {%- endcomment -%}
+      <div class="fastco-log-promise">
+
+        <div class="fastco-log-row fastco-log-row--featured">
+          <div class="fastco-log-row-head">
+            <span class="fastco-log-row-zone">CDMX y zona metropolitana</span>
+            <span class="fastco-log-row-time">48h</span>
+          </div>
+          <div class="fastco-log-row-tiers">
+            <div class="fastco-log-tier">
+              <span class="fastco-log-tier-cond">Pedido ≥ $3,500</span>
+              <span class="fastco-log-tier-cost fastco-log-tier-cost--free">Gratis</span>
+            </div>
