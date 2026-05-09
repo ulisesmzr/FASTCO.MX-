@@ -1,0 +1,331 @@
+/* ─────────────────────────────────────────────────────
+   FASTCO · ECO STYLES
+   Línea biodegradable. Acento menta. Sprint 2026-05-08.
+   Depende de: assets/fastco-tokens.css
+   Reusa: .fastco-section-eyebrow / -title / -lead
+   ─────────────────────────────────────────────────── */
+
+.fastco-eco {
+  position: relative;
+  background: var(--fastco-crema);
+  padding: 96px 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.fastco-eco-blur {
+  position: absolute;
+  top: 50%;
+  left: -120px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(43,214,139,0.18), transparent 70%);
+  filter: blur(70px);
+  transform: translateY(-50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.fastco-eco-inner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--fastco-max);
+  margin: 0 auto;
+  padding: 0 var(--fastco-gutter);
+}
+
+/* ─── GRID layout ─── */
+.fastco-eco-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* ─────────────────────────────────────────────────────
+   LEFT — Header + criteria
+   ─────────────────────────────────────────────────── */
+.fastco-eco-text {
+  min-width: 0;
+}
+
+/* Eyebrow override — verde menta en lugar de naranja */
+.fastco-eco-eyebrow {
+  color: var(--fastco-grafito);
+  background: var(--fastco-menta-tint);
+  border-color: rgba(43,214,139,0.3);
+}
+
+.fastco-eco-criteria {
+  list-style: none;
+  margin: 32px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.fastco-eco-criterion {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  background: var(--fastco-blanco);
+  border: 1px solid var(--fastco-linea);
+  border-radius: var(--fastco-r-md);
+  transition: all 0.2s var(--fastco-ease-out);
+}
+
+.fastco-eco-criterion:hover {
+  border-color: var(--fastco-menta);
+  transform: translateX(2px);
+}
+
+.fastco-eco-criterion-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--fastco-r-md);
+  background: var(--fastco-menta-tint);
+  color: var(--fastco-grafito);
+}
+
+.fastco-eco-criterion-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.fastco-eco-criterion-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fastco-grafito);
+  letter-spacing: -0.01em;
+}
+
+.fastco-eco-criterion-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--fastco-texto-sec);
+}
+
+/* ─────────────────────────────────────────────────────
+   RIGHT — Products grid OR "soon" state
+   ─────────────────────────────────────────────────── */
+.fastco-eco-products {
+  min-width: 0;
+}
+
+.fastco-eco-grid-products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+/* Product card */
+.fastco-eco-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--fastco-blanco);
+  border: 1px solid var(--fastco-linea);
+  border-radius: var(--fastco-r-lg);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  transition: all 0.25s var(--fastco-ease-out);
+}
+
+.fastco-eco-card:hover {
+  border-color: var(--fastco-menta);
+  transform: translateY(-2px);
+  box-shadow: var(--fastco-sh-1);
+}
+
+.fastco-eco-card-media {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--fastco-crema-deep);
+  overflow: hidden;
+}
+
+.fastco-eco-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s var(--fastco-ease-out);
+}
+
+.fastco-eco-card:hover .fastco-eco-card-media img {
+  transform: scale(1.04);
+}
+
+.fastco-eco-card-empty {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  color: var(--fastco-linea);
+}
+
+.fastco-eco-card-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  background: var(--fastco-menta);
+  color: var(--fastco-grafito);
+  border-radius: var(--fastco-r-pill);
+}
+
+.fastco-eco-card-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fastco-eco-card-vendor {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fastco-texto-mute);
+}
+
+.fastco-eco-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--fastco-grafito);
+  margin: 0 0 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.fastco-eco-card-price {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--fastco-grafito);
+  font-variant-numeric: tabular-nums;
+  margin-top: 4px;
+}
+
+/* Foot: CTA "ver toda la línea" */
+.fastco-eco-foot {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.fastco-btn--ghost-dark {
+  background: transparent;
+  color: var(--fastco-grafito);
+  border-color: var(--fastco-linea);
+}
+
+.fastco-btn--ghost-dark:hover {
+  border-color: var(--fastco-menta);
+  background: var(--fastco-menta-tint);
+  color: var(--fastco-grafito);
+}
+
+/* ─────────────────────────────────────────────────────
+   "Próximamente" state (fallback elegante)
+   ─────────────────────────────────────────────────── */
+.fastco-eco-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 48px 32px;
+  background: var(--fastco-blanco);
+  border: 1px dashed var(--fastco-linea);
+  border-radius: var(--fastco-r-xl);
+}
+
+.fastco-eco-soon-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--fastco-menta-tint);
+  color: var(--fastco-grafito);
+  margin-bottom: 16px;
+}
+
+.fastco-eco-soon-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--fastco-grafito);
+  margin: 0 0 6px;
+  letter-spacing: -0.015em;
+}
+
+.fastco-eco-soon-desc {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--fastco-texto-sec);
+  margin: 0;
+  max-width: 380px;
+}
+
+/* ─────────────────────────────────────────────────────
+   RESPONSIVE
+   ─────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .fastco-eco {
+    padding: 72px 0;
+  }
+  .fastco-eco-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 640px) {
+  .fastco-eco {
+    padding: 56px 0;
+  }
+  .fastco-eco-criteria {
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .fastco-eco-criterion {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  .fastco-eco-criterion-icon {
+    width: 36px;
+    height: 36px;
+  }
+  .fastco-eco-grid-products {
+    gap: 10px;
+  }
+  .fastco-eco-card-body {
+    padding: 12px 14px;
+  }
+  .fastco-eco-soon {
+    padding: 36px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fastco-eco-card-title {
+    font-size: 13px;
+  }
+}
