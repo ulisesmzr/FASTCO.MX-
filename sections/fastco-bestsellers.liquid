@@ -10,7 +10,7 @@
 {{ 'section-fastco-bestsellers.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
-  assign coll = collections[section.settings.collection]
+  assign coll = section.settings.collection
   assign limit = section.settings.product_count | default: 8
 -%}
 
