@@ -1,0 +1,181 @@
+{% comment %}
+  ============================================
+  Section: fastco-cart-drawer.liquid
+  Purpose: AJAX cart drawer with fastco look
+  Used: included globally from layout/theme.liquid
+  Behavior: opens automatically on add-to-cart, slide-in from right
+  ============================================
+{% endcomment %}
+
+<link rel="stylesheet" href="{{ 'section-fastco-cart-drawer.css' | asset_url }}">
+
+{%- assign free_shipping_threshold = section.settings.free_shipping_threshold | default: 3500 -%}
+{%- assign cart_total = cart.total_price | divided_by: 100.00 -%}
+{%- assign threshold_remaining = free_shipping_threshold | minus: cart_total -%}
+
+<div
+  id="fastco-cart-drawer"
+  class="fastco-cart-drawer"
+  aria-hidden="true"
+  aria-labelledby="fastco-cart-drawer-title"
+  role="dialog"
+  data-free-shipping-threshold="{{ free_shipping_threshold }}"
+>
+  {%- comment -%} BACKDROP {%- endcomment -%}
+  <div class="fastco-cart-drawer-overlay" data-cart-drawer-close></div>
+
+  {%- comment -%} PANEL {%- endcomment -%}
+  <aside class="fastco-cart-drawer-panel" tabindex="-1">
+
+    {%- comment -%} HEADER {%- endcomment -%}
+    <header class="fastco-cart-drawer-header">
+      <h2 id="fastco-cart-drawer-title" class="fastco-cart-drawer-title">
+        Tu carrito
+        <span class="fastco-cart-drawer-count" data-cart-count>{{ cart.item_count }}</span>
+      </h2>
+      <button
+        type="button"
+        class="fastco-cart-drawer-close"
+        aria-label="Cerrar carrito"
+        data-cart-drawer-close
+      >
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <path d="M5 5l10 10M15 5L5 15"/>
+        </svg>
+      </button>
+    </header>
+
+    {%- comment -%} FREE SHIPPING PROGRESS BAR {%- endcomment -%}
+    <div class="fastco-cart-drawer-shipping" data-shipping-bar>
+      <div class="fastco-cart-drawer-shipping-message" data-shipping-message>
+        {%- if cart.item_count == 0 -%}
+          Pedidos de ${{ free_shipping_threshold }} MXN o más: <strong>envío gratis</strong> en CDMX y zona metropolitana.
+        {%- elsif cart_total >= free_shipping_threshold -%}
+          🎉 <strong>Envío gratis activado</strong> en CDMX y zona metropolitana.
+        {%- else -%}
+          Te faltan <strong>${{ threshold_remaining | money_without_currency }} MXN</strong> para envío gratis en CDMX.
+        {%- endif -%}
+      </div>
+      <div class="fastco-cart-drawer-shipping-bar">
+        <div
+          class="fastco-cart-drawer-shipping-bar-fill"
+          data-shipping-fill
+          style="width: {% if cart_total >= free_shipping_threshold %}100{% else %}{{ cart_total | times: 100 | divided_by: free_shipping_threshold }}{% endif %}%;"
+        ></div>
+      </div>
+    </div>
+
+    {%- comment -%} ITEMS LIST {%- endcomment -%}
+    <div class="fastco-cart-drawer-items" data-cart-items>
+      {%- if cart.item_count > 0 -%}
+        {%- for item in cart.items -%}
+          <div class="fastco-cart-drawer-item" data-cart-item data-line-key="{{ item.key }}" data-line-index="{{ forloop.index }}">
+            <a href="{{ item.url }}" class="fastco-cart-drawer-item-image">
+              {%- if item.image -%}
+                <img src="{{ item.image | image_url: width: 160 }}" alt="{{ item.image.alt | escape }}" loading="lazy" width="80" height="80">
+              {%- else -%}
+                <div class="fastco-cart-drawer-item-image-placeholder"></div>
+              {%- endif -%}
+            </a>
+
+            <div class="fastco-cart-drawer-item-info">
+              <a href="{{ item.url }}" class="fastco-cart-drawer-item-title">{{ item.product.title }}</a>
+              {%- unless item.variant.title contains 'Default' -%}
+                <p class="fastco-cart-drawer-item-variant">{{ item.variant.title }}</p>
+              {%- endunless -%}
+
+              <div class="fastco-cart-drawer-item-bottom">
+                <div class="fastco-cart-drawer-qty">
+                  <button
+                    type="button"
+                    class="fastco-cart-drawer-qty-btn"
+                    aria-label="Disminuir cantidad"
+                    data-qty-decrease
+                    data-line-index="{{ forloop.index }}"
+                  >−</button>
+                  <input
+                    type="number"
+                    class="fastco-cart-drawer-qty-input"
+                    value="{{ item.quantity }}"
+                    min="0"
+                    aria-label="Cantidad"
+                    data-qty-input
+                    data-line-index="{{ forloop.index }}"
+                  >
+                  <button
+                    type="button"
+                    class="fastco-cart-drawer-qty-btn"
+                    aria-label="Aumentar cantidad"
+                    data-qty-increase
+                    data-line-index="{{ forloop.index }}"
+                  >+</button>
+                </div>
+                <p class="fastco-cart-drawer-item-price">{{ item.final_line_price | money }}</p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              class="fastco-cart-drawer-item-remove"
+              aria-label="Eliminar producto"
+              data-qty-remove
+              data-line-index="{{ forloop.index }}"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+                <path d="M3 3l8 8M11 3L3 11"/>
+              </svg>
+            </button>
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="fastco-cart-drawer-empty" data-cart-empty>
+          <p class="fastco-cart-drawer-empty-title">Tu carrito está vacío.</p>
+          <p class="fastco-cart-drawer-empty-text">Empieza a abastecer tu operación.</p>
+          <a href="/collections/all" class="fastco-cart-drawer-empty-cta" data-cart-drawer-close>Ver catálogo</a>
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} FOOTER (subtotal + CTAs) {%- endcomment -%}
+    {%- if cart.item_count > 0 -%}
+      <footer class="fastco-cart-drawer-footer" data-cart-footer>
+        <div class="fastco-cart-drawer-subtotal">
+          <span class="fastco-cart-drawer-subtotal-label">Subtotal</span>
+          <span class="fastco-cart-drawer-subtotal-value" data-cart-subtotal>{{ cart.total_price | money }}</span>
+        </div>
+        <p class="fastco-cart-drawer-footer-note">
+          Impuestos incluidos. Envío calculado al checkout.
+        </p>
+        <div class="fastco-cart-drawer-actions">
+          <a href="/cart" class="fastco-cart-drawer-btn fastco-cart-drawer-btn-secondary">
+            Ver carrito completo
+          </a>
+          <a href="/checkout" class="fastco-cart-drawer-btn fastco-cart-drawer-btn-primary">
+            Ir al checkout →
+          </a>
+        </div>
+      </footer>
+    {%- endif -%}
+
+  </aside>
+</div>
+
+{% schema %}
+{
+  "name": "fastco · Cart Drawer",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Configuración del carrito"
+    },
+    {
+      "type": "number",
+      "id": "free_shipping_threshold",
+      "label": "Umbral de envío gratis (MXN)",
+      "default": 3500,
+      "info": "Monto mínimo del subtotal para envío gratis en CDMX y zona metropolitana."
+    }
+  ]
+}
+{% endschema %}
