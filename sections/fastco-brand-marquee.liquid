@@ -1,0 +1,93 @@
+{%- comment -%}
+  ─────────────────────────────────────────
+  fastco-brand-marquee.liquid
+  Claim aspiracional + marquee de marcas.
+  Background grafito. Sprint 2026-05-08.
+  ─────────────────────────────────────────
+{%- endcomment -%}
+
+{{ 'section-fastco-brand-marquee.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign brands = section.settings.brands_list | split: ','
+-%}
+
+<section class="fastco-marquee" data-section-id="{{ section.id }}">
+  <div class="fastco-marquee-inner">
+
+    <div class="fastco-marquee-head">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="fastco-section-eyebrow fastco-marquee-eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+      {%- if section.settings.claim != blank -%}
+        <h2 class="fastco-marquee-claim">{{ section.settings.claim }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subclaim != blank -%}
+        <p class="fastco-marquee-subclaim">{{ section.settings.subclaim }}</p>
+      {%- endif -%}
+    </div>
+
+  </div>
+
+  {%- comment -%} Marquee row — full bleed {%- endcomment -%}
+  <div class="fastco-marquee-track" aria-hidden="true">
+    <div class="fastco-marquee-row">
+      {%- for brand in brands -%}
+        <span class="fastco-marquee-chip">{{ brand | strip }}</span>
+        <span class="fastco-marquee-dot"></span>
+      {%- endfor -%}
+      {%- comment -%} Duplicado para loop infinito {%- endcomment -%}
+      {%- for brand in brands -%}
+        <span class="fastco-marquee-chip">{{ brand | strip }}</span>
+        <span class="fastco-marquee-dot"></span>
+      {%- endfor -%}
+    </div>
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "fastco · Marcas",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Texto principal"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Catálogo institucional con respaldo"
+    },
+    {
+      "type": "text",
+      "id": "claim",
+      "label": "Claim principal",
+      "default": "300+ SKUs · 50+ marcas líderes en México."
+    },
+    {
+      "type": "textarea",
+      "id": "subclaim",
+      "label": "Subclaim",
+      "default": "Distribuimos las marcas que tu operación HORECA ya conoce, con la consistencia y el respaldo institucional que necesita."
+    },
+    {
+      "type": "header",
+      "content": "Marquee"
+    },
+    {
+      "type": "textarea",
+      "id": "brands_list",
+      "label": "Lista de marcas (separadas por coma)",
+      "default": "KCP, Tork, 3M, Pétalo, Marli, Cloralex, Kleenex, Scott, Kimlark, LinStyle, PYCSA, Pacific Blue, Kimberly-Clark Professional, Tena Professional, Sigma Plastic"
+    }
+  ],
+  "presets": [
+    {
+      "name": "fastco · Marcas"
+    }
+  ]
+}
+{% endschema %}
