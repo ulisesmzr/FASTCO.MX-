@@ -44,6 +44,7 @@
 {%- comment -%} fastco brand layer · Sprint 2026-05-06 {%- endcomment -%}
        {% render 'fastco-fonts' %}
        {{ 'fastco-tokens.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'fastco-cart-ajax.js' | asset_url }}" defer="defer"></script>
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
@@ -376,5 +377,7 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+{% section 'fastco-cart-drawer' %}
   </body>
 </html>
