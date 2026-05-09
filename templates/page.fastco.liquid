@@ -1,0 +1,121 @@
+{% comment %}
+  ============================================
+  Template: page.fastco.liquid
+  Purpose: Branded page template for fastco static pages
+  Used by: pages with templateSuffix "fastco"
+  Pages assigned: quienes-somos, logistica, marcas, contacto
+  ============================================
+{% endcomment %}
+
+<link rel="stylesheet" href="{{ 'template-page-fastco.css' | asset_url }}">
+
+<article class="fastco-page">
+
+  {%- comment -%} HERO EYEBROW BAND {%- endcomment -%}
+  <header class="fastco-page-hero-eyebrow">
+    <div class="fastco-page-container">
+      <span class="fastco-page-eyebrow">fastco · {{ page.title }}</span>
+    </div>
+  </header>
+
+  {%- comment -%} BODY CONTENT (renders page.content with rte styles) {%- endcomment -%}
+  <div class="fastco-page-body">
+    <div class="fastco-page-container">
+      <div class="rte fastco-page-content">
+        {{ page.content }}
+      </div>
+
+      {%- comment -%} CONTACT FORM only renders on /pages/contacto {%- endcomment -%}
+      {%- if page.handle == 'contacto' -%}
+        <div class="fastco-page-form" id="contact-form">
+          {%- form 'contact', class: 'fastco-form' -%}
+
+            {%- if form.posted_successfully? -%}
+              <p class="fastco-form-success">
+                ¡Recibido! Te respondemos en menos de 24 horas hábiles.
+              </p>
+            {%- endif -%}
+
+            {%- if form.errors -%}
+              <div class="fastco-form-errors">
+                <p>Hubo un problema con tu mensaje:</p>
+                <ul>
+                  {%- for field in form.errors -%}
+                    <li>{{ form.errors.messages[field] }}</li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            {%- endif -%}
+
+            <div class="fastco-form-row">
+              <label for="ContactFormName" class="fastco-form-label">Nombre</label>
+              <input
+                type="text"
+                id="ContactFormName"
+                name="contact[name]"
+                class="fastco-form-input"
+                value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                autocomplete="name"
+                required
+              >
+            </div>
+
+            <div class="fastco-form-row">
+              <label for="ContactFormEmail" class="fastco-form-label">Correo electrónico</label>
+              <input
+                type="email"
+                id="ContactFormEmail"
+                name="contact[email]"
+                class="fastco-form-input"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                autocomplete="email"
+                required
+              >
+            </div>
+
+            <div class="fastco-form-row">
+              <label for="ContactFormCompany" class="fastco-form-label">Empresa (opcional)</label>
+              <input
+                type="text"
+                id="ContactFormCompany"
+                name="contact[empresa]"
+                class="fastco-form-input"
+                value="{{ form.empresa }}"
+                autocomplete="organization"
+              >
+            </div>
+
+            <div class="fastco-form-row">
+              <label for="ContactFormBody" class="fastco-form-label">Mensaje</label>
+              <textarea
+                id="ContactFormBody"
+                name="contact[body]"
+                rows="6"
+                class="fastco-form-textarea"
+                required
+              >{{ form.body }}</textarea>
+            </div>
+
+            <button type="submit" class="fastco-form-submit">
+              Enviar mensaje
+            </button>
+
+          {%- endform -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} FINAL CTA BAND (skip on contacto, already has its own CTA at end) {%- endcomment -%}
+  {%- unless page.handle == 'contacto' -%}
+    <section class="fastco-page-final-cta">
+      <div class="fastco-page-container">
+        <p class="fastco-page-final-cta-question">¿Listo para abastecer tu operación?</p>
+        <a href="/collections/all" class="fastco-page-final-cta-button">
+          Ver catálogo completo
+        </a>
+      </div>
+    </section>
+  {%- endunless -%}
+
+</article>
