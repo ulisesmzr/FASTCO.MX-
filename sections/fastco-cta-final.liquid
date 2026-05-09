@@ -1,0 +1,108 @@
+{%- comment -%}
+  ─────────────────────────────────────────
+  fastco-cta-final.liquid
+  Cierre del home: slogan + 1 CTA directo al catálogo.
+  Background grafito con gradient. Sprint 2026-05-08.
+  Direct-purchase puro — sin AM, sin asesor.
+  ─────────────────────────────────────────
+{%- endcomment -%}
+
+{{ 'section-fastco-cta-final.css' | asset_url | stylesheet_tag }}
+
+<section class="fastco-cta" data-section-id="{{ section.id }}">
+  <div class="fastco-cta-glow fastco-cta-glow--left" aria-hidden="true"></div>
+  <div class="fastco-cta-glow fastco-cta-glow--right" aria-hidden="true"></div>
+
+  <div class="fastco-cta-inner">
+
+    {%- if section.settings.eyebrow != blank -%}
+      <div class="fastco-section-eyebrow fastco-cta-eyebrow">{{ section.settings.eyebrow }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.slogan != blank -%}
+      <h2 class="fastco-cta-slogan">{{ section.settings.slogan }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.subtitle != blank -%}
+      <p class="fastco-cta-sub">{{ section.settings.subtitle }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+      <div class="fastco-cta-action">
+        <a href="{{ section.settings.button_link }}" class="fastco-btn fastco-btn--primary fastco-cta-btn">
+          {{ section.settings.button_label }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M13 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.foot_note != blank -%}
+      <p class="fastco-cta-foot">{{ section.settings.foot_note }}</p>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "fastco · CTA final",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Texto"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Empieza ahora"
+    },
+    {
+      "type": "text",
+      "id": "slogan",
+      "label": "Slogan principal",
+      "default": "Tu operación nunca se detiene."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "Catálogo institucional con respaldo de marcas líderes. Entrega 48h en CDMX y zona metropolitana, nacional vía Estafeta y DHL."
+    },
+    {
+      "type": "header",
+      "content": "Botón"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto del botón",
+      "default": "Ver catálogo completo"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Link del botón",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Nota al pie"
+    },
+    {
+      "type": "text",
+      "id": "foot_note",
+      "label": "Texto al pie",
+      "default": "Pedido mínimo $3,500 para envío gratis CDMX/AM · Pago seguro · Facturación electrónica"
+    }
+  ],
+  "presets": [
+    {
+      "name": "fastco · CTA final"
+    }
+  ]
+}
+{% endschema %}
