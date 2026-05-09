@@ -1,0 +1,180 @@
+/* ─────────────────────────────────────────────────────
+   FASTCO · CTA FINAL STYLES
+   Cierre del home. Background grafito + glows naranjas.
+   Slogan display + 1 botón. Sprint 2026-05-08.
+   Depende de: assets/fastco-tokens.css
+   ─────────────────────────────────────────────────── */
+
+.fastco-cta {
+  position: relative;
+  background: var(--fastco-grafito);
+  color: var(--fastco-blanco);
+  padding: 120px 0 128px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  isolation: isolate;
+  text-align: center;
+}
+
+/* Glows naranjas a los lados */
+.fastco-cta-glow {
+  position: absolute;
+  top: 50%;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(246,87,31,0.18), transparent 70%);
+  filter: blur(80px);
+  transform: translateY(-50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.fastco-cta-glow--left {
+  left: -200px;
+}
+
+.fastco-cta-glow--right {
+  right: -200px;
+  background: radial-gradient(circle, rgba(246,87,31,0.12), transparent 70%);
+}
+
+.fastco-cta-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 var(--fastco-gutter);
+}
+
+/* Eyebrow override sobre grafito */
+.fastco-cta-eyebrow {
+  color: var(--fastco-naranja);
+  background: rgba(246,87,31,0.12);
+  border-color: rgba(246,87,31,0.3);
+  display: inline-block;
+}
+
+/* Slogan display gigante */
+.fastco-cta-slogan {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--fastco-blanco);
+  margin: 20px 0 22px;
+}
+
+.fastco-cta-sub {
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.72);
+  margin: 0 auto;
+  max-width: 620px;
+}
+
+/* Botón */
+.fastco-cta-action {
+  margin-top: 44px;
+  display: flex;
+  justify-content: center;
+}
+
+.fastco-cta-btn {
+  font-size: 16px;
+  font-weight: 700;
+  padding: 18px 36px;
+  letter-spacing: -0.01em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 12px 40px rgba(246,87,31,0.35);
+  transition: all 0.25s var(--fastco-ease-out);
+}
+
+.fastco-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 48px rgba(246,87,31,0.5);
+}
+
+.fastco-cta-btn svg {
+  transition: transform 0.25s var(--fastco-ease-out);
+}
+
+.fastco-cta-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* Nota al pie */
+.fastco-cta-foot {
+  margin: 32px auto 0;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.45);
+  max-width: 540px;
+}
+
+/* ─────────────────────────────────────────────────────
+   RESPONSIVE
+   ─────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .fastco-cta {
+    padding: 96px 0 104px;
+  }
+  .fastco-cta-glow {
+    width: 480px;
+    height: 480px;
+  }
+  .fastco-cta-glow--left {
+    left: -260px;
+  }
+  .fastco-cta-glow--right {
+    right: -260px;
+  }
+}
+
+@media (max-width: 640px) {
+  .fastco-cta {
+    padding: 72px 0 80px;
+  }
+  .fastco-cta-glow {
+    width: 360px;
+    height: 360px;
+    filter: blur(60px);
+  }
+  .fastco-cta-glow--left {
+    left: -200px;
+  }
+  .fastco-cta-glow--right {
+    right: -200px;
+  }
+  .fastco-cta-slogan {
+    margin: 16px 0 16px;
+  }
+  .fastco-cta-sub {
+    font-size: 15px;
+  }
+  .fastco-cta-action {
+    margin-top: 32px;
+  }
+  .fastco-cta-btn {
+    font-size: 15px;
+    padding: 16px 28px;
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
+  .fastco-cta-foot {
+    margin-top: 24px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fastco-cta-foot {
+    font-size: 11px;
+  }
+}
