@@ -48,11 +48,21 @@
         "product_count": 8,
         "show_view_all": true
       }
+    },
+    "fastco_mundos_w3aacq": {
+      "type": "fastco-mundos",
+      "name": "fastco · 7 Mundos",
+      "settings": {
+        "eyebrow": "Catálogo institucional",
+        "title": "Los 7 mundos fastco.",
+        "lead": "Catálogo curado por categoría de uso institucional. Marcas líderes, presentación profesional, compatibilidad cruzada entre dispensadores y refills."
+      }
     }
   },
   "order": [
     "fastco-header",
     "fastco_hero_GAYkCF",
-    "fastco_bestsellers_jBnNQp"
+    "fastco_bestsellers_jBnNQp",
+    "fastco_mundos_w3aacq"
   ]
 }
