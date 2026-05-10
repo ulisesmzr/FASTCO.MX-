@@ -1,37 +1,40 @@
 /* ============================================
-   FASTCO COLLECTION COAT
+   FASTCO COLLECTION COAT — MINIMAL v2
    File: assets/section-fastco-collection.css
-   Purpose: Visual override of Dawn's collection page (grid + cards + header + facets toolbar + pagination).
-   Targets: body.template-collection, .collection-hero, .product-grid, .card-wrapper, .card, .facets, .active-facets, .pagination
-   Loaded conditionally from layout/theme.liquid when template contains 'collection'.
-   Note: The filters drawer is in Batch 06b (separate file).
+   Date: 2026-05-10 (sub-batch 06a fix)
+   Strategy: Visual coat ONLY. Zero layout overrides. Dawn handles grid + card structure.
+   What this file DOES:
+     - Page background (crema)
+     - Collection hero title in Cormorant Garamond
+     - Vendor/brand in fastco accent red
+     - Price in Cormorant Garamond, tabular-nums
+     - Card hover lift (subtle)
+     - Filters button + sort dropdown branding
+   What this file DOES NOT DO (intentionally):
+     - Override .card-wrapper display/flex/height
+     - Override .product-grid columns
+     - Override .card__badge position
+     - Hide quick-add (handled by Dawn settings instead)
    ============================================ */
 
-/* --------- Page wrapper --------- */
-.template-collection main,
+
+/* ---------- Page background ---------- */
 body.template-collection {
   background: var(--fastco-color-bg, #faf7f2);
 }
 
-.template-collection {
-  font-family: var(--fastco-font-body, system-ui, -apple-system, sans-serif);
-  color: var(--fastco-color-text, #1a1a1a);
-}
 
-/* --------- Collection hero / header --------- */
-.template-collection .collection-hero,
-.template-collection .collection__title-wrapper,
-.template-collection .collection-header,
-.template-collection #shopify-section-template--*__main-collection-banner .collection-hero {
-  padding: 56px 0 28px;
+/* ---------- Collection hero / banner ---------- */
+.template-collection .collection-hero {
   background: transparent;
-  text-align: left;
 }
 
-.template-collection .collection-hero__title,
-.template-collection .collection__title h1,
-.template-collection .collection__title,
-.template-collection .collection-header h1 {
+.template-collection .collection-hero__inner {
+  padding-top: 48px;
+  padding-bottom: 24px;
+}
+
+.template-collection .collection-hero__title {
   font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
   font-size: clamp(40px, 6vw, 64px);
   line-height: 1.05;
@@ -41,377 +44,103 @@ body.template-collection {
   margin: 0 0 14px;
 }
 
-.template-collection .collection-hero__description,
-.template-collection .collection__description {
+.template-collection .collection-hero__description {
   font-size: 16px;
   line-height: 1.65;
   color: var(--fastco-color-text-secondary, #2c2c2c);
   max-width: 68ch;
-  margin: 0 0 6px;
 }
 
-.template-collection .collection-hero__description p,
-.template-collection .collection__description p {
+.template-collection .collection-hero__description p {
   margin: 0 0 12px;
 }
 
-/* --------- Toolbar (count + facets toggle + sort) --------- */
-.template-collection .facets-container,
-.template-collection .product-grid-container .facets-pill-list,
-.template-collection .collection__toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 18px 0 24px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  margin-bottom: 28px;
+.template-collection .collection-hero__description p:last-child {
+  margin-bottom: 0;
 }
 
-/* product count */
-.template-collection .product-count,
-.template-collection .collection-product-count,
-.template-collection .product-count__text {
-  font-size: 13px;
+
+/* ---------- Native Dawn filters toolbar — fastco branding ---------- */
+
+/* Horizontal filters disclosure */
+.template-collection .disclosure-has-popup summary.facets__summary {
+  font-family: var(--fastco-font-body, system-ui, sans-serif);
+  font-weight: 600;
   letter-spacing: 0.04em;
-  color: var(--fastco-color-text-muted, #5a5a5a);
-  margin: 0;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: var(--fastco-color-text, #1a1a1a);
 }
 
-.template-collection .product-count strong {
+.template-collection .disclosure-has-popup summary.facets__summary:hover {
   color: var(--fastco-color-accent, #c8332a);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
 }
 
-/* --------- "Filtros" button (opens drawer in Batch 06b) --------- */
-.template-collection .facets__heading,
-.template-collection .facets-vertical .facets__heading {
-  display: none;
-}
-
-.template-collection .facets-pill-list__button,
-.template-collection .facets__summary,
-.template-collection .disclosure-has-popup .facets__summary,
-.template-collection #fastco-filters-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 11px 20px;
-  background: var(--fastco-color-accent, #c8332a);
-  color: #ffffff;
-  border: 1px solid var(--fastco-color-accent, #c8332a);
-  border-radius: 4px;
+/* Sort dropdown */
+.template-collection .facet-filters__field .select__select,
+.template-collection #SortBy {
   font-family: var(--fastco-font-body, system-ui, sans-serif);
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
-  list-style: none;
+  color: var(--fastco-color-text, #1a1a1a);
 }
 
-.template-collection .facets-pill-list__button:hover,
-.template-collection .facets__summary:hover,
-.template-collection #fastco-filters-toggle:hover {
-  background: var(--fastco-color-accent-hover, #a52822);
-  border-color: var(--fastco-color-accent-hover, #a52822);
-}
-
-.template-collection .facets-pill-list__button::-webkit-details-marker,
-.template-collection .facets__summary::-webkit-details-marker {
-  display: none;
-}
-
-.template-collection #fastco-filters-toggle svg,
-.template-collection .facets__summary svg {
-  width: 14px;
-  height: 14px;
-}
-
-/* --------- Sort dropdown --------- */
-.template-collection .facets__sort,
-.template-collection .collection__sort {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.template-collection .facets__label,
-.template-collection .collection__sort label {
+.template-collection .facet-filters__label,
+.template-collection .facet-filters__field label {
+  font-family: var(--fastco-font-body, system-ui, sans-serif);
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--fastco-color-text-muted, #5a5a5a);
-  margin: 0;
 }
 
-.template-collection .facets__select,
-.template-collection .collection__sort select,
-.template-collection #SortBy {
-  padding: 10px 36px 10px 14px;
-  font-size: 13px;
-  font-family: inherit;
-  font-weight: 500;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
-  background-color: var(--fastco-color-surface, #ffffff);
-  color: var(--fastco-color-text, #1a1a1a);
-  -webkit-appearance: none;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%231a1a1a' stroke-width='1.5' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 12px;
-  cursor: pointer;
-  transition: border-color 0.15s ease;
-}
-
-.template-collection .facets__select:focus,
-.template-collection #SortBy:focus {
-  outline: none;
-  border-color: var(--fastco-color-accent, #c8332a);
-}
-
-/* --------- Active filters pills --------- */
-.template-collection .active-facets,
-.template-collection .active-facets-vertical-filter {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  margin: 0 0 24px;
-  padding: 0;
-}
-
-.template-collection .active-facets__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.template-collection .active-facets__heading,
-.template-collection .active-facets__title {
-  font-size: 12px;
+/* Active filter pills */
+.template-collection .active-facets__button {
+  border-color: rgba(200, 51, 42, 0.3);
+  color: var(--fastco-color-text);
+  font-family: var(--fastco-font-body);
   font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--fastco-color-text-muted, #5a5a5a);
-  margin: 0 8px 0 0;
-}
-
-.template-collection .active-facets__button,
-.template-collection .active-facets__button-wrapper {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  background: var(--fastco-color-surface, #ffffff);
-  color: var(--fastco-color-text, #1a1a1a);
-  border: 1px solid rgba(200, 51, 42, 0.3);
-  border-radius: 20px;
   font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .template-collection .active-facets__button:hover {
-  background: rgba(200, 51, 42, 0.08);
   border-color: var(--fastco-color-accent, #c8332a);
+  background: rgba(200, 51, 42, 0.04);
 }
 
-.template-collection .active-facets__button-inner {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.template-collection .active-facets__button svg {
-  width: 10px;
-  height: 10px;
-  fill: currentColor;
-}
-
-.template-collection .active-facets__button-remove,
-.template-collection .active-facets__button-remove::after {
-  color: var(--fastco-color-accent, #c8332a);
-  font-weight: 700;
-}
-
-/* "Clear all" link */
-.template-collection .active-facets__button-remove,
-.template-collection .active-facets a[class*="clear"] {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 12px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--fastco-color-accent, #c8332a);
-  background: transparent;
-  border: none;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-}
-
-/* --------- Product Grid --------- */
-.template-collection #product-grid,
-.template-collection .product-grid,
-.template-collection .collection .grid--3-col-desktop,
-.template-collection .collection ul.grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px 24px;
-  list-style: none;
-  margin: 0 0 48px;
-  padding: 0;
-}
-
-@media (max-width: 989px) {
-  .template-collection #product-grid,
-  .template-collection .product-grid,
-  .template-collection .collection ul.grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px 16px;
-  }
-}
-
-@media (max-width: 580px) {
-  .template-collection #product-grid,
-  .template-collection .product-grid,
-  .template-collection .collection ul.grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-}
-
-.template-collection .grid__item {
-  width: 100% !important;
-  max-width: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* --------- Product Card (fastco coat) --------- */
-.template-collection .card-wrapper,
-.template-collection .product-card-wrapper {
-  background: var(--fastco-color-surface, #ffffff);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 6px;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.template-collection .card-wrapper:hover,
-.template-collection .product-card-wrapper:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-  border-color: rgba(200, 51, 42, 0.2);
-}
-
-.template-collection .card,
-.template-collection .card--standard,
-.template-collection .card--card {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.template-collection .card__inner {
-  background: transparent;
-  border: none;
-  border-radius: 0;
-}
-
-/* card media */
-.template-collection .card__media,
-.template-collection .card-wrapper .media,
-.template-collection .card .media {
-  background: #f5f1ea;
-  border-radius: 0;
-  overflow: hidden;
-  margin: 0;
-  aspect-ratio: 1 / 1;
-}
-
-.template-collection .card__media img,
-.template-collection .card-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 18px;
-  transition: transform 0.3s ease;
-}
-
-.template-collection .card-wrapper:hover .card__media img,
-.template-collection .product-card-wrapper:hover .card-wrapper img {
-  transform: scale(1.04);
-}
-
-/* card content */
-.template-collection .card__content,
-.template-collection .card__information {
-  padding: 16px 18px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex: 1;
-}
-
-/* vendor / brand on card */
-.template-collection .card__vendor,
-.template-collection .card .caption-with-letter-spacing,
-.template-collection .card-information__text--caption {
+/* Product count */
+.template-collection .product-count,
+.template-collection .product-count__text {
   font-family: var(--fastco-font-body, system-ui, sans-serif);
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--fastco-color-accent, #c8332a);
-  margin: 0 0 2px;
-  line-height: 1.4;
+  font-size: 13px;
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  letter-spacing: 0.02em;
 }
 
-/* card title */
+
+/* ---------- Product cards — VISUAL layer only ---------- */
+
+/* Gentle hover lift, NO display/layout changes */
+.template-collection .card-wrapper {
+  transition: transform 0.2s ease;
+}
+
+.template-collection .card-wrapper:hover {
+  transform: translateY(-2px);
+}
+
+/* Title in Cormorant Garamond */
 .template-collection .card__heading,
-.template-collection .card__information .card__heading,
-.template-collection .card-information__heading {
+.template-collection .card__heading.h5 {
   font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
-  font-size: 19px;
-  line-height: 1.25;
   font-weight: 500;
   letter-spacing: -0.005em;
-  color: var(--fastco-color-text, #1a1a1a);
-  margin: 0;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  display: -webkit-box;
-  overflow: hidden;
+  line-height: 1.25;
 }
 
 .template-collection .card__heading a,
-.template-collection .card-information__heading a,
 .template-collection .full-unstyled-link {
-  color: inherit;
+  color: var(--fastco-color-text, #1a1a1a);
   text-decoration: none;
 }
 
@@ -419,29 +148,26 @@ body.template-collection {
   color: var(--fastco-color-accent, #c8332a);
 }
 
-/* card price */
-.template-collection .card .price,
-.template-collection .card__information .price {
-  margin-top: auto;
-  padding-top: 10px;
+/* Vendor / brand: fastco accent red, uppercase tight */
+.template-collection .card-information .caption-with-letter-spacing,
+.template-collection .card .caption-with-letter-spacing {
+  color: var(--fastco-color-accent, #c8332a);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 10px;
+  opacity: 1;
 }
 
-.template-collection .card .price__container,
-.template-collection .card .price .price__regular,
-.template-collection .card .price-item {
-  margin: 0;
-  padding: 0;
-}
-
-.template-collection .card .price-item,
-.template-collection .card .price__regular .price-item--regular {
+/* Price in Cormorant, tabular-nums */
+.template-collection .card-information .price__regular .price-item--regular,
+.template-collection .card .price-item--regular {
   font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 500;
-  letter-spacing: -0.005em;
   color: var(--fastco-color-text, #1a1a1a);
   font-variant-numeric: tabular-nums;
-  line-height: 1.1;
+  letter-spacing: -0.005em;
 }
 
 .template-collection .card .price--on-sale .price-item--sale {
@@ -449,233 +175,49 @@ body.template-collection {
 }
 
 .template-collection .card .price--on-sale .price-item--regular {
-  font-size: 13px;
   color: var(--fastco-color-text-muted, #5a5a5a);
   text-decoration: line-through;
-  margin-right: 6px;
-}
-
-/* sold out / inventory badges */
-.template-collection .card__badge,
-.template-collection .badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 4px 10px;
-  background: var(--fastco-color-surface, #ffffff);
-  color: var(--fastco-color-text, #1a1a1a);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 14px;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  z-index: 1;
-}
-
-.template-collection .card__badge.badge--bottom-left .badge {
-  background: var(--fastco-color-accent, #c8332a);
-  color: #ffffff;
-  border-color: var(--fastco-color-accent, #c8332a);
-}
-
-/* hide Dawn's quick-add buttons on cards (Sprint 1 decision: card click → PDP only) */
-.template-collection .card .quick-add,
-.template-collection .quick-add__submit,
-.template-collection .card__information .product-form,
-.template-collection .card__heading-link + .product-form {
-  display: none !important;
-}
-
-/* --------- Empty state ("no products match filters") --------- */
-.template-collection .collection--empty,
-.template-collection .collection .collection__empty,
-.template-collection #ProductGridContainer .empty-state {
-  text-align: center;
-  padding: 64px 24px 80px;
-  background: transparent;
-}
-
-.template-collection .collection--empty h2,
-.template-collection .collection__empty-text {
-  font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
-  font-size: clamp(28px, 4vw, 38px);
-  font-weight: 500;
-  color: var(--fastco-color-text, #1a1a1a);
-  margin: 0 0 12px;
-  letter-spacing: -0.01em;
-}
-
-.template-collection .collection--empty p {
-  font-size: 15px;
-  color: var(--fastco-color-text-muted, #5a5a5a);
-  max-width: 48ch;
-  margin: 0 auto 24px;
-  line-height: 1.6;
-}
-
-.template-collection .collection--empty a.button,
-.template-collection .collection__empty a {
-  display: inline-flex;
-  align-items: center;
-  padding: 13px 26px;
-  background: var(--fastco-color-accent, #c8332a);
-  color: #ffffff;
-  border: 1px solid var(--fastco-color-accent, #c8332a);
-  border-radius: 4px;
   font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: background 0.2s ease;
 }
 
-.template-collection .collection--empty a.button:hover {
-  background: var(--fastco-color-accent-hover, #a52822);
+
+/* ---------- Pagination ---------- */
+.template-collection .pagination-wrapper {
+  font-family: var(--fastco-font-body, system-ui, sans-serif);
 }
 
-/* --------- Pagination --------- */
-.template-collection .pagination-wrapper,
-.template-collection .pagination {
-  margin: 32px 0 64px;
-  padding-top: 32px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.template-collection .pagination__list,
-.template-collection .pagination ul {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.template-collection .pagination__item,
-.template-collection .pagination li {
-  margin: 0;
-}
-
-.template-collection .pagination__item a,
-.template-collection .pagination__item span,
-.template-collection .pagination li a,
-.template-collection .pagination li span {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 38px;
-  height: 38px;
-  padding: 0 10px;
-  background: transparent;
+.template-collection .pagination-wrapper a,
+.template-collection .pagination-wrapper span {
   color: var(--fastco-color-text, #1a1a1a);
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  text-decoration: none;
   font-variant-numeric: tabular-nums;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  font-weight: 600;
+  font-size: 13px;
 }
 
-.template-collection .pagination__item a:hover,
-.template-collection .pagination li a:hover {
-  background: var(--fastco-color-surface, #ffffff);
-  border-color: var(--fastco-color-accent, #c8332a);
+.template-collection .pagination-wrapper a:hover {
   color: var(--fastco-color-accent, #c8332a);
 }
 
-.template-collection .pagination__item--current span,
-.template-collection .pagination__item-current,
-.template-collection .pagination li.active span,
-.template-collection .pagination li[aria-current="page"] span {
-  background: var(--fastco-color-accent, #c8332a);
-  color: #ffffff !important;
-  border-color: var(--fastco-color-accent, #c8332a);
+.template-collection .pagination-wrapper [aria-current="page"] {
+  color: var(--fastco-color-accent, #c8332a);
+  font-weight: 700;
 }
 
-.template-collection .pagination__item-arrow svg {
-  width: 14px;
-  height: 14px;
+
+/* ---------- Empty state ---------- */
+.template-collection .collection--empty .title {
+  font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
+  font-weight: 500;
+  color: var(--fastco-color-text, #1a1a1a);
 }
 
-/* --------- Page-width container alignment --------- */
-.template-collection .page-width,
-.template-collection .collection .page-width {
-  padding-left: clamp(20px, 4vw, 48px);
-  padding-right: clamp(20px, 4vw, 48px);
+.template-collection .collection--empty .underlined-link {
+  color: var(--fastco-color-accent, #c8332a);
 }
 
-/* --------- MOBILE responsive --------- */
-@media (max-width: 749px) {
-  .template-collection .collection-hero,
-  .template-collection .collection-header {
-    padding: 36px 0 20px;
-  }
 
-  .template-collection .collection-hero__title,
-  .template-collection .collection__title h1 {
-    font-size: clamp(32px, 8vw, 44px);
-  }
-
-  .template-collection .facets-container,
-  .template-collection .collection__toolbar {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 12px;
-    padding: 14px 0 18px;
-  }
-
-  .template-collection .facets__sort,
-  .template-collection .collection__sort {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .template-collection .facets__select,
-  .template-collection #SortBy {
-    flex: 1;
-  }
-
-  .template-collection .card__content,
-  .template-collection .card__information {
-    padding: 12px 14px 16px;
-  }
-
-  .template-collection .card__heading,
-  .template-collection .card-information__heading {
-    font-size: 16px;
-  }
-
-  .template-collection .card .price-item {
-    font-size: 18px;
-  }
-
-  .template-collection .card__vendor {
-    font-size: 9px;
-  }
-
-  .template-collection .pagination__item a,
-  .template-collection .pagination__item span {
-    min-width: 34px;
-    height: 34px;
-    font-size: 12px;
-  }
-}
-
-/* --------- A11Y: focus visible --------- */
-.template-collection .card-wrapper:focus-within,
-.template-collection .product-card-wrapper:focus-within {
-  outline: 2px solid var(--fastco-color-accent, #c8332a);
-  outline-offset: 2px;
-}
-
-.template-collection .facets__select:focus-visible,
-.template-collection .pagination__item a:focus-visible,
-.template-collection .active-facets__button:focus-visible {
+/* ---------- A11Y focus visible ---------- */
+.template-collection .card-wrapper:focus-within {
   outline: 2px solid var(--fastco-color-accent, #c8332a);
   outline-offset: 2px;
 }
