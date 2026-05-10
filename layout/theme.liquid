@@ -48,6 +48,9 @@
     {%- if template contains 'product' -%}
          {{ 'section-fastco-pdp.css' | asset_url | stylesheet_tag }}
        {%- endif -%}
+{%- if template contains 'collection' -%}
+         {{ 'section-fastco-collection.css' | asset_url | stylesheet_tag }}
+       {%- endif -%}
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
@@ -381,6 +384,7 @@
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
+{%- if template contains 'collection' -%}{% section 'fastco-filters-drawer' %}{%- endif -%}
 {% section 'fastco-cart-drawer' %}
   </body>
 </html>
