@@ -1,0 +1,736 @@
+{%- comment -%}
+  ============================================
+  FASTCO FILTERS DRAWER
+  File: sections/fastco-filters-drawer.liquid
+  Purpose: Custom drawer wrapping Dawn's native <facets-form>. Renders globally on collection pages.
+  Loaded conditionally from layout/theme.liquid when template contains 'collection'.
+  Includes: HTML structure + embedded CSS + embedded JS.
+  Behavior:
+    - Detects <facets-form> Dawn renders in sidebar, moves it into drawer body
+    - Injects "Filtros" toggle button into collection toolbar
+    - Hides Dawn's vertical facets sidebar with CSS
+    - Blacklists internal tags (premium, rol-margen, rol-rotacion) from public filters
+    - Slide-in from left (400px desktop), bottom sheet on mobile (≤749px, 85vh)
+  ============================================
+{%- endcomment -%}
+
+{%- if template contains 'collection' -%}
+
+<aside
+  id="fastco-filters-drawer"
+  class="fastco-filters-drawer"
+  aria-hidden="true"
+  aria-labelledby="fastco-filters-title"
+  role="dialog"
+  aria-modal="true"
+  tabindex="-1"
+>
+  <div class="fastco-filters-drawer__overlay" data-fastco-filters-close></div>
+  <div class="fastco-filters-drawer__panel" role="document">
+    <header class="fastco-filters-drawer__header">
+      <h2 id="fastco-filters-title" class="fastco-filters-drawer__title">Filtros</h2>
+      <button
+        type="button"
+        class="fastco-filters-drawer__close"
+        data-fastco-filters-close
+        aria-label="Cerrar filtros"
+      >
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M3 3L15 15M15 3L3 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </header>
+
+    <div class="fastco-filters-drawer__body" id="fastco-filters-body">
+      {%- comment -%} <facets-form> from Dawn gets injected here via JS {%- endcomment -%}
+      <p class="fastco-filters-drawer__loading">Cargando filtros…</p>
+    </div>
+
+    <footer class="fastco-filters-drawer__footer">
+      <button
+        type="button"
+        class="fastco-filters-drawer__clear"
+        id="fastco-filters-clear"
+      >
+        Limpiar todo
+      </button>
+      <button
+        type="button"
+        class="fastco-filters-drawer__apply"
+        id="fastco-filters-apply"
+        data-fastco-filters-close
+      >
+        Ver resultados
+      </button>
+    </footer>
+  </div>
+</aside>
+
+<style>
+  /* ============================================
+     FASTCO FILTERS DRAWER · STYLES
+     ============================================ */
+
+  /* Hide Dawn's vertical facets sidebar (filters now live in our drawer) */
+  .template-collection .facets-wrap,
+  .template-collection .facets-vertical .facets-wrapper,
+  .template-collection #main-collection-filters,
+  .template-collection .facets-vertical-form,
+  .template-collection facet-filters-form.facets-vertical {
+    display: none !important;
+  }
+
+  /* Restore full-width grid (no more 2-column layout with sidebar) */
+  .template-collection .collection.product-grid-container--with-sidebar,
+  .template-collection .product-grid-container--with-sidebar,
+  .template-collection .collection .product-grid-container {
+    grid-template-columns: 1fr !important;
+    display: block !important;
+  }
+
+  /* Drawer container (positioning + base) */
+  .fastco-filters-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s linear 280ms, opacity 280ms ease-out;
+    pointer-events: none;
+  }
+
+  .fastco-filters-drawer.is-open {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s linear 0s, opacity 280ms ease-out;
+    pointer-events: auto;
+  }
+
+  /* Overlay */
+  .fastco-filters-drawer__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.5);
+    opacity: 0;
+    transition: opacity 280ms ease-out;
+    cursor: pointer;
+  }
+
+  .fastco-filters-drawer.is-open .fastco-filters-drawer__overlay {
+    opacity: 1;
+  }
+
+  /* Panel (slides in from LEFT) */
+  .fastco-filters-drawer__panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 400px;
+    max-width: 90vw;
+    background: var(--fastco-color-bg, #faf7f2);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-100%);
+    transition: transform 280ms cubic-bezier(0.32, 0.72, 0, 1);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .fastco-filters-drawer.is-open .fastco-filters-drawer__panel {
+    transform: translateX(0);
+  }
+
+  /* Header */
+  .fastco-filters-drawer__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    background: var(--fastco-color-bg, #faf7f2);
+    flex-shrink: 0;
+  }
+
+  .fastco-filters-drawer__title {
+    font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--fastco-color-text, #1a1a1a);
+    margin: 0;
+  }
+
+  .fastco-filters-drawer__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    color: var(--fastco-color-text, #1a1a1a);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .fastco-filters-drawer__close:hover {
+    background: var(--fastco-color-accent, #c8332a);
+    color: #ffffff;
+    border-color: var(--fastco-color-accent, #c8332a);
+  }
+
+  /* Body (filters live here) */
+  .fastco-filters-drawer__body {
+    flex: 1;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 8px 24px 24px;
+    background: var(--fastco-color-bg, #faf7f2);
+  }
+
+  .fastco-filters-drawer__loading {
+    color: var(--fastco-color-text-muted, #5a5a5a);
+    font-size: 13px;
+    text-align: center;
+    padding: 32px 0;
+    margin: 0;
+  }
+
+  /* Style Dawn's facets-form when injected inside drawer */
+  .fastco-filters-drawer__body facet-filters-form,
+  .fastco-filters-drawer__body .facets,
+  .fastco-filters-drawer__body .facets-vertical-form,
+  .fastco-filters-drawer__body form#FacetFiltersForm,
+  .fastco-filters-drawer__body form[is="facet-filters-form"] {
+    display: block !important;
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Facet group (e.g. "Marca", "Categoría", "Sistema") */
+  .fastco-filters-drawer__body .facets__disclosure,
+  .fastco-filters-drawer__body .facets__disclosure-vertical,
+  .fastco-filters-drawer__body details.disclosure-has-popup {
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 0;
+    margin: 0;
+    background: transparent;
+  }
+
+  .fastco-filters-drawer__body details.disclosure-has-popup:last-child,
+  .fastco-filters-drawer__body .facets__disclosure:last-child {
+    border-bottom: none;
+  }
+
+  .fastco-filters-drawer__body .facets__summary,
+  .fastco-filters-drawer__body summary.facets__summary {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0 !important;
+    background: transparent !important;
+    color: var(--fastco-color-text, #1a1a1a) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    font-family: var(--fastco-font-body, system-ui, sans-serif) !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    cursor: pointer;
+    list-style: none;
+    margin: 0;
+    width: 100%;
+  }
+
+  .fastco-filters-drawer__body .facets__summary:hover {
+    color: var(--fastco-color-accent, #c8332a) !important;
+    background: transparent !important;
+  }
+
+  .fastco-filters-drawer__body .facets__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Disclosure arrow */
+  .fastco-filters-drawer__body .facets__summary svg,
+  .fastco-filters-drawer__body .facets__summary .icon-caret {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.2s ease;
+    color: var(--fastco-color-text-muted, #5a5a5a);
+  }
+
+  .fastco-filters-drawer__body details[open] .facets__summary svg,
+  .fastco-filters-drawer__body details[open] .facets__summary .icon-caret {
+    transform: rotate(180deg);
+  }
+
+  /* Filter list (checkboxes) */
+  .fastco-filters-drawer__body .facets__list,
+  .fastco-filters-drawer__body ul.facets__list {
+    list-style: none;
+    padding: 0 0 18px 0;
+    margin: 0;
+    max-height: 280px;
+    overflow-y: auto;
+  }
+
+  .fastco-filters-drawer__body .facets__item,
+  .fastco-filters-drawer__body .facets__list li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .fastco-filters-drawer__body .facet-checkbox,
+  .fastco-filters-drawer__body .facets__label {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0 !important;
+    color: var(--fastco-color-text, #1a1a1a);
+    font-size: 14px;
+    font-family: var(--fastco-font-body, system-ui, sans-serif);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    margin: 0;
+    line-height: 1.4;
+    background: transparent !important;
+    border: none !important;
+  }
+
+  .fastco-filters-drawer__body .facet-checkbox:hover {
+    color: var(--fastco-color-accent, #c8332a);
+  }
+
+  .fastco-filters-drawer__body .facet-checkbox input[type="checkbox"],
+  .fastco-filters-drawer__body input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    flex-shrink: 0;
+    accent-color: var(--fastco-color-accent, #c8332a);
+    cursor: pointer;
+  }
+
+  .fastco-filters-drawer__body .facet-checkbox--disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* Count next to filter (e.g. "Marca KCP (12)") */
+  .fastco-filters-drawer__body .facet-checkbox span {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Price range filter */
+  .fastco-filters-drawer__body .facets__price,
+  .fastco-filters-drawer__body price-range {
+    display: flex;
+    gap: 12px;
+    padding: 8px 0 12px;
+  }
+
+  .fastco-filters-drawer__body .field__currency,
+  .fastco-filters-drawer__body .facets__price label {
+    font-size: 12px;
+    color: var(--fastco-color-text-muted, #5a5a5a);
+    align-self: center;
+  }
+
+  .fastco-filters-drawer__body input[name^="filter.v.price"],
+  .fastco-filters-drawer__body .facets__price input[type="number"] {
+    flex: 1;
+    padding: 10px 12px;
+    font-size: 13px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    background: var(--fastco-color-surface, #ffffff);
+    color: var(--fastco-color-text, #1a1a1a);
+    font-family: inherit;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .fastco-filters-drawer__body input[name^="filter.v.price"]:focus,
+  .fastco-filters-drawer__body .facets__price input:focus {
+    outline: none;
+    border-color: var(--fastco-color-accent, #c8332a);
+  }
+
+  /* Hide Dawn's internal "Clear all" link inside facets (we have our own in footer) */
+  .fastco-filters-drawer__body .mobile-facets__clear,
+  .fastco-filters-drawer__body .facets__reset,
+  .fastco-filters-drawer__body .no-js-hidden {
+    display: none !important;
+  }
+
+  /* Footer */
+  .fastco-filters-drawer__footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    background: var(--fastco-color-bg, #faf7f2);
+    flex-shrink: 0;
+  }
+
+  .fastco-filters-drawer__clear {
+    flex-shrink: 0;
+    padding: 12px 16px;
+    background: transparent;
+    color: var(--fastco-color-text-muted, #5a5a5a);
+    border: none;
+    font-family: var(--fastco-font-body, system-ui, sans-serif);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: color 0.15s ease;
+  }
+
+  .fastco-filters-drawer__clear:hover {
+    color: var(--fastco-color-accent, #c8332a);
+  }
+
+  .fastco-filters-drawer__apply {
+    flex: 1;
+    padding: 14px 24px;
+    background: var(--fastco-color-accent, #c8332a);
+    color: #ffffff;
+    border: 1px solid var(--fastco-color-accent, #c8332a);
+    border-radius: 4px;
+    font-family: var(--fastco-font-body, system-ui, sans-serif);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .fastco-filters-drawer__apply:hover {
+    background: var(--fastco-color-accent-hover, #a52822);
+    border-color: var(--fastco-color-accent-hover, #a52822);
+  }
+
+  /* Body scroll lock when drawer open */
+  body.fastco-filters-drawer-open {
+    overflow: hidden;
+  }
+
+  /* MOBILE: drawer becomes BOTTOM SHEET */
+  @media (max-width: 749px) {
+    .fastco-filters-drawer__panel {
+      top: auto;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      max-width: 100%;
+      height: 85vh;
+      border-radius: 16px 16px 0 0;
+      transform: translateY(100%);
+      box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    .fastco-filters-drawer.is-open .fastco-filters-drawer__panel {
+      transform: translateY(0);
+    }
+
+    .fastco-filters-drawer__header {
+      padding: 20px 20px 16px;
+      position: relative;
+    }
+
+    /* Drag handle on mobile */
+    .fastco-filters-drawer__header::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 40px;
+      height: 4px;
+      background: rgba(0, 0, 0, 0.15);
+      border-radius: 2px;
+    }
+
+    .fastco-filters-drawer__body {
+      padding: 8px 20px 20px;
+    }
+
+    .fastco-filters-drawer__footer {
+      padding: 12px 20px;
+      padding-bottom: max(12px, env(safe-area-inset-bottom));
+    }
+
+    .fastco-filters-drawer__title {
+      font-size: 24px;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  'use strict';
+
+  // Only run on collection pages
+  if (!document.body.classList.contains('template-collection')) return;
+
+  // Internal tags to hide from public filters (decision 2026-05-10)
+  const INTERNAL_TAG_VALUES = [
+    'premium',
+    'rol-margen',
+    'rol-rotacion',
+    'rol margen',
+    'rol rotacion'
+  ];
+
+  const drawer = document.getElementById('fastco-filters-drawer');
+  const drawerBody = document.getElementById('fastco-filters-body');
+  const drawerPanel = drawer ? drawer.querySelector('.fastco-filters-drawer__panel') : null;
+  const clearBtn = document.getElementById('fastco-filters-clear');
+
+  if (!drawer || !drawerBody) return;
+
+  let lastFocusedElement = null;
+  let dawnFacetsForm = null;
+
+  /* ----- Step 1: Find Dawn's <facets-form> and move to drawer body ----- */
+  function captureDawnFacets() {
+    // Dawn moderna renderea facets como <facet-filters-form> tag or form#FacetFiltersForm
+    dawnFacetsForm =
+      document.querySelector('facet-filters-form:not(.mobile-facets)') ||
+      document.querySelector('#FacetFiltersForm') ||
+      document.querySelector('form[is="facet-filters-form"]') ||
+      document.querySelector('.facets-vertical-form') ||
+      document.querySelector('.facets-wrap-vertical');
+
+    if (!dawnFacetsForm) {
+      // No facets on this collection — show empty message
+      drawerBody.innerHTML = '<p class="fastco-filters-drawer__loading">No hay filtros disponibles para esta colección.</p>';
+      return false;
+    }
+
+    // Clear loading placeholder
+    drawerBody.innerHTML = '';
+    // Move (not clone — preserves listeners) the facets form into the drawer
+    drawerBody.appendChild(dawnFacetsForm);
+
+    // Hide internal tags
+    hideInternalTags();
+
+    return true;
+  }
+
+  /* ----- Step 2: Hide internal tags from filter UI ----- */
+  function hideInternalTags() {
+    if (!drawerBody) return;
+    const items = drawerBody.querySelectorAll('.facets__item, li');
+    items.forEach(function(item) {
+      const label = item.querySelector('label, .facet-checkbox');
+      if (!label) return;
+      const text = (label.textContent || '').toLowerCase().trim();
+      const isInternal = INTERNAL_TAG_VALUES.some(function(internalVal) {
+        return text.startsWith(internalVal) || text.includes('(' + internalVal + ')') || text === internalVal;
+      });
+      if (isInternal) {
+        item.style.display = 'none';
+        item.setAttribute('aria-hidden', 'true');
+      }
+    });
+  }
+
+  /* ----- Step 3: Inject "Filtros" toggle button into toolbar ----- */
+  function injectToggleButton() {
+    // Don't inject if already present
+    if (document.getElementById('fastco-filters-toggle')) return;
+
+    // Find a suitable toolbar location
+    const toolbar =
+      document.querySelector('.facets-container') ||
+      document.querySelector('.collection__toolbar') ||
+      document.querySelector('#ProductGridContainer');
+
+    if (!toolbar) return;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.id = 'fastco-filters-toggle';
+    button.setAttribute('aria-controls', 'fastco-filters-drawer');
+    button.setAttribute('aria-expanded', 'false');
+    button.innerHTML = '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M1 3h12M3 7h8M5 11h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Filtros</span>';
+
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      openDrawer();
+    });
+
+    // Insert as first child of toolbar
+    toolbar.insertBefore(button, toolbar.firstChild);
+  }
+
+  /* ----- Step 4: Open / close drawer ----- */
+  function openDrawer() {
+    lastFocusedElement = document.activeElement;
+    drawer.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('fastco-filters-drawer-open');
+
+    const toggle = document.getElementById('fastco-filters-toggle');
+    if (toggle) toggle.setAttribute('aria-expanded', 'true');
+
+    // Focus the close button after animation
+    setTimeout(function() {
+      const closeBtn = drawer.querySelector('.fastco-filters-drawer__close');
+      if (closeBtn) closeBtn.focus();
+    }, 280);
+  }
+
+  function closeDrawer() {
+    drawer.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('fastco-filters-drawer-open');
+
+    const toggle = document.getElementById('fastco-filters-toggle');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+
+    // Restore focus
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+      lastFocusedElement.focus();
+    }
+  }
+
+  /* ----- Step 5: Bind close triggers ----- */
+  function bindCloseTriggers() {
+    const closeElements = drawer.querySelectorAll('[data-fastco-filters-close]');
+    closeElements.forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        e.preventDefault();
+        closeDrawer();
+      });
+    });
+
+    // Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && drawer.classList.contains('is-open')) {
+        closeDrawer();
+      }
+    });
+  }
+
+  /* ----- Step 6: Clear all filters ----- */
+  function bindClearButton() {
+    if (!clearBtn) return;
+    clearBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      // Redirect to current collection URL without any filters
+      const path = window.location.pathname;
+      window.location.href = path;
+    });
+  }
+
+  /* ----- Step 7: Update "Ver resultados" CTA with count ----- */
+  function updateApplyButtonCount() {
+    const applyBtn = document.getElementById('fastco-filters-apply');
+    if (!applyBtn) return;
+    const countEl = document.querySelector('.product-count strong, .product-count__text strong');
+    if (countEl) {
+      const count = countEl.textContent.trim();
+      applyBtn.innerHTML = 'Ver resultados (' + count + ')';
+    } else {
+      applyBtn.innerHTML = 'Ver resultados';
+    }
+  }
+
+  /* ----- Step 8: Focus trap inside drawer ----- */
+  function bindFocusTrap() {
+    drawer.addEventListener('keydown', function(e) {
+      if (e.key !== 'Tab' || !drawer.classList.contains('is-open')) return;
+
+      const focusableSelector = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      const focusables = drawer.querySelectorAll(focusableSelector);
+      if (focusables.length === 0) return;
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+  }
+
+  /* ----- Step 9: Observe DOM mutations (Dawn re-renders facets after AJAX filter) ----- */
+  function watchForFacetsRebuild() {
+    // After filtering, Dawn may re-render the facets-form. Re-capture and re-hide internal tags.
+    const observer = new MutationObserver(function(mutations) {
+      // Check if facets were updated
+      mutations.forEach(function(m) {
+        if (m.type === 'childList' && m.target.id !== 'fastco-filters-body') {
+          // Check if Dawn re-rendered facets outside our drawer
+          const orphanFacets = document.querySelector('facet-filters-form:not(.mobile-facets):not(#fastco-filters-body facet-filters-form)');
+          if (orphanFacets && !drawerBody.contains(orphanFacets)) {
+            drawerBody.innerHTML = '';
+            drawerBody.appendChild(orphanFacets);
+            hideInternalTags();
+          } else {
+            hideInternalTags();
+          }
+        }
+      });
+      updateApplyButtonCount();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  }
+
+  /* ----- Init ----- */
+  function init() {
+    if (captureDawnFacets()) {
+      injectToggleButton();
+      bindCloseTriggers();
+      bindClearButton();
+      bindFocusTrap();
+      updateApplyButtonCount();
+      watchForFacetsRebuild();
+    } else {
+      // No facets found — still inject toggle if user wants to see "No filters available" message
+      injectToggleButton();
+      bindCloseTriggers();
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "fastco Filtros Drawer",
+  "settings": []
+}
+{% endschema %}
