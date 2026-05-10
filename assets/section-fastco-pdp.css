@@ -1,0 +1,531 @@
+/* ============================================
+   FASTCO PDP COAT
+   File: assets/section-fastco-pdp.css
+   Purpose: Visual override of Dawn's PDP (main-product) with fastco look.
+   Targets: .product wrapper (Dawn) on /products/* pages.
+   Loaded conditionally from layout/theme.liquid when template contains 'product'.
+   ============================================ */
+
+/* --------- Page wrapper --------- */
+.template-product main,
+body.template-product {
+  background: var(--fastco-color-bg, #faf7f2);
+}
+
+.template-product .product {
+  background: transparent;
+  padding: 24px 0 64px;
+  font-family: var(--fastco-font-body, system-ui, -apple-system, sans-serif);
+  color: var(--fastco-color-text, #1a1a1a);
+}
+
+/* --------- 2-column layout container --------- */
+.template-product .product__media-gallery,
+.template-product .product__media-wrapper {
+  padding-right: 0;
+}
+
+.template-product .product__info-wrapper,
+.template-product .product__info-container {
+  padding-left: 32px;
+}
+
+@media (max-width: 989px) {
+  .template-product .product__info-wrapper,
+  .template-product .product__info-container {
+    padding-left: 0;
+    padding-top: 24px;
+  }
+}
+
+/* --------- Gallery --------- */
+.template-product .product__media-item {
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--fastco-color-surface, #ffffff);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.template-product .product__media-item img,
+.template-product .product__media-wrapper img {
+  border-radius: 6px;
+}
+
+.template-product .thumbnail-list {
+  margin-top: 14px;
+}
+
+.template-product .thumbnail-list__item {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.template-product .thumbnail {
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: border-color 0.2s ease;
+}
+
+.template-product .thumbnail[aria-current="true"],
+.template-product .thumbnail:hover {
+  border-color: var(--fastco-color-accent, #c8332a);
+}
+
+/* --------- Vendor badge (Dawn's product__vendor) --------- */
+.template-product .product__vendor,
+.template-product .product__text.caption-with-letter-spacing {
+  display: inline-block;
+  font-family: var(--fastco-font-body, system-ui, sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--fastco-color-accent, #c8332a);
+  margin-bottom: 14px;
+}
+
+/* --------- Title --------- */
+.template-product .product__title h1,
+.template-product .product__title > h1 {
+  font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(32px, 4.5vw, 52px);
+  line-height: 1.1;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  color: var(--fastco-color-text, #1a1a1a);
+  margin: 0 0 18px;
+}
+
+/* --------- Custom SKU block (added via custom_liquid in editor) --------- */
+.fastco-pdp-sku {
+  display: inline-block;
+  font-size: 13px;
+  font-family: var(--fastco-font-body, system-ui, sans-serif);
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  margin-bottom: 18px;
+  padding: 4px 0;
+  letter-spacing: 0.02em;
+}
+
+.fastco-pdp-sku-label {
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  margin-right: 6px;
+}
+
+.fastco-pdp-sku-value {
+  color: var(--fastco-color-text, #1a1a1a);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em;
+}
+
+/* --------- Compatible systems (custom block) --------- */
+.fastco-pdp-systems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 24px;
+}
+
+.fastco-pdp-systems-label {
+  width: 100%;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  margin-bottom: 6px;
+}
+
+.fastco-pdp-system-pill {
+  display: inline-block;
+  padding: 6px 12px;
+  background: rgba(200, 51, 42, 0.08);
+  color: var(--fastco-color-accent, #c8332a);
+  border: 1px solid rgba(200, 51, 42, 0.2);
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* --------- Price --------- */
+.template-product .price {
+  margin: 0 0 28px;
+}
+
+.template-product .price .price__container {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.template-product .price .price-item,
+.template-product .price .price-item--regular,
+.template-product .price__regular .price-item {
+  font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(28px, 3.2vw, 38px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--fastco-color-text, #1a1a1a);
+  line-height: 1.1;
+}
+
+.template-product .price--on-sale .price__sale .price-item--sale {
+  color: var(--fastco-color-accent, #c8332a);
+}
+
+.template-product .price--on-sale .price-item--regular {
+  font-size: 16px;
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  text-decoration: line-through;
+}
+
+.template-product .price__notice {
+  font-size: 12px;
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  margin-top: 4px;
+  letter-spacing: 0.02em;
+}
+
+/* --------- Variant selectors --------- */
+.template-product .product-form__input {
+  margin: 0 0 22px;
+}
+
+.template-product .product-form__input .form__label,
+.template-product .product-form__input legend {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fastco-color-text, #1a1a1a);
+  margin-bottom: 8px;
+}
+
+/* radio buttons / pills */
+.template-product .product-form__input input[type="radio"] + label,
+.template-product variant-radios .product-form__input label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  padding: 10px 16px;
+  margin: 0 6px 6px 0;
+  background: var(--fastco-color-surface, #ffffff);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  color: var(--fastco-color-text, #1a1a1a);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.template-product .product-form__input input[type="radio"]:checked + label,
+.template-product variant-radios .product-form__input input:checked + label {
+  background: var(--fastco-color-accent, #c8332a);
+  border-color: var(--fastco-color-accent, #c8332a);
+  color: #ffffff;
+}
+
+.template-product .product-form__input input[type="radio"] + label:hover {
+  border-color: var(--fastco-color-accent, #c8332a);
+}
+
+/* select variant (cuando hay muchas) */
+.template-product .product-form__input select {
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  background: var(--fastco-color-surface, #ffffff);
+  color: var(--fastco-color-text, #1a1a1a);
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%231a1a1a' stroke-width='1.5' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px;
+  padding-right: 36px;
+}
+
+.template-product .product-form__input select:focus {
+  outline: none;
+  border-color: var(--fastco-color-accent, #c8332a);
+}
+
+/* --------- Quantity selector --------- */
+.template-product .product-form__quantity {
+  margin: 0 0 22px;
+}
+
+.template-product .product-form__quantity .form__label,
+.template-product .quantity__label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fastco-color-text, #1a1a1a);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.template-product .quantity {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--fastco-color-surface, #ffffff);
+  width: auto;
+  min-height: 44px;
+}
+
+.template-product .quantity__button {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--fastco-color-text, #1a1a1a);
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 0;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.template-product .quantity__button:hover {
+  background: var(--fastco-color-accent, #c8332a);
+  color: #ffffff;
+}
+
+.template-product .quantity__button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.template-product .quantity__button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.template-product .quantity__input {
+  width: 56px;
+  height: 44px;
+  text-align: center;
+  border: none;
+  border-left: 1px solid rgba(0, 0, 0, 0.08);
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fastco-color-text, #1a1a1a);
+  background: transparent;
+  font-family: inherit;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.template-product .quantity__input::-webkit-outer-spin-button,
+.template-product .quantity__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.template-product .quantity__input:focus {
+  outline: 2px solid var(--fastco-color-accent, #c8332a);
+  outline-offset: -2px;
+}
+
+/* --------- Add to cart button --------- */
+.template-product .product-form__buttons {
+  margin: 8px 0 28px;
+}
+
+.template-product .product-form__submit,
+.template-product button[name="add"] {
+  width: 100%;
+  padding: 16px 28px;
+  background: var(--fastco-color-accent, #c8332a);
+  color: #ffffff;
+  border: 1px solid var(--fastco-color-accent, #c8332a);
+  border-radius: 4px;
+  font-family: var(--fastco-font-body, system-ui, sans-serif);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+  text-transform: none;
+}
+
+.template-product .product-form__submit:hover,
+.template-product button[name="add"]:hover {
+  background: var(--fastco-color-accent-hover, #a52822);
+  border-color: var(--fastco-color-accent-hover, #a52822);
+}
+
+.template-product .product-form__submit:active,
+.template-product button[name="add"]:active {
+  transform: translateY(1px);
+}
+
+.template-product .product-form__submit:disabled,
+.template-product button[name="add"]:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.template-product .product-form__submit[aria-busy="true"] .loading-overlay__spinner {
+  color: #ffffff;
+}
+
+/* secondary "Buy it now" / dynamic checkout (esconder en Sprint 1) */
+.template-product .shopify-payment-button,
+.template-product .shopify-payment-button__button {
+  display: none !important;
+}
+
+/* --------- Description (rte content) --------- */
+.template-product .product__description {
+  margin: 0 0 28px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.template-product .product__description.rte,
+.template-product .product__description {
+  font-family: var(--fastco-font-body, system-ui, sans-serif);
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--fastco-color-text-secondary, #2c2c2c);
+}
+
+.template-product .product__description h2,
+.template-product .product__description h3 {
+  font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
+  font-weight: 500;
+  color: var(--fastco-color-text, #1a1a1a);
+  letter-spacing: -0.01em;
+  margin: 24px 0 12px;
+}
+
+.template-product .product__description h2 {
+  font-size: 24px;
+}
+
+.template-product .product__description h3 {
+  font-size: 18px;
+}
+
+.template-product .product__description p {
+  margin: 0 0 14px;
+}
+
+.template-product .product__description strong {
+  color: var(--fastco-color-text, #1a1a1a);
+  font-weight: 600;
+}
+
+.template-product .product__description ul,
+.template-product .product__description ol {
+  padding-left: 22px;
+  margin: 0 0 14px;
+}
+
+.template-product .product__description li {
+  margin-bottom: 6px;
+}
+
+.template-product .product__description li::marker {
+  color: var(--fastco-color-accent, #c8332a);
+}
+
+.template-product .product__description a {
+  color: var(--fastco-color-accent, #c8332a);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --------- Inventory pill / "low stock" --------- */
+.template-product .product__inventory {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  margin: -12px 0 18px;
+  letter-spacing: 0.02em;
+}
+
+.template-product .product__inventory.product__inventory--low {
+  color: var(--fastco-color-accent, #c8332a);
+  font-weight: 600;
+}
+
+/* --------- Share button --------- */
+.template-product .share-button {
+  margin-top: 18px;
+}
+
+.template-product .share-button__button {
+  font-size: 13px;
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* --------- Breadcrumbs (si Dawn las renderea) --------- */
+.template-product .breadcrumb {
+  font-size: 12px;
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  margin-bottom: 18px;
+  letter-spacing: 0.02em;
+}
+
+.template-product .breadcrumb a {
+  color: var(--fastco-color-text-muted, #5a5a5a);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.template-product .breadcrumb a:hover {
+  color: var(--fastco-color-accent, #c8332a);
+}
+
+/* --------- MOBILE responsive --------- */
+@media (max-width: 749px) {
+  .template-product .product {
+    padding: 16px 0 48px;
+  }
+
+  .template-product .product__title h1 {
+    font-size: clamp(28px, 7vw, 38px);
+  }
+
+  .template-product .price .price-item {
+    font-size: clamp(24px, 6vw, 30px);
+  }
+
+  .template-product .product-form__submit,
+  .template-product button[name="add"] {
+    padding: 14px 22px;
+    font-size: 14px;
+  }
+
+  .template-product .quantity__button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .template-product .quantity__input {
+    width: 50px;
+    height: 40px;
+  }
+
+  .template-product .quantity {
+    min-height: 40px;
+  }
+}
