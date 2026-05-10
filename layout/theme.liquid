@@ -45,6 +45,9 @@
        {% render 'fastco-fonts' %}
        {{ 'fastco-tokens.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'fastco-cart-ajax.js' | asset_url }}" defer="defer"></script>
+    {%- if template contains 'product' -%}
+         {{ 'section-fastco-pdp.css' | asset_url | stylesheet_tag }}
+       {%- endif -%}
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
