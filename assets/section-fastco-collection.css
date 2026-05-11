@@ -1,26 +1,15 @@
 /* ============================================
-   FASTCO COLLECTION COAT — MINIMAL v2
+   FASTCO COLLECTION COAT v2.1 — Color sync
    File: assets/section-fastco-collection.css
-   Date: 2026-05-10 (sub-batch 06a fix)
+   Date: 2026-05-10 (sub-batch 06b)
    Strategy: Visual coat ONLY. Zero layout overrides. Dawn handles grid + card structure.
-   What this file DOES:
-     - Page background (crema)
-     - Collection hero title in Cormorant Garamond
-     - Vendor/brand in fastco accent red
-     - Price in Cormorant Garamond, tabular-nums
-     - Card hover lift (subtle)
-     - Filters button + sort dropdown branding
-   What this file DOES NOT DO (intentionally):
-     - Override .card-wrapper display/flex/height
-     - Override .product-grid columns
-     - Override .card__badge position
-     - Hide quick-add (handled by Dawn settings instead)
+   Changes vs v2: rgbas hardcoded ahora usan --fastco-rgb-naranja; todos los fallbacks hex actualizados a paleta institucional.
    ============================================ */
 
 
 /* ---------- Page background ---------- */
 body.template-collection {
-  background: var(--fastco-color-bg, #faf7f2);
+  background: var(--fastco-color-bg, #FAFAF7);
 }
 
 
@@ -40,14 +29,14 @@ body.template-collection {
   line-height: 1.05;
   font-weight: 500;
   letter-spacing: -0.02em;
-  color: var(--fastco-color-text, #1a1a1a);
+  color: var(--fastco-color-text, #1A1F2E);
   margin: 0 0 14px;
 }
 
 .template-collection .collection-hero__description {
   font-size: 16px;
   line-height: 1.65;
-  color: var(--fastco-color-text-secondary, #2c2c2c);
+  color: var(--fastco-color-text-secondary, #6B6F78);
   max-width: 68ch;
 }
 
@@ -62,74 +51,72 @@ body.template-collection {
 
 /* ---------- Native Dawn filters toolbar — fastco branding ---------- */
 
-/* Horizontal filters disclosure */
 .template-collection .disclosure-has-popup summary.facets__summary {
-  font-family: var(--fastco-font-body, system-ui, sans-serif);
+  font-family: var(--fastco-font-body, 'Inter', system-ui, sans-serif);
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   font-size: 13px;
-  color: var(--fastco-color-text, #1a1a1a);
+  color: var(--fastco-color-text, #1A1F2E);
+  transition: color 0.15s ease;
 }
 
 .template-collection .disclosure-has-popup summary.facets__summary:hover {
-  color: var(--fastco-color-accent, #c8332a);
+  color: var(--fastco-color-accent, #F6571F);
 }
 
-/* Sort dropdown */
 .template-collection .facet-filters__field .select__select,
 .template-collection #SortBy {
-  font-family: var(--fastco-font-body, system-ui, sans-serif);
+  font-family: var(--fastco-font-body, 'Inter', system-ui, sans-serif);
   font-size: 13px;
-  color: var(--fastco-color-text, #1a1a1a);
+  color: var(--fastco-color-text, #1A1F2E);
 }
 
 .template-collection .facet-filters__label,
 .template-collection .facet-filters__field label {
-  font-family: var(--fastco-font-body, system-ui, sans-serif);
+  font-family: var(--fastco-font-body, 'Inter', system-ui, sans-serif);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--fastco-color-text-muted, #5a5a5a);
+  color: var(--fastco-color-text-muted, #9CA0A8);
 }
 
 /* Active filter pills */
 .template-collection .active-facets__button {
-  border-color: rgba(200, 51, 42, 0.3);
-  color: var(--fastco-color-text);
-  font-family: var(--fastco-font-body);
+  border-color: rgba(var(--fastco-rgb-naranja, 246, 87, 31), 0.3);
+  color: var(--fastco-color-text, #1A1F2E);
+  font-family: var(--fastco-font-body, 'Inter', system-ui, sans-serif);
   font-weight: 600;
   font-size: 12px;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
 
 .template-collection .active-facets__button:hover {
-  border-color: var(--fastco-color-accent, #c8332a);
-  background: rgba(200, 51, 42, 0.04);
+  border-color: var(--fastco-color-accent, #F6571F);
+  background: rgba(var(--fastco-rgb-naranja, 246, 87, 31), 0.06);
 }
 
 /* Product count */
 .template-collection .product-count,
 .template-collection .product-count__text {
-  font-family: var(--fastco-font-body, system-ui, sans-serif);
+  font-family: var(--fastco-font-body, 'Inter', system-ui, sans-serif);
   font-size: 13px;
-  color: var(--fastco-color-text-muted, #5a5a5a);
+  color: var(--fastco-color-text-muted, #9CA0A8);
   letter-spacing: 0.02em;
 }
 
 
 /* ---------- Product cards — VISUAL layer only ---------- */
 
-/* Gentle hover lift, NO display/layout changes */
 .template-collection .card-wrapper {
-  transition: transform 0.2s ease;
+  transition: transform 0.25s var(--fastco-ease-out, cubic-bezier(0.22, 0.61, 0.36, 1));
 }
 
 .template-collection .card-wrapper:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
-/* Title in Cormorant Garamond */
 .template-collection .card__heading,
 .template-collection .card__heading.h5 {
   font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
@@ -140,18 +127,19 @@ body.template-collection {
 
 .template-collection .card__heading a,
 .template-collection .full-unstyled-link {
-  color: var(--fastco-color-text, #1a1a1a);
+  color: var(--fastco-color-text, #1A1F2E);
   text-decoration: none;
+  transition: color 0.15s ease;
 }
 
 .template-collection .card__heading a:hover {
-  color: var(--fastco-color-accent, #c8332a);
+  color: var(--fastco-color-accent, #F6571F);
 }
 
-/* Vendor / brand: fastco accent red, uppercase tight */
+/* Vendor / brand: fastco accent, uppercase tight */
 .template-collection .card-information .caption-with-letter-spacing,
 .template-collection .card .caption-with-letter-spacing {
-  color: var(--fastco-color-accent, #c8332a);
+  color: var(--fastco-color-accent, #F6571F);
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -165,17 +153,17 @@ body.template-collection {
   font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
   font-size: 20px;
   font-weight: 500;
-  color: var(--fastco-color-text, #1a1a1a);
+  color: var(--fastco-color-text, #1A1F2E);
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.005em;
 }
 
 .template-collection .card .price--on-sale .price-item--sale {
-  color: var(--fastco-color-accent, #c8332a);
+  color: var(--fastco-color-accent, #F6571F);
 }
 
 .template-collection .card .price--on-sale .price-item--regular {
-  color: var(--fastco-color-text-muted, #5a5a5a);
+  color: var(--fastco-color-text-muted, #9CA0A8);
   text-decoration: line-through;
   font-size: 13px;
 }
@@ -183,23 +171,24 @@ body.template-collection {
 
 /* ---------- Pagination ---------- */
 .template-collection .pagination-wrapper {
-  font-family: var(--fastco-font-body, system-ui, sans-serif);
+  font-family: var(--fastco-font-body, 'Inter', system-ui, sans-serif);
 }
 
 .template-collection .pagination-wrapper a,
 .template-collection .pagination-wrapper span {
-  color: var(--fastco-color-text, #1a1a1a);
+  color: var(--fastco-color-text, #1A1F2E);
   font-variant-numeric: tabular-nums;
   font-weight: 600;
   font-size: 13px;
+  transition: color 0.15s ease;
 }
 
 .template-collection .pagination-wrapper a:hover {
-  color: var(--fastco-color-accent, #c8332a);
+  color: var(--fastco-color-accent, #F6571F);
 }
 
 .template-collection .pagination-wrapper [aria-current="page"] {
-  color: var(--fastco-color-accent, #c8332a);
+  color: var(--fastco-color-accent, #F6571F);
   font-weight: 700;
 }
 
@@ -208,16 +197,17 @@ body.template-collection {
 .template-collection .collection--empty .title {
   font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
   font-weight: 500;
-  color: var(--fastco-color-text, #1a1a1a);
+  color: var(--fastco-color-text, #1A1F2E);
 }
 
 .template-collection .collection--empty .underlined-link {
-  color: var(--fastco-color-accent, #c8332a);
+  color: var(--fastco-color-accent, #F6571F);
 }
 
 
 /* ---------- A11Y focus visible ---------- */
 .template-collection .card-wrapper:focus-within {
-  outline: 2px solid var(--fastco-color-accent, #c8332a);
+  outline: 2px solid var(--fastco-color-accent, #F6571F);
   outline-offset: 2px;
+  border-radius: var(--fastco-r-sm, 4px);
 }
