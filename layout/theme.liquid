@@ -47,6 +47,7 @@
 <script src="{{ 'fastco-cart-ajax.js' | asset_url }}" defer="defer"></script>
     {%- if template contains 'product' -%}
          {{ 'section-fastco-pdp.css' | asset_url | stylesheet_tag }}
+         <script src="{{ 'fastco-pdp-readmore.js' | asset_url }}" defer="defer"></script>
        {%- endif -%}
 {%- if template contains 'collection' -%}
          {{ 'section-fastco-collection.css' | asset_url | stylesheet_tag }}
