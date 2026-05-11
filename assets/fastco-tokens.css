@@ -1,32 +1,65 @@
-/* ─────────────────────────────────────────────────────
-   FASTCO · DESIGN SYSTEM v1.0
+/* ──────────────────────────────────────────────────────
+   FASTCO · DESIGN SYSTEM v1.1
    Brand approved 2026-05
    Variables prefijadas con --fastco- para no chocar con Dawn
    ─────────────────────────────────────────────────── */
 
 :root {
-  /* ─── Colors ─── */
+  /* ═══════════════ COLORS ═══════════════ */
   --fastco-grafito: #1A1F2E;
   --fastco-grafito-soft: #2A3042;
   --fastco-grafito-deep: #0F121C;
+
   --fastco-naranja: #F6571F;
   --fastco-naranja-hover: #E04A14;
   --fastco-naranja-deep: #C73E0F;
   --fastco-naranja-soft: #FFE5D6;
   --fastco-naranja-tint: #FFF2EB;
+
   --fastco-menta: #2BD68B;
   --fastco-menta-soft: #D4F1E0;
   --fastco-menta-tint: #EEFBF5;
+
   --fastco-crema: #FAFAF7;
   --fastco-crema-deep: #F2F2EE;
+
   --fastco-linea: #E5E5E0;
   --fastco-linea-soft: #EFEFEB;
+
   --fastco-texto: #1A1F2E;
   --fastco-texto-sec: #6B6F78;
   --fastco-texto-mute: #9CA0A8;
+
   --fastco-blanco: #FFFFFF;
 
-  /* ─── Spacing scale ─── */
+  /* ═══════════════ TYPOGRAPHY ═══════════════ */
+  --fastco-font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --fastco-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+  /* ═══════════════ ALIASES (para coats: PDP, Collection, etc) ═══════════════ */
+  /* Estos aliases mapean nombres semánticos → tokens raíz. */
+  /* Si cambias un valor abajo, se propaga a todo el theme automáticamente. */
+  --fastco-color-bg: var(--fastco-crema);
+  --fastco-color-surface: var(--fastco-blanco);
+  --fastco-color-surface-alt: var(--fastco-crema-deep);
+  --fastco-color-text: var(--fastco-texto);
+  --fastco-color-text-secondary: var(--fastco-texto-sec);
+  --fastco-color-text-muted: var(--fastco-texto-mute);
+  --fastco-color-accent: var(--fastco-naranja);
+  --fastco-color-accent-hover: var(--fastco-naranja-hover);
+  --fastco-color-accent-deep: var(--fastco-naranja-deep);
+  --fastco-color-accent-soft: var(--fastco-naranja-soft);
+  --fastco-color-accent-tint: var(--fastco-naranja-tint);
+  --fastco-color-success: var(--fastco-menta);
+  --fastco-color-line: var(--fastco-linea);
+  --fastco-color-line-soft: var(--fastco-linea-soft);
+
+  /* RGB triplets para usar con rgba() — ej: rgba(var(--fastco-rgb-naranja), 0.2) */
+  --fastco-rgb-naranja: 246, 87, 31;
+  --fastco-rgb-grafito: 26, 31, 46;
+  --fastco-rgb-menta: 43, 214, 139;
+
+  /* ═══════════════ SPACING SCALE ═══════════════ */
   --fastco-s-1: 4px;
   --fastco-s-2: 8px;
   --fastco-s-3: 12px;
@@ -38,25 +71,25 @@
   --fastco-s-9: 96px;
   --fastco-s-10: 128px;
 
-  /* ─── Radius ─── */
+  /* ═══════════════ RADIUS ═══════════════ */
   --fastco-r-sm: 4px;
   --fastco-r-md: 6px;
   --fastco-r-lg: 10px;
   --fastco-r-xl: 16px;
   --fastco-r-pill: 99px;
 
-  /* ─── Shadows ─── */
-  --fastco-sh-1: 0 1px 2px rgba(26,31,46,0.06), 0 1px 1px rgba(26,31,46,0.04);
-  --fastco-sh-2: 0 4px 12px rgba(26,31,46,0.08), 0 2px 4px rgba(26,31,46,0.04);
-  --fastco-sh-3: 0 12px 32px rgba(26,31,46,0.10), 0 4px 8px rgba(26,31,46,0.05);
-  --fastco-sh-orange: 0 8px 24px rgba(246,87,31,0.18);
+  /* ═══════════════ SHADOWS ══════════════ */
+  --fastco-sh-1: 0 1px 2px rgba(26, 31, 46, 0.06), 0 1px 1px rgba(26, 31, 46, 0.04);
+  --fastco-sh-2: 0 4px 12px rgba(26, 31, 46, 0.08), 0 2px 4px rgba(26, 31, 46, 0.04);
+  --fastco-sh-3: 0 12px 32px rgba(26, 31, 46, 0.10), 0 4px 8px rgba(26, 31, 46, 0.05);
+  --fastco-sh-naranja: 0 8px 24px rgba(246, 87, 31, 0.18);
 
-  /* ─── Motion easings ─── */
+  /* ═══════════════ MOTION EASINGS ═══════════════ */
   --fastco-ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
   --fastco-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --fastco-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  /* ─── Layout ─── */
+  /* ═══════════════ LAYOUT ═══════════════ */
   --fastco-max: 1280px;
   --fastco-gutter: 32px;
   --fastco-nav-h: 72px;
@@ -66,4 +99,9 @@
 ::selection {
   background: var(--fastco-naranja);
   color: var(--fastco-blanco);
+}
+
+/* ─── Smooth scroll global ─── */
+html {
+  scroll-behavior: smooth;
 }
