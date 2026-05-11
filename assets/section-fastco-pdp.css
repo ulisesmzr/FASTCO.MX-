@@ -1,297 +1,323 @@
 /* ============================================
-   FASTCO PDP COAT
+   FASTCO PDP COAT v2 — Polish upgrade
    File: assets/section-fastco-pdp.css
-   Purpose: Visual override of Dawn's PDP (main-product) with fastco look.
-   Targets: .product wrapper (Dawn) on /products/* pages.
-   Loaded conditionally from layout/theme.liquid when template contains 'product'.
+   Date: 2026-05-10
+   Strategy: Visual layer on Dawn's main-product. Stronger hierarchy, generous spacing,
+             refined typography, smooth micro-interactions. NO layout hijacking.
    ============================================ */
 
-/* --------- Page wrapper --------- */
-.template-product main,
+
+/* ════════════════ Page wrapper ════════════════ */
 body.template-product {
-  background: var(--fastco-color-bg, #faf7f2);
+  background: var(--fastco-color-bg);
 }
 
 .template-product .product {
   background: transparent;
-  padding: 24px 0 64px;
-  font-family: var(--fastco-font-body, system-ui, -apple-system, sans-serif);
-  color: var(--fastco-color-text, #1a1a1a);
+  padding: 32px 0 72px;
+  font-family: var(--fastco-font-body);
+  color: var(--fastco-color-text);
 }
 
-/* --------- 2-column layout container --------- */
-.template-product .product__media-gallery,
-.template-product .product__media-wrapper {
-  padding-right: 0;
-}
 
+/* ════════════════ 2-column layout ════════════════ */
 .template-product .product__info-wrapper,
 .template-product .product__info-container {
-  padding-left: 32px;
+  padding-left: 40px;
 }
 
 @media (max-width: 989px) {
   .template-product .product__info-wrapper,
   .template-product .product__info-container {
     padding-left: 0;
-    padding-top: 24px;
+    padding-top: 32px;
   }
 }
 
-/* --------- Gallery --------- */
+
+/* ════════════════ Gallery (Dawn renders this) ════════════════ */
 .template-product .product__media-item {
-  border-radius: 6px;
+  border-radius: var(--fastco-r-md);
   overflow: hidden;
-  background: var(--fastco-color-surface, #ffffff);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  background: var(--fastco-color-surface);
+  box-shadow: var(--fastco-sh-1);
 }
 
 .template-product .product__media-item img,
 .template-product .product__media-wrapper img {
-  border-radius: 6px;
+  border-radius: var(--fastco-r-md);
+  transition: transform 0.6s var(--fastco-ease-out);
+}
+
+.template-product .product__media-item:hover img {
+  transform: scale(1.015);
 }
 
 .template-product .thumbnail-list {
-  margin-top: 14px;
+  margin-top: 16px;
+  gap: 10px;
 }
 
 .template-product .thumbnail-list__item {
-  border-radius: 4px;
+  border-radius: var(--fastco-r-sm);
   overflow: hidden;
 }
 
 .template-product .thumbnail {
-  border-radius: 4px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  transition: border-color 0.2s ease;
+  border-radius: var(--fastco-r-sm);
+  border: 1.5px solid var(--fastco-color-line);
+  transition: border-color 0.2s var(--fastco-ease-out);
 }
 
 .template-product .thumbnail[aria-current="true"],
 .template-product .thumbnail:hover {
-  border-color: var(--fastco-color-accent, #c8332a);
+  border-color: var(--fastco-color-accent);
 }
 
-/* --------- Vendor badge (Dawn's product__vendor) --------- */
+
+/* ════════════════ Vendor ════════════════ */
 .template-product .product__vendor,
 .template-product .product__text.caption-with-letter-spacing {
   display: inline-block;
-  font-family: var(--fastco-font-body, system-ui, sans-serif);
-  font-size: 12px;
-  font-weight: 600;
+  font-family: var(--fastco-font-body);
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--fastco-color-accent, #c8332a);
-  margin-bottom: 14px;
+  letter-spacing: 0.22em;
+  color: var(--fastco-color-accent);
+  margin: 0 0 18px;
+  line-height: 1.2;
 }
 
-/* --------- Title --------- */
+
+/* ════════════════ Title ════════════════ */
 .template-product .product__title h1,
 .template-product .product__title > h1 {
-  font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
-  font-size: clamp(32px, 4.5vw, 52px);
-  line-height: 1.1;
+  font-family: var(--fastco-font-display);
+  font-size: clamp(36px, 4.8vw, 56px);
+  line-height: 1.05;
   font-weight: 500;
-  letter-spacing: -0.015em;
-  color: var(--fastco-color-text, #1a1a1a);
-  margin: 0 0 18px;
+  letter-spacing: -0.02em;
+  color: var(--fastco-color-text);
+  margin: 0 0 22px;
 }
 
-/* --------- Custom SKU block (added via custom_liquid in editor) --------- */
+
+/* ════════════════ Custom SKU block ════════════════ */
 .fastco-pdp-sku {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-size: 13px;
-  font-family: var(--fastco-font-body, system-ui, sans-serif);
-  color: var(--fastco-color-text-muted, #5a5a5a);
-  margin-bottom: 18px;
-  padding: 4px 0;
+  font-family: var(--fastco-font-body);
+  color: var(--fastco-color-text-muted);
+  margin-bottom: 20px;
+  padding: 6px 12px;
+  background: var(--fastco-color-surface-alt);
+  border-radius: var(--fastco-r-pill);
   letter-spacing: 0.02em;
 }
 
 .fastco-pdp-sku-label {
-  color: var(--fastco-color-text-muted, #5a5a5a);
-  margin-right: 6px;
+  color: var(--fastco-color-text-muted);
+  font-weight: 500;
 }
 
 .fastco-pdp-sku-value {
-  color: var(--fastco-color-text, #1a1a1a);
-  font-weight: 600;
+  color: var(--fastco-color-text);
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.05em;
 }
 
-/* --------- Compatible systems (custom block) --------- */
+
+/* ════════════════ Compatible systems pills ════════════════ */
 .fastco-pdp-systems {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 0 0 24px;
+  margin: 0 0 28px;
 }
 
 .fastco-pdp-systems-label {
   width: 100%;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--fastco-color-text-muted, #5a5a5a);
-  margin-bottom: 6px;
+  color: var(--fastco-color-text-muted);
+  margin-bottom: 8px;
 }
 
 .fastco-pdp-system-pill {
   display: inline-block;
-  padding: 6px 12px;
-  background: rgba(200, 51, 42, 0.08);
-  color: var(--fastco-color-accent, #c8332a);
-  border: 1px solid rgba(200, 51, 42, 0.2);
-  border-radius: 14px;
+  padding: 7px 14px;
+  background: rgba(var(--fastco-rgb-naranja), 0.08);
+  color: var(--fastco-color-accent);
+  border: 1px solid rgba(var(--fastco-rgb-naranja), 0.2);
+  border-radius: var(--fastco-r-pill);
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
-/* --------- Price --------- */
+.fastco-pdp-system-pill:hover {
+  background: rgba(var(--fastco-rgb-naranja), 0.14);
+  border-color: rgba(var(--fastco-rgb-naranja), 0.35);
+}
+
+
+/* ════════════════ Price ════════════════ */
 .template-product .price {
-  margin: 0 0 28px;
+  margin: 0 0 32px;
 }
 
 .template-product .price .price__container {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .template-product .price .price-item,
 .template-product .price .price-item--regular,
 .template-product .price__regular .price-item {
-  font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
-  font-size: clamp(28px, 3.2vw, 38px);
+  font-family: var(--fastco-font-display);
+  font-size: clamp(32px, 3.8vw, 44px);
   font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--fastco-color-text, #1a1a1a);
-  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--fastco-color-text);
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
 }
 
 .template-product .price--on-sale .price__sale .price-item--sale {
-  color: var(--fastco-color-accent, #c8332a);
+  color: var(--fastco-color-accent);
 }
 
 .template-product .price--on-sale .price-item--regular {
-  font-size: 16px;
-  color: var(--fastco-color-text-muted, #5a5a5a);
+  font-size: 17px;
+  color: var(--fastco-color-text-muted);
   text-decoration: line-through;
 }
 
 .template-product .price__notice {
   font-size: 12px;
-  color: var(--fastco-color-text-muted, #5a5a5a);
-  margin-top: 4px;
+  color: var(--fastco-color-text-muted);
+  margin-top: 6px;
   letter-spacing: 0.02em;
 }
 
-/* --------- Variant selectors --------- */
+
+/* ════════════════ Variant selectors (radio pills) ════════════════ */
 .template-product .product-form__input {
-  margin: 0 0 22px;
+  margin: 0 0 24px;
 }
 
 .template-product .product-form__input .form__label,
 .template-product .product-form__input legend {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--fastco-color-text, #1a1a1a);
-  margin-bottom: 8px;
+  color: var(--fastco-color-text);
+  margin-bottom: 10px;
 }
 
-/* radio buttons / pills */
 .template-product .product-form__input input[type="radio"] + label,
 .template-product variant-radios .product-form__input label {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 48px;
-  padding: 10px 16px;
-  margin: 0 6px 6px 0;
-  background: var(--fastco-color-surface, #ffffff);
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
-  color: var(--fastco-color-text, #1a1a1a);
+  min-width: 52px;
+  padding: 11px 18px;
+  margin: 0 8px 8px 0;
+  background: var(--fastco-color-surface);
+  border: 1.5px solid var(--fastco-color-line);
+  border-radius: var(--fastco-r-sm);
+  color: var(--fastco-color-text);
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
 
 .template-product .product-form__input input[type="radio"]:checked + label,
 .template-product variant-radios .product-form__input input:checked + label {
-  background: var(--fastco-color-accent, #c8332a);
-  border-color: var(--fastco-color-accent, #c8332a);
-  color: #ffffff;
+  background: var(--fastco-color-accent);
+  border-color: var(--fastco-color-accent);
+  color: var(--fastco-blanco);
 }
 
 .template-product .product-form__input input[type="radio"] + label:hover {
-  border-color: var(--fastco-color-accent, #c8332a);
+  border-color: var(--fastco-color-accent);
 }
 
-/* select variant (cuando hay muchas) */
 .template-product .product-form__input select {
-  padding: 12px 14px;
+  padding: 13px 16px;
   font-size: 14px;
   font-family: inherit;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
-  background: var(--fastco-color-surface, #ffffff);
-  color: var(--fastco-color-text, #1a1a1a);
+  border: 1.5px solid var(--fastco-color-line);
+  border-radius: var(--fastco-r-sm);
+  background: var(--fastco-color-surface);
+  color: var(--fastco-color-text);
   -webkit-appearance: none;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%231a1a1a' stroke-width='1.5' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%231a1f2e' stroke-width='1.5' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
   background-size: 12px;
-  padding-right: 36px;
+  padding-right: 38px;
+  transition: border-color 0.15s ease;
 }
 
 .template-product .product-form__input select:focus {
   outline: none;
-  border-color: var(--fastco-color-accent, #c8332a);
+  border-color: var(--fastco-color-accent);
 }
 
-/* --------- Quantity selector --------- */
+
+/* ════════════════ Quantity selector ════════════════ */
 .template-product .product-form__quantity {
-  margin: 0 0 22px;
+  margin: 0 0 24px;
 }
 
 .template-product .product-form__quantity .form__label,
 .template-product .quantity__label {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--fastco-color-text, #1a1a1a);
-  margin-bottom: 8px;
+  color: var(--fastco-color-text);
+  margin-bottom: 10px;
   display: block;
 }
 
 .template-product .quantity {
   display: inline-flex;
   align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
+  border: 1.5px solid var(--fastco-color-line);
+  border-radius: var(--fastco-r-md);
   overflow: hidden;
-  background: var(--fastco-color-surface, #ffffff);
+  background: var(--fastco-color-surface);
   width: auto;
-  min-height: 44px;
+  min-height: 48px;
+  transition: border-color 0.15s ease;
+}
+
+.template-product .quantity:focus-within {
+  border-color: var(--fastco-color-accent);
 }
 
 .template-product .quantity__button {
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: transparent;
   border: none;
-  color: var(--fastco-color-text, #1a1a1a);
+  color: var(--fastco-color-text);
   cursor: pointer;
   font-size: 18px;
   font-weight: 500;
@@ -300,8 +326,8 @@ body.template-product {
 }
 
 .template-product .quantity__button:hover {
-  background: var(--fastco-color-accent, #c8332a);
-  color: #ffffff;
+  background: var(--fastco-color-accent);
+  color: var(--fastco-blanco);
 }
 
 .template-product .quantity__button:disabled {
@@ -315,17 +341,18 @@ body.template-product {
 }
 
 .template-product .quantity__input {
-  width: 56px;
-  height: 44px;
+  width: 60px;
+  height: 48px;
   text-align: center;
   border: none;
-  border-left: 1px solid rgba(0, 0, 0, 0.08);
-  border-right: 1px solid rgba(0, 0, 0, 0.08);
+  border-left: 1px solid var(--fastco-color-line);
+  border-right: 1px solid var(--fastco-color-line);
   font-size: 15px;
-  font-weight: 600;
-  color: var(--fastco-color-text, #1a1a1a);
+  font-weight: 700;
+  color: var(--fastco-color-text);
   background: transparent;
   font-family: inherit;
+  font-variant-numeric: tabular-nums;
   -moz-appearance: textfield;
   appearance: textfield;
 }
@@ -337,195 +364,304 @@ body.template-product {
 }
 
 .template-product .quantity__input:focus {
-  outline: 2px solid var(--fastco-color-accent, #c8332a);
-  outline-offset: -2px;
+  outline: none;
 }
 
-/* --------- Add to cart button --------- */
+
+/* ════════════════ Add to cart button ════════════════ */
 .template-product .product-form__buttons {
-  margin: 8px 0 28px;
+  margin: 12px 0 32px;
 }
 
 .template-product .product-form__submit,
 .template-product button[name="add"] {
   width: 100%;
-  padding: 16px 28px;
-  background: var(--fastco-color-accent, #c8332a);
-  color: #ffffff;
-  border: 1px solid var(--fastco-color-accent, #c8332a);
-  border-radius: 4px;
-  font-family: var(--fastco-font-body, system-ui, sans-serif);
+  padding: 18px 32px;
+  background: var(--fastco-color-accent);
+  color: var(--fastco-blanco);
+  border: 1px solid var(--fastco-color-accent);
+  border-radius: var(--fastco-r-md);
+  font-family: var(--fastco-font-body);
   font-size: 15px;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+  transition: background 0.2s var(--fastco-ease-out),
+              border-color 0.2s var(--fastco-ease-out),
+              box-shadow 0.25s var(--fastco-ease-out),
+              transform 0.1s ease;
   text-transform: none;
+  box-shadow: 0 1px 2px rgba(var(--fastco-rgb-naranja), 0.10);
 }
 
 .template-product .product-form__submit:hover,
 .template-product button[name="add"]:hover {
-  background: var(--fastco-color-accent-hover, #a52822);
-  border-color: var(--fastco-color-accent-hover, #a52822);
+  background: var(--fastco-color-accent-hover);
+  border-color: var(--fastco-color-accent-hover);
+  box-shadow: var(--fastco-sh-naranja);
 }
 
 .template-product .product-form__submit:active,
 .template-product button[name="add"]:active {
   transform: translateY(1px);
+  box-shadow: 0 1px 2px rgba(var(--fastco-rgb-naranja), 0.10);
 }
 
 .template-product .product-form__submit:disabled,
 .template-product button[name="add"]:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  box-shadow: none;
+}
+
+.template-product .product-form__submit:focus-visible,
+.template-product button[name="add"]:focus-visible {
+  outline: 2px solid var(--fastco-color-accent);
+  outline-offset: 3px;
 }
 
 .template-product .product-form__submit[aria-busy="true"] .loading-overlay__spinner {
-  color: #ffffff;
+  color: var(--fastco-blanco);
 }
 
-/* secondary "Buy it now" / dynamic checkout (esconder en Sprint 1) */
+/* Hide Shop Pay / dynamic checkout */
 .template-product .shopify-payment-button,
 .template-product .shopify-payment-button__button {
   display: none !important;
 }
 
-/* --------- Description (rte content) --------- */
+
+/* ════════════════ Description (with read-more) ════════════════ */
 .template-product .product__description {
-  margin: 0 0 28px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  margin: 0 0 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--fastco-color-line);
 }
 
 .template-product .product__description.rte,
 .template-product .product__description {
-  font-family: var(--fastco-font-body, system-ui, sans-serif);
+  font-family: var(--fastco-font-body);
   font-size: 15px;
-  line-height: 1.7;
-  color: var(--fastco-color-text-secondary, #2c2c2c);
+  line-height: 1.75;
+  color: var(--fastco-color-text-secondary);
 }
 
 .template-product .product__description h2,
 .template-product .product__description h3 {
-  font-family: var(--fastco-font-display, 'Cormorant Garamond', Georgia, serif);
+  font-family: var(--fastco-font-display);
   font-weight: 500;
-  color: var(--fastco-color-text, #1a1a1a);
+  color: var(--fastco-color-text);
   letter-spacing: -0.01em;
-  margin: 24px 0 12px;
+  margin: 28px 0 14px;
+  line-height: 1.2;
 }
 
 .template-product .product__description h2 {
-  font-size: 24px;
+  font-size: 26px;
 }
 
 .template-product .product__description h3 {
-  font-size: 18px;
+  font-size: 19px;
 }
 
 .template-product .product__description p {
   margin: 0 0 14px;
 }
 
+.template-product .product__description p:last-child {
+  margin-bottom: 0;
+}
+
 .template-product .product__description strong {
-  color: var(--fastco-color-text, #1a1a1a);
-  font-weight: 600;
+  color: var(--fastco-color-text);
+  font-weight: 700;
 }
 
 .template-product .product__description ul,
 .template-product .product__description ol {
   padding-left: 22px;
-  margin: 0 0 14px;
+  margin: 0 0 16px;
 }
 
 .template-product .product__description li {
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  padding-left: 4px;
 }
 
 .template-product .product__description li::marker {
-  color: var(--fastco-color-accent, #c8332a);
+  color: var(--fastco-color-accent);
+  font-weight: 700;
 }
 
 .template-product .product__description a {
-  color: var(--fastco-color-accent, #c8332a);
+  color: var(--fastco-color-accent);
   text-decoration: underline;
   text-underline-offset: 3px;
+  transition: color 0.15s ease;
 }
 
-/* --------- Inventory pill / "low stock" --------- */
+.template-product .product__description a:hover {
+  color: var(--fastco-color-accent-hover);
+}
+
+/* ────── Read-more wrapper (JS-driven) ────── */
+.fastco-readmore-wrapper {
+  position: relative;
+  overflow: hidden;
+  transition: max-height 0.5s var(--fastco-ease-out);
+}
+
+.fastco-readmore-wrapper.is-collapsed {
+  max-height: 340px;
+}
+
+.fastco-readmore-wrapper.is-collapsed::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(
+    to bottom,
+    rgba(250, 250, 247, 0) 0%,
+    var(--fastco-crema) 92%
+  );
+  pointer-events: none;
+}
+
+.fastco-readmore-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding: 8px 0;
+  background: transparent;
+  border: none;
+  color: var(--fastco-color-accent);
+  font-family: var(--fastco-font-body);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.15s ease, gap 0.2s var(--fastco-ease-out);
+}
+
+.fastco-readmore-toggle::after {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  transition: transform 0.25s var(--fastco-ease-out);
+}
+
+.fastco-readmore-toggle[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
+
+.fastco-readmore-toggle:hover {
+  color: var(--fastco-color-accent-hover);
+  gap: 12px;
+}
+
+.fastco-readmore-toggle:focus-visible {
+  outline: 2px solid var(--fastco-color-accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+
+/* ════════════════ Inventory pill ════════════════ */
 .template-product .product__inventory {
   font-size: 12px;
   font-weight: 500;
-  color: var(--fastco-color-text-muted, #5a5a5a);
-  margin: -12px 0 18px;
+  color: var(--fastco-color-text-muted);
+  margin: -14px 0 20px;
   letter-spacing: 0.02em;
 }
 
 .template-product .product__inventory.product__inventory--low {
-  color: var(--fastco-color-accent, #c8332a);
-  font-weight: 600;
+  color: var(--fastco-color-accent);
+  font-weight: 700;
 }
 
-/* --------- Share button --------- */
+
+/* ════════════════ Share button ════════════════ */
 .template-product .share-button {
-  margin-top: 18px;
+  margin-top: 20px;
 }
 
 .template-product .share-button__button {
   font-size: 13px;
-  color: var(--fastco-color-text-muted, #5a5a5a);
+  color: var(--fastco-color-text-muted);
   text-transform: none;
-  letter-spacing: 0;
+  letter-spacing: 0.02em;
+  transition: color 0.15s ease;
 }
 
-/* --------- Breadcrumbs (si Dawn las renderea) --------- */
+.template-product .share-button__button:hover {
+  color: var(--fastco-color-accent);
+}
+
+
+/* ════════════════ Breadcrumbs ════════════════ */
 .template-product .breadcrumb {
   font-size: 12px;
-  color: var(--fastco-color-text-muted, #5a5a5a);
-  margin-bottom: 18px;
+  color: var(--fastco-color-text-muted);
+  margin-bottom: 20px;
   letter-spacing: 0.02em;
 }
 
 .template-product .breadcrumb a {
-  color: var(--fastco-color-text-muted, #5a5a5a);
+  color: var(--fastco-color-text-muted);
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
 .template-product .breadcrumb a:hover {
-  color: var(--fastco-color-accent, #c8332a);
+  color: var(--fastco-color-accent);
 }
 
-/* --------- MOBILE responsive --------- */
+
+/* ════════════════ MOBILE responsive ════════════════ */
 @media (max-width: 749px) {
   .template-product .product {
-    padding: 16px 0 48px;
+    padding: 20px 0 56px;
   }
 
   .template-product .product__title h1 {
-    font-size: clamp(28px, 7vw, 38px);
+    font-size: clamp(30px, 7vw, 42px);
   }
 
   .template-product .price .price-item {
-    font-size: clamp(24px, 6vw, 30px);
+    font-size: clamp(26px, 6.5vw, 34px);
   }
 
   .template-product .product-form__submit,
   .template-product button[name="add"] {
-    padding: 14px 22px;
+    padding: 16px 24px;
     font-size: 14px;
   }
 
   .template-product .quantity__button {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
 
   .template-product .quantity__input {
-    width: 50px;
-    height: 40px;
+    width: 52px;
+    height: 44px;
   }
 
   .template-product .quantity {
-    min-height: 40px;
+    min-height: 44px;
+  }
+
+  .fastco-readmore-wrapper.is-collapsed {
+    max-height: 280px;
   }
 }
